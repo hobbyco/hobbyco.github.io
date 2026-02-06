@@ -1,21 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-      <!-- google adsene 관련하여 추가 26/02/02  --> 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2233415985336309" crossorigin="anonymous"></script> 
-     <!-- google adsene 관련하여 추가 26/02/02  --> 
-  
-  <meta http-equiv="refresh" content="0; url=https://hobbyco.github.io/pds_root/index.html">
-  <meta name="google-adsense-account" content="ca-pub-2233415985336309">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="canonical" href="https://hobbyco.github.io/pds_root/index.html" />
-  
-  <title>페이지 이동 중...</title>
+    <!-- Google Analytics (GA) Tracking Code -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <!-- SEO - Basic Meta Tags -->
+    <title>pdongsoo의 바이브 코딩 자료실 | Hobbyco</title>
+    <meta name="description" content="pdongsoo의 바이브 코딩 자료실입니다. 오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
+    <meta name="keywords" content="pdongsoo, 바이브 코딩, 코딩 자료실, 개발, 프로젝트, 오늘의 크로스워드, 십자말풀이, 클라이밍, 암장 검색기, 암장 위치 기반 인스타그램, 미니게임, 인스타그램, 페이스북, 블로그">
+    <meta name="author" content="pdongsoo">
+
+    <!-- SEO - Open Graph -->
+    <meta property="og:title" content="pdongsoo의 바이브 코딩 자료실">
+    <meta property="og:description" content="오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hobbyco.github.io/">
+    <meta property="og:image" content="https://hobbyco.github.io/img/home_img.png">
+
+    <!-- SEO - Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="pdongsoo의 바이브 코딩 자료실">
+    <meta name="twitter:description" content="오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
+    <meta name="twitter:image" content="https://hobbyco.github.io/img/home_img.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
+    <style>
+        body {
+            background-color: #f9fafb;
+            color: #111827;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .link-card {
+            transition: all 0.3s ease-in-out;
+            border-top: 4px solid transparent;
+        }
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        .card-border-blue { border-top-color: #3b82f6; }
+        .card-border-green { border-top-color: #22c55e; }
+        .card-border-pink { border-top-color: #ec4899; }
+        .card-border-purple { border-top-color: #8b5cf6; }
+
+        .gradient-text {
+            background: linear-gradient(to right, #3b82f6, #14b8a6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+    </style>
 </head>
-<body>
-  <p>
-    페이지를 이동하고 있습니다. 만약 자동으로 이동하지 않는다면 
-    <a href="https://hobbyco.github.io/pds_root/index.html">여기를 클릭하세요</a>.
-  </p>
+
+<body class="pt-16">
+    <main>
+        <h1 class="text-3xl md:text-5xl font-black text-center leading-tight md:leading-normal">
+            <span class="gradient-text">pdongsoo의<br class="md:hidden"> 바이브 코딩 자료실</span>
+        </h1>
+
+        <p class="text-center text-base md:text-lg text-gray-500 mt-4 tracking-wide">
+            무용과 유용 사이 <span class="mx-2 text-gray-300">•</span> 필요와 재미 사이
+        </p>
+
+        <section class="container mx-auto px-6 mt-16">
+            <div class="flex flex-wrap justify-center items-center gap-10">
+
+                <!-- 오늘의 크로스워드 -->
+                <article>
+                    <a href="https://hobbyco.github.io/cross_word/index.html"
+                       class="link-card card-border-blue block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="puzzle" class="w-12 h-12 text-blue-500"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">오늘의 크로스워드</h2>
+                        <p class="text-gray-500 mt-2">매일 새로운 십자말풀이에 도전하세요.</p>
+                    </a>
+                </article>
+
+                <!-- 클라이밍 암장 검색기 -->
+                <article>
+                    <a href="https://hobbyco.github.io/climbing/index.html"
+                       class="link-card card-border-green block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="mountain" class="w-12 h-12 text-green-500"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">클라이밍 암장 검색기</h2>
+                        <p class="text-gray-500 mt-2">원정러를 위한 클라이밍 암장 검색기</p>
+                    </a>
+                </article>
+
+                <!-- 암장 위치 기반 Instagram -->
+                <article>
+                    <a href="https://hobbyco.github.io/climb_movie/index.html"
+                       class="link-card card-border-pink block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="map-pin" class="w-12 h-12 text-pink-500"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">암장 위치 기반 Instagram</h2>
+                        <p class="text-gray-500 mt-2">장소별 인스타그램 링크 모음</p>
+                    </a>
+                </article>
+
+                <!-- 미니게임 -->
+                <article>
+                    <a href="https://hobbyco.github.io/mini_games/index_mini_games.html"
+                       class="link-card card-border-purple block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="gamepad-2" class="w-12 h-12 text-purple-500"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">미니게임</h2>
+                        <p class="text-gray-500 mt-2">간단하게 즐기는 미니게임 모음.</p>
+                    </a>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터가 삽입될 위치 -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // 공통 푸터 삽입 (루트 기준: /footer.html)
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('네트워크 응답이 올바르지 않습니다: ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(data => {
+                const placeholder = document.getElementById('footer-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = data;
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('푸터를 불러오는 데 문제가 발생했습니다:', error);
+                const placeholder = document.getElementById('footer-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = '<p class="text-center text-red-500 py-10">푸터를 불러오지 못했습니다. 로컬 환경에서 테스트하는 경우 브라우저 보안 정책(CORS) 때문일 수 있습니다.</p>';
+                }
+            });
+
+        // 페이지의 나머지 Lucide 아이콘 렌더링
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+
 </body>
+<!-- Last updated: 2026-02-06 KST -->
 </html>
