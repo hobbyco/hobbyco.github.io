@@ -19,7 +19,7 @@
       gtag('config', 'G-KFCTS5DZ6V');
     </script>
 
-    <!-- Lucide Icons Library (필요 시) -->
+    <!-- Lucide Icons Library -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -443,8 +443,8 @@
 <div id="footer-placeholder"></div>
 
 <script>
-    // 공통 푸터 삽입
-    fetch('footer.html')
+    // 공통 푸터 삽입 (상위 폴더의 footer.html 참조)
+    fetch('../footer.html')
         .then(response => {
             if (!response.ok) throw new Error('네트워크 응답 에러');
             return response.text();
@@ -640,6 +640,6 @@
     }
 </script>
 
-<!-- 버전: v1.1.5 | 최종 수정 시간: 2026-02-13 20:18 KST -->
+<!-- 버전: v1.1.6 | 최종 수정 시간: 2026-02-13 20:23 KST -->
 </body>
 </html>
