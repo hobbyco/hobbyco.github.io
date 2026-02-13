@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- SEO 설정 -->
-    <title>랜덤 로또 번호 추천기 | 리얼 셔플 & 고정수 전략</title>
-    <meta name="description" content="리얼 셔플 알고리즘과 고정수 전략을 활용한 똑똑한 로또 번호 추천기입니다. 45개 전체 숫자 커버리지와 당첨 확률 계산 기능을 제공합니다.">
+    <title>로또 번호 랜덤 추천기 | 리얼 셔플 & 고정수 전략</title>
+    <meta name="description" content="리얼 셔플 알고리즘과 고정수 전략을 활용한 똑똑한 무료 로또 번호 추천기입니다. 45개 전체 숫자 커버리지와 당첨 확률 계산 기능을 제공합니다.">
     <meta name="keywords" content="로또번호추천, 로또번호생성기, 랜덤로또, 로또고정수, 로또확률계산, 무료로또번호">
-    <meta property="og:title" content="랜덤 로또 번호 추천기">
+    <meta property="og:title" content="로또 번호 랜덤 추천기">
     <meta property="og:description" content="전략적인 번호 배분과 리얼 셔플로 당첨 확률의 효율을 높이세요.">
     
     <!-- Google Analytics (GA4) -->
@@ -30,6 +30,11 @@
             --accent-blue: #eff6ff;
             --accent-indigo: #eef2ff;
             --success-color: #10b981;
+            --nav-bg: #f0fdf4;
+            --nav-border: #bbf7d0;
+            --nav-text: #15803d;
+            --orange-color: #f97316;
+            --orange-hover: #ea580c;
         }
 
         body {
@@ -51,17 +56,57 @@
             padding: 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .nav-home-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background-color: var(--nav-bg);
+            border: 1px solid var(--nav-border);
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--nav-text);
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .nav-home-btn:hover {
+            background-color: #dcfce7;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transform: translateY(-1px);
+        }
+
+        .nav-text {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            line-height: 1.3;
         }
 
         header {
             text-align: center;
             margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-img {
+            width: 100px; /* 사이즈 업 */
+            height: auto;
+            margin-bottom: 15px;
+            display: block;
         }
 
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* 약간 확대 */
+            line-height: 1.3;
             margin: 0 0 0.5rem 0;
             color: var(--primary-color);
+            font-weight: 800;
         }
 
         .controls {
@@ -155,12 +200,13 @@
             box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
         }
 
+        /* 초기화 버튼 스타일 수정 */
         .btn-reset {
-            grid-column: span 2;
+            grid-column: 6 / span 2; /* 오른쪽 밀착 배치 */
             height: 34px;
             padding: 0 8px;
             font-size: 0.75rem;
-            background-color: #ef4444;
+            background-color: var(--orange-color); /* 오렌지색으로 변경 */
             color: white;
             border-radius: 8px;
             display: flex;
@@ -170,7 +216,7 @@
         }
 
         .btn-reset:hover {
-            background-color: #dc2626;
+            background-color: var(--orange-hover);
         }
 
         .result-section {
@@ -325,8 +371,16 @@
 <body>
 
 <div class="app-container">
+    <!-- 좌측 상단 바로가기 버튼 -->
+    <a href="https://hobbyco.github.io/index.html" class="nav-home-btn">
+        <div class="nav-text">
+            pdongsoo의 <br> 바이브 코딩
+        </div>
+    </a>
+
     <header>
-        <h1>🎲 랜덤 로또 번호 추천기</h1>
+        <img src="lotto_img.svg" alt="로또 이미지" class="header-img" onerror="this.style.display='none'">
+        <h1>로또 번호<br>랜덤 추천기</h1>
     </header>
 
     <div class="controls">
@@ -554,6 +608,6 @@
     }
 </script>
 
-<!-- 버전: v1.1.1 | 최종 수정 시간: 2026-02-13 10:54 KST -->
+<!-- 버전: v1.1.4 | 최종 수정 시간: 2026-02-13 19:54 KST -->
 </body>
 </html>
