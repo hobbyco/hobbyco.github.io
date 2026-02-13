@@ -19,6 +19,9 @@
       gtag('config', 'G-KFCTS5DZ6V');
     </script>
 
+    <!-- Lucide Icons Library (필요 시) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
             --primary-color: #4f46e5;
@@ -42,8 +45,8 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
             margin: 0;
             padding: 20px;
@@ -57,6 +60,7 @@
             border-radius: 20px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
             position: relative;
+            margin-bottom: 40px;
         }
 
         .nav-home-btn {
@@ -71,6 +75,7 @@
             margin-bottom: 20px;
             transition: all 0.2s ease;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            align-self: flex-start;
         }
 
         .nav-home-btn:hover {
@@ -95,14 +100,14 @@
         }
 
         .header-img {
-            width: 100px; /* 사이즈 업 */
+            width: 100px;
             height: auto;
             margin-bottom: 15px;
             display: block;
         }
 
         h1 {
-            font-size: 1.8rem; /* 약간 확대 */
+            font-size: 1.8rem;
             line-height: 1.3;
             margin: 0 0 0.5rem 0;
             color: var(--primary-color);
@@ -200,13 +205,12 @@
             box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
         }
 
-        /* 초기화 버튼 스타일 수정 */
         .btn-reset {
-            grid-column: 6 / span 2; /* 오른쪽 밀착 배치 */
+            grid-column: 6 / span 2;
             height: 34px;
             padding: 0 8px;
             font-size: 0.75rem;
-            background-color: var(--orange-color); /* 오렌지색으로 변경 */
+            background-color: var(--orange-color);
             color: white;
             border-radius: 8px;
             display: flex;
@@ -366,6 +370,11 @@
             border-top: 1px solid #eee;
             padding-top: 10px;
         }
+
+        #footer-placeholder {
+            width: 100%;
+            max-width: 500px;
+        }
     </style>
 </head>
 <body>
@@ -430,7 +439,30 @@
     </div>
 </div>
 
+<!-- 푸터가 삽입될 위치 -->
+<div id="footer-placeholder"></div>
+
 <script>
+    // 공통 푸터 삽입
+    fetch('footer.html')
+        .then(response => {
+            if (!response.ok) throw new Error('네트워크 응답 에러');
+            return response.text();
+        })
+        .then(data => {
+            const placeholder = document.getElementById('footer-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = data;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+        })
+        .catch(error => console.error('푸터 로드 실패:', error));
+
+    // 페이지의 나머지 Lucide 아이콘 렌더링
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
     const grid = document.getElementById('checkboxGrid');
     for (let i = 1; i <= 45; i++) {
         const item = document.createElement('div');
@@ -608,6 +640,6 @@
     }
 </script>
 
-<!-- 버전: v1.1.4 | 최종 수정 시간: 2026-02-13 19:54 KST -->
+<!-- 버전: v1.1.5 | 최종 수정 시간: 2026-02-13 20:18 KST -->
 </body>
 </html>
