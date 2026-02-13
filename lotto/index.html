@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SEO 설정 -->
+    <title>랜덤 로또 번호 추천기 | 리얼 셔플 & 고정수 전략</title>
+    <meta name="description" content="리얼 셔플 알고리즘과 고정수 전략을 활용한 똑똑한 로또 번호 추천기입니다. 45개 전체 숫자 커버리지와 당첨 확률 계산 기능을 제공합니다.">
+    <meta name="keywords" content="로또번호추천, 로또번호생성기, 랜덤로또, 로또고정수, 로또확률계산, 무료로또번호">
+    <meta property="og:title" content="랜덤 로또 번호 추천기">
+    <meta property="og:description" content="전략적인 번호 배분과 리얼 셔플로 당첨 확률의 효율을 높이세요.">
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --accent-yellow: #fefce8;
+            --accent-blue: #eff6ff;
+            --accent-indigo: #eef2ff;
+            --success-color: #10b981;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .app-container {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 500px;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--primary-color);
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        select {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            flex: 2;
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-outline {
+            background-color: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        #fixedSelector {
+            display: none;
+            background: var(--accent-indigo);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        .fixed-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .fixed-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fixed-item input {
+            display: none;
+        }
+
+        .fixed-label {
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+        }
+
+        .fixed-item input:checked + .fixed-label {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-reset {
+            grid-column: span 2;
+            height: 34px;
+            padding: 0 8px;
+            font-size: 0.75rem;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .btn-reset:hover {
+            background-color: #dc2626;
+        }
+
+        .result-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .game-card {
+            padding: 12px 15px;
+            border-radius: 15px;
+            background: #f1f5f9;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .game-header {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .ball-container {
+            display: flex;
+            gap: 5px;
+            justify-content: space-between;
+        }
+
+        .ball {
+            position: relative;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: white;
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.15);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ball.is-fixed {
+            box-shadow: 0 0 12px rgba(79, 70, 229, 0.5), inset -2px -2px 4px rgba(0,0,0,0.2);
+            transform: scale(1.05);
+            z-index: 1;
+        }
+
+        .ball.is-fixed::after {
+            content: '🔒';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            font-size: 10px;
+            background: white;
+            width: 14px;
+            height: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            color: #1e293b;
+        }
+
+        .ball-1-10 { background: #fbc400; }
+        .ball-11-20 { background: #69c8f2; }
+        .ball-21-30 { background: #ff7272; }
+        .ball-31-40 { background: #aaaaaa; }
+        .ball-41-45 { background: #b0d840; }
+
+        .cheer-message {
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 800;
+            color: var(--success-color);
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+        }
+
+        .cheer-message.show {
+            opacity: 1;
+            transform: translateY(0);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .stats-container {
+            margin-top: 1.5rem;
+            padding: 15px;
+            border-radius: 15px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+
+        .prob-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .prob-value {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .strategy-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .strategy-stable { background: #dcfce7; color: #166534; }
+        .strategy-highrisk { background: #fee2e2; color: #991b1b; }
+
+        .info-box {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .info-excluded { background: var(--accent-yellow); color: #854d0e; }
+        .info-duplicate { background: var(--accent-blue); color: #1e40af; }
+
+        .empty-state { text-align: center; padding: 2rem 0; color: #94a3b8; }
+        
+        .tooltip {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <header>
+        <h1>🎲 랜덤 로또 번호 추천기</h1>
+    </header>
+
+    <div class="controls">
+        <div class="input-group">
+            <select id="gameCount">
+                <option value="3">3게임</option>
+                <option value="5" selected>5게임</option>
+                <option value="7">7게임</option>
+                <option value="8">8게임</option>
+                <option value="10">10게임</option>
+            </select>
+            <button class="btn-outline" onclick="toggleFixedSelector()">고정 숫자 선택</button>
+        </div>
+        
+        <div id="fixedSelector">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-color);">고정할 숫자를 선택하세요 (최대 5개)</div>
+            <div class="fixed-grid" id="checkboxGrid"></div>
+        </div>
+
+        <button class="btn-primary" onclick="runLottoGenerator()">번호 추출하기</button>
+    </div>
+
+    <div id="resultDisplay">
+        <div class="empty-state">버튼을 눌러 번호를 생성하세요.</div>
+    </div>
+
+    <div id="cheerMessage" class="cheer-message">당첨을 기원합니다! 🍀</div>
+
+    <div id="statsDisplay" style="display: none;" class="stats-container">
+        <div id="strategyBadge"></div>
+        <div class="prob-row">
+            <span>1등 당첨 확률 (6개 일치)</span>
+            <span class="prob-value" id="prob1st">-</span>
+        </div>
+        <div class="prob-row">
+            <span>총 당첨 기댓값 (평균)</span>
+            <span class="prob-value" id="expectedValue">-</span>
+        </div>
+        <div class="prob-row">
+            <span>최소 1개라도 당첨될 확률</span>
+            <span class="prob-value" id="winAtLeastOnce">-</span>
+        </div>
+        <div id="coverageInfo"></div>
+        <div class="tooltip" id="logicExplain">
+            ※ 고정된 번호는 <b>글로우 효과</b>와 <b>🔒 자물쇠</b> 표시가 붙습니다.
+        </div>
+    </div>
+</div>
+
+<script>
+    const grid = document.getElementById('checkboxGrid');
+    for (let i = 1; i <= 45; i++) {
+        const item = document.createElement('div');
+        item.className = 'fixed-item';
+        item.innerHTML = `
+            <input type="checkbox" id="fix-${i}" value="${i}" onchange="validateFixed(this)">
+            <label for="fix-${i}" class="fixed-label">${i}</label>
+        `;
+        grid.appendChild(item);
+    }
+    
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'btn-reset';
+    resetBtn.innerText = '초기화';
+    resetBtn.onclick = resetFixedNumbers;
+    grid.appendChild(resetBtn);
+
+    function toggleFixedSelector() {
+        const selector = document.getElementById('fixedSelector');
+        selector.style.display = selector.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function resetFixedNumbers() {
+        const checkboxes = document.querySelectorAll('#checkboxGrid input:checked');
+        checkboxes.forEach(cb => cb.checked = false);
+    }
+
+    function validateFixed(checkbox) {
+        const checked = document.querySelectorAll('#checkboxGrid input:checked');
+        if (checked.length > 5) {
+            checkbox.checked = false;
+            alert('고정수는 최대 5개까지만 선택 가능합니다.');
+        }
+    }
+
+    function getBallClass(num) {
+        if (num <= 10) return 'ball-1-10';
+        if (num <= 20) return 'ball-11-20';
+        if (num <= 30) return 'ball-21-30';
+        if (num <= 40) return 'ball-31-40';
+        return 'ball-41-45';
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function runLottoGenerator() {
+        const count = parseInt(document.getElementById('gameCount').value);
+        const fixedNums = Array.from(document.querySelectorAll('#checkboxGrid input:checked')).map(cb => parseInt(cb.value));
+        const neededPerGame = 6 - fixedNums.length;
+        
+        let basePool = Array.from({length: 45}, (_, i) => i + 1).filter(n => !fixedNums.includes(n));
+        
+        let games = [];
+        let drawingPool = [];
+
+        for (let i = 0; i < count; i++) {
+            if (drawingPool.length < neededPerGame) {
+                let newSet = [...basePool];
+                shuffleArray(newSet);
+                drawingPool = [...drawingPool, ...newSet];
+            }
+            
+            let randomPart = drawingPool.splice(0, neededPerGame);
+            let fullGame = [...fixedNums, ...randomPart].sort((a, b) => a - b);
+            games.push(fullGame);
+        }
+
+        games.sort((a, b) => a[0] - b[0]);
+
+        renderResults(games, basePool, fixedNums);
+        calculateAdvancedProbabilities(count, fixedNums.length);
+        
+        const cheerMsg = document.getElementById('cheerMessage');
+        cheerMsg.classList.add('show');
+
+        // GA 이벤트 전송 (추출 시점)
+        if(typeof gtag === 'function') {
+            gtag('event', 'generate_lotto', {
+                'game_count': count,
+                'fixed_count': fixedNums.length
+            });
+        }
+    }
+
+    function calculateAdvancedProbabilities(count, fixedLen) {
+        document.getElementById('statsDisplay').style.display = 'block';
+        
+        const p1 = (count / 8145060 * 100).toFixed(6);
+        document.getElementById('prob1st').innerText = `약 ${p1}% (1/${Math.round(8145060/count).toLocaleString()})`;
+
+        const expectedCount = (count / 44.8).toFixed(2);
+        document.getElementById('expectedValue').innerText = `${expectedCount}회 (5등 기준)`;
+
+        const p_single = 1 / 44.8;
+        let p_at_least_one;
+
+        if (fixedLen === 0) {
+            p_at_least_one = 1 - Math.pow(1 - p_single, count);
+        } else {
+            const correlation = fixedLen / 6; 
+            const independentPart = 1 - Math.pow(1 - p_single, count);
+            p_at_least_one = (independentPart * (1 - correlation)) + (p_single * correlation);
+        }
+
+        document.getElementById('winAtLeastOnce').innerText = `약 ${(p_at_least_one * 100).toFixed(2)}%`;
+
+        const badge = document.getElementById('strategyBadge');
+        if (fixedLen === 0) {
+            badge.className = 'strategy-badge strategy-stable';
+            badge.innerText = '🛡️ 분산 투자 (안정형)';
+        } else if (fixedLen >= 3) {
+            badge.className = 'strategy-badge strategy-highrisk';
+            badge.innerText = '🔥 고정수 전략 (수익 몰빵형)';
+        } else {
+            badge.className = 'strategy-badge';
+            badge.style.background = '#e2e8f0';
+            badge.innerText = '⚖️ 혼합 전략';
+        }
+    }
+
+    function renderResults(games, basePool, fixedNums) {
+        const display = document.getElementById('resultDisplay');
+        display.innerHTML = '';
+
+        const section = document.createElement('div');
+        section.className = 'result-section';
+
+        const flatResults = games.flat();
+        const uniqueInResults = new Set(flatResults);
+        const fixedSet = new Set(fixedNums); 
+        
+        games.forEach((game, idx) => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <div class="game-header">
+                    <span>GAME ${idx + 1}</span>
+                    <span></span>
+                </div>
+                <div class="ball-container">
+                    ${game.map(num => {
+                        const isFixed = fixedSet.has(num);
+                        return `<span class="ball ${getBallClass(num)} ${isFixed ? 'is-fixed' : ''}">${num}</span>`;
+                    }).join('')}
+                </div>
+            `;
+            section.appendChild(card);
+        });
+        display.appendChild(section);
+
+        const coverageArea = document.getElementById('coverageInfo');
+        if (games.length <= 7) {
+            const excluded = Array.from({length: 45}, (_, i) => i + 1).filter(n => !uniqueInResults.has(n));
+            coverageArea.innerHTML = `
+                <div class="info-box info-excluded">
+                    <strong>제외된 숫자 (${excluded.length}개):</strong><br>${excluded.join(', ') || '없음'}
+                </div>
+            `;
+        } else {
+            const counts = {};
+            flatResults.forEach(n => { if(!fixedNums.includes(n)) counts[n] = (counts[n] || 0) + 1; });
+            const duplicates = Object.keys(counts).filter(k => counts[k] > 1).map(Number).sort((a,b)=>a-b);
+            coverageArea.innerHTML = `
+                <div class="info-box info-duplicate">
+                    <strong>중복 활용 숫자 (고정수 제외):</strong><br>${duplicates.join(', ') || '없음'}
+                </div>
+            `;
+        }
+    }
+</script>
+
+<!-- 버전: v1.1.1 | 최종 수정 시간: 2026-02-13 10:54 KST -->
+</body>
+</html>
