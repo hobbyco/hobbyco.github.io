@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>블랙잭 마스터 전략 프로 - AI 기반 블랙잭 시뮬레이터</title>
+    <meta name="description" content="AI가 추천하는 실시간 블랙잭 전략으로 승률을 높이세요. 카지노 확률 계산기 및 블랙잭 기본 전략을 학습할 수 있는 최고의 시뮬레이터입니다.">
+    <meta name="keywords" content="블랙잭, 블랙잭 전략, 카지노 게임, 블랙잭 연습, 싱글 플레이, 블랙잭 싱글,  확률 계산기, 블랙잭 AI, 기본 전략표, Blackjack Strategy, Casino Simulator">
+    <meta name="author" content="Blackjack Master Pro">
+    <link rel="canonical" href="https://your-domain.com/">
+
+    <!-- Open Graph / Facebook / Kakao -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:title" content="블랙잭 마스터 전략 프로 - AI 실시간 피드백">
+    <meta property="og:description" content="수학적 기본 전략에 따라 가장 유리한 수를 제안합니다. 지금 바로 블랙잭 실력을 업그레이드하세요.">
+    <meta property="og:image" content="https://your-domain.com/og-image.jpg">
+
+    <!-- Structured Data (JSON-LD) for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "블랙잭 마스터 전략 프로",
+      "operatingSystem": "Web",
+      "applicationCategory": "GameApplication",
+      "description": "AI 기반 블랙잭 전략 시뮬레이터 및 확률 학습 도구",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
+
+        :root {
+            --casino-green: #064e3b; /* 짙은 카지노 펠트 색상 */
+            --felt-light: #065f46;
+            --gold: #fbbf24;
+            --gold-dark: #d97706;
+            --danger: #ef4444;
+            --card-white: #ffffff;
+            --text-light: #f8fafc;
+            --border-gold: rgba(251, 191, 36, 0.3);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: var(--casino-green);
+            background: radial-gradient(circle at center, var(--felt-light) 0%, var(--casino-green) 100%);
+            color: var(--text-light);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 32px;
+            border: 2px solid var(--border-gold);
+            padding: 24px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        @media (max-width: 480px) {
+            .app-container { padding: 16px; border-radius: 20px; }
+        }
+
+        /* Header Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-gold);
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .stat-label { font-size: 0.8rem; color: var(--gold); margin-bottom: 4px; font-weight: 600; letter-spacing: 1px; }
+        .stat-value { font-size: 1.5rem; font-weight: 800; }
+
+        /* Game Areas */
+        .game-section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .game-section.active-turn {
+            border-color: var(--gold);
+            background: rgba(251, 191, 36, 0.05);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.1);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            background: var(--gold);
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        /* Card Visuals */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            min-height: 110px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            width: 75px;
+            height: 105px;
+            background: var(--card-white);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1e293b;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+            animation: cardAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #ddd;
+        }
+
+        @media (max-width: 480px) {
+            .card { width: 60px; height: 85px; font-size: 1.4rem; }
+        }
+
+        @keyframes cardAppear {
+            from { transform: rotateY(90deg) translateY(30px); opacity: 0; }
+            to { transform: rotateY(0) translateY(0); opacity: 1; }
+        }
+
+        .card.red { color: var(--danger); }
+        .card.hidden {
+            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            border: 3px solid white;
+            color: transparent;
+        }
+
+        /* Controls */
+        .action-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .action-bar { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        button {
+            padding: 15px 5px;
+            border: none;
+            border-radius: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-transform: uppercase;
+        }
+
+        button:hover:not(:disabled) { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+        button:active { transform: scale(0.95); }
+        button:disabled { opacity: 0.2; cursor: not-allowed; filter: grayscale(1); }
+
+        .btn-hit { background: #10b981; color: white; }
+        .btn-stay { background: #ef4444; color: white; }
+        .btn-main { 
+            grid-column: 1 / -1; 
+            background: var(--gold); 
+            color: #000; 
+            font-size: 1.2rem; 
+            margin-top: 10px; 
+            padding: 18px;
+            box-shadow: 0 4px 0 var(--gold-dark);
+        }
+        .btn-main:active { box-shadow: none; transform: translateY(4px); }
+
+        /* Strategy AI Panel */
+        .ai-assistant {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 24px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-gold);
+        }
+
+        .ai-header { color: var(--gold); font-weight: 800; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .ai-feedback { font-size: 1rem; line-height: 1.6; }
+        .ai-reason { font-size: 0.85rem; color: #94a3b8; margin-top: 10px; display: block; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
+
+        #result-overlay {
+            font-size: 2rem;
+            font-weight: 900;
+            text-align: center;
+            color: var(--gold);
+            margin: 20px 0;
+            min-height: 2.4rem;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+
+        .lang-toggle {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+        }
+
+        select {
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            padding: 5px 10px;
+        }
+
+        /* Footer Container */
+        #footer-container {
+            width: 100%;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    <div class="lang-toggle">
+        <select id="lang-select">
+            <option value="ko">KO</option>
+            <option value="en">EN</option>
+        </select>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-label" id="lbl-balance">CAPITAL</div>
+            <div class="stat-value">$<span id="balance">1000</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label" id="lbl-bet">STAKE</div>
+            <div class="stat-value">$<span id="bet">50</span></div>
+        </div>
+    </div>
+
+    <div id="dealer-area" class="game-section">
+        <div class="section-header">
+            <span id="lbl-dealer" style="font-weight: 800; letter-spacing: 1px;">DEALER</span>
+            <span id="dealer-score" class="badge">?</span>
+        </div>
+        <div id="dealer-cards" class="card-container"></div>
+    </div>
+
+    <div id="player-area"></div>
+
+    <div id="result-overlay"></div>
+
+    <div class="action-bar">
+        <button id="hit-btn" class="btn-hit">HIT</button>
+        <button id="stay-btn" class="btn-stay">STAY</button>
+        <button id="double-btn">DOUBLE</button>
+        <button id="split-btn">SPLIT</button>
+        <button id="deal-btn" class="btn-main">NEW GAME</button>
+    </div>
+
+    <div class="ai-assistant">
+        <div class="ai-header">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
+            <span id="lbl-ai">AI STRATEGY PRO</span>
+        </div>
+        <div id="ai-content" class="ai-feedback">
+            최적의 확률을 계산하여 승리를 돕습니다.
+        </div>
+    </div>
+</div>
+
+<div id="footer-container"></div>
+
+<script>
+    const i18n = {
+        ko: {
+            balance: "보유 자산", bet: "베팅액", dealer: "딜러", player: "플레이어",
+            deal: "새 게임 시작", hit: "히트", stay: "스테이", double: "더블", split: "스플릿",
+            ai: "AI 전략 분석", aiStart: "카드를 분석하여 최적의 판단을 제안합니다.",
+            perfect: "✨ 탁월한 선택!", error: "💡 전략적 조언",
+            perfectDesc: "가장 높은 기대값을 가진 <b>{opt}</b>를 선택하셨습니다.",
+            errorDesc: "수학적으로는 <b>{opt}</b>를 선택하는 것이 더 유리합니다.",
+            win: "WIN", lose: "LOSE", push: "PUSH", bust: "BUST", bj: "BLACKJACK",
+            reasons: {
+                splitAA: "에이스 스플릿은 블랙잭에서 가장 유리한 수입니다.",
+                split88: "16점은 가장 위험한 점수입니다. 8-8로 나누어 다시 시작하세요.",
+                split10: "20점은 매우 강력한 패입니다. 절대 나누지 마세요.",
+                standHigh: "17점 이상은 추가 카드를 받을 때 버스트 확률이 매우 높습니다.",
+                dealerWeak: "딜러의 오픈카드가 2-6일 때는 딜러가 버스트될 확률을 노리세요.",
+                double11: "11점은 다음 카드로 21을 만들 확률이 매우 높은 기회입니다.",
+                hitToImprove: "딜러의 패가 강하므로 현재 낮은 점수로는 이기기 어렵습니다."
+            }
+        },
+        en: {
+            balance: "CAPITAL", bet: "STAKE", dealer: "DEALER", player: "PLAYER",
+            deal: "NEW GAME", hit: "HIT", stay: "STAY", double: "DOUBLE", split: "SPLIT",
+            ai: "AI STRATEGY", aiStart: "Analyzing your hand to find the best move.",
+            perfect: "✨ PERFECT!", error: "💡 ADVICE",
+            perfectDesc: "You chose the move with the highest EV: <b>{opt}</b>.",
+            errorDesc: "Mathematically, <b>{opt}</b> is the better move here.",
+            win: "WIN", lose: "LOSE", push: "PUSH", bust: "BUST", bj: "BLACKJACK",
+            reasons: {
+                splitAA: "Always split Aces to maximize high-value potential.",
+                split88: "16 is the worst hand. Break it into 8s for a fresh start.",
+                split10: "20 is a winning total. Never risk splitting 10s.",
+                standHigh: "17+ has a high bust risk. Standing is the optimal move.",
+                dealerWeak: "Dealer upcard (2-6) is weak. Let them take the risk of busting.",
+                double11: "11 is the perfect total to double down for a 10-value card.",
+                hitToImprove: "Dealer shows strength. You must take a risk to improve your score."
+            }
+        }
+    };
+
+    let state = {
+        lang: 'ko', balance: 1000, bet: 50, deck: [], dealerHand: [],
+        playerHands: [], currentHandIdx: 0, phase: 'IDLE'
+    };
+
+    const createDeck = () => {
+        const suits = ['♠', '♥', '♦', '♣'];
+        const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+        let deck = [];
+        for (let s of suits) for (let r of ranks) deck.push({ r, s, v: isNaN(r) ? (r === 'A' ? 11 : 10) : parseInt(r) });
+        return deck.sort(() => Math.random() - 0.5);
+    };
+
+    const getScore = (hand) => {
+        let s = hand.reduce((a, c) => a + c.v, 0);
+        let aces = hand.filter(c => c.r === 'A').length;
+        while (s > 21 && aces > 0) { s -= 10; aces--; }
+        return s;
+    };
+
+    const getOptimal = () => {
+        const hObj = state.playerHands[state.currentHandIdx];
+        if (!hObj) return { act: 'HIT', res: 'hitToImprove' };
+        const hand = hObj.cards;
+        const pScore = getScore(hand);
+        const dCard = state.dealerHand[0].v;
+        const canSplit = hand.length === 2 && hand[0].v === hand[1].v;
+        const canDouble = hand.length === 2;
+
+        if (canSplit) {
+            if (hand[0].r === 'A') return { act: 'SPLIT', res: 'splitAA' };
+            if (hand[0].r === '8') return { act: 'SPLIT', res: 'split88' };
+            if (hand[0].v === 10) return { act: 'STAY', res: 'split10' };
+            if ([2,3,6,7].includes(hand[0].v) && dCard <= 6) return { act: 'SPLIT', res: 'dealerWeak' };
+        }
+        if (pScore >= 17) return { act: 'STAY', res: 'standHigh' };
+        if (pScore >= 13 && dCard <= 6) return { act: 'STAY', res: 'dealerWeak' };
+        if (pScore === 11) return { act: canDouble ? 'DOUBLE' : 'HIT', res: 'double11' };
+        return { act: 'HIT', res: 'hitToImprove' };
+    };
+
+    const updateUI = () => {
+        const t = i18n[state.lang];
+        document.getElementById('lbl-balance').textContent = t.balance;
+        document.getElementById('lbl-bet').textContent = t.bet;
+        document.getElementById('lbl-dealer').textContent = t.dealer;
+        document.getElementById('lbl-ai').textContent = t.ai;
+        document.getElementById('balance').textContent = state.balance;
+        document.getElementById('bet').textContent = state.bet;
+        document.getElementById('deal-btn').textContent = t.deal;
+        document.getElementById('hit-btn').textContent = t.hit;
+        document.getElementById('stay-btn').textContent = t.stay;
+        document.getElementById('double-btn').textContent = t.double;
+        document.getElementById('split-btn').textContent = t.split;
+
+        const showAll = state.phase === 'DEALER' || state.phase === 'END';
+        document.getElementById('dealer-cards').innerHTML = state.dealerHand.map((c, i) => `
+            <div class="card ${i === 1 && !showAll ? 'hidden' : ''} ${c.s === '♥' || c.s === '♦' ? 'red' : ''}">
+                ${i === 1 && !showAll ? '' : `<span>${c.r}</span><small>${c.s}</small>`}
+            </div>
+        `).join('');
+        document.getElementById('dealer-score').textContent = showAll ? getScore(state.dealerHand) : '?';
+
+        document.getElementById('player-area').innerHTML = state.playerHands.map((h, i) => `
+            <div class="game-section ${i === state.currentHandIdx && state.phase === 'PLAYER' ? 'active-turn' : ''}">
+                <div class="section-header">
+                    <span>${t.player} ${state.playerHands.length > 1 ? i + 1 : ''}</span>
+                    <span class="badge">${getScore(h.cards)}</span>
+                </div>
+                <div class="card-container">${h.cards.map(c => `
+                    <div class="card ${c.s === '♥' || c.s === '♦' ? 'red' : ''}"><span>${c.r}</span><small>${c.s}</small></div>
+                `).join('')}</div>
+            </div>
+        `).join('');
+
+        const isPlayer = state.phase === 'PLAYER';
+        document.getElementById('hit-btn').disabled = !isPlayer;
+        document.getElementById('stay-btn').disabled = !isPlayer;
+        document.getElementById('deal-btn').disabled = isPlayer || state.phase === 'DEALER';
+        
+        if (isPlayer) {
+            const h = state.playerHands[state.currentHandIdx];
+            document.getElementById('double-btn').disabled = h.cards.length !== 2 || state.balance < h.bet;
+            document.getElementById('split-btn').disabled = !(h.cards.length === 2 && h.cards[0].v === h.cards[1].v) || state.balance < h.bet;
+        } else {
+            document.getElementById('double-btn').disabled = true;
+            document.getElementById('split-btn').disabled = true;
+        }
+    };
+
+    const giveFeedback = (userAct) => {
+        const opt = getOptimal();
+        const t = i18n[state.lang];
+        const isOpt = userAct === opt.act;
+        const head = isOpt ? t.perfect : t.error;
+        const desc = (isOpt ? t.perfectDesc : t.errorDesc).replace('{opt}', t[opt.act.toLowerCase()]);
+        
+        document.getElementById('ai-content').innerHTML = `
+            <span style="color: ${isOpt ? '#10b981' : '#f59e0b'}; font-weight:800; font-size:1.1rem;">${head}</span><br>
+            ${desc} <span class="ai-reason">${t.reasons[opt.res]}</span>
+        `;
+
+        // GA Event Tracking (Optional: Send user actions to GA)
+        if (typeof gtag === 'function') {
+            gtag('event', 'game_action', {
+                'action_type': userAct,
+                'is_optimal': isOpt
+            });
+        }
+    };
+
+    const nextHand = () => {
+        state.currentHandIdx++;
+        if (state.currentHandIdx >= state.playerHands.length) {
+            state.phase = 'DEALER';
+            dealerPlay();
+        }
+        updateUI();
+    };
+
+    const dealerPlay = async () => {
+        updateUI();
+        while (getScore(state.dealerHand) < 17) {
+            await new Promise(r => setTimeout(r, 600));
+            state.dealerHand.push(state.deck.pop());
+            updateUI();
+        }
+        state.phase = 'END';
+        finalize();
+    };
+
+    const finalize = () => {
+        const dScore = getScore(state.dealerHand);
+        const t = i18n[state.lang];
+        let resArr = [];
+        state.playerHands.forEach(h => {
+            const pScore = getScore(h.cards);
+            if (pScore > 21) resArr.push(t.bust);
+            else if (dScore > 21 || pScore > dScore) {
+                const bj = pScore === 21 && h.cards.length === 2;
+                state.balance += h.bet * (bj ? 2.5 : 2);
+                resArr.push(bj ? t.bj : t.win);
+            }
+            else if (pScore === dScore) { state.balance += h.bet; resArr.push(t.push); }
+            else resArr.push(t.lose);
+        });
+        document.getElementById('result-overlay').textContent = resArr.join(' | ');
+        updateUI();
+    };
+
+    // Actions
+    document.getElementById('deal-btn').onclick = () => {
+        if (state.balance < state.bet) return;
+        state.balance -= state.bet;
+        state.deck = createDeck();
+        state.dealerHand = [state.deck.pop(), state.deck.pop()];
+        state.playerHands = [{ cards: [state.deck.pop(), state.deck.pop()], bet: state.bet }];
+        state.currentHandIdx = 0;
+        state.phase = 'PLAYER';
+        document.getElementById('result-overlay').textContent = '';
+        document.getElementById('ai-content').textContent = i18n[state.lang].aiStart;
+        updateUI();
+        if (getScore(state.playerHands[0].cards) === 21) nextHand();
+    };
+    document.getElementById('hit-btn').onclick = () => { hit(); };
+    function hit() {
+        giveFeedback('HIT');
+        const h = state.playerHands[state.currentHandIdx];
+        h.cards.push(state.deck.pop());
+        if (getScore(h.cards) >= 21) nextHand();
+        updateUI();
+    }
+    document.getElementById('stay-btn').onclick = () => {
+        giveFeedback('STAY');
+        nextHand();
+    };
+    document.getElementById('double-btn').onclick = () => {
+        giveFeedback('DOUBLE');
+        const h = state.playerHands[state.currentHandIdx];
+        state.balance -= h.bet;
+        h.bet *= 2;
+        h.cards.push(state.deck.pop());
+        nextHand();
+    };
+    document.getElementById('split-btn').onclick = () => {
+        giveFeedback('SPLIT');
+        const h = state.playerHands[state.currentHandIdx];
+        state.balance -= h.bet;
+        const newHand = { cards: [h.cards.pop(), state.deck.pop()], bet: h.bet };
+        h.cards.push(state.deck.pop());
+        state.playerHands.splice(state.currentHandIdx + 1, 0, newHand);
+        updateUI();
+    };
+    document.getElementById('lang-select').onchange = (e) => {
+        state.lang = e.target.value;
+        updateUI();
+    };
+
+    window.onload = function() {
+        fetch('../footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Footer not found');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(err => {
+                console.warn('Footer Load Failed');
+            });
+        updateUI();
+    };
+</script>
+</body>
+  
+<!-- Last updated: 2026-02-14 21:37 KST . 깃허브 직접 수정 -->
+</html>
