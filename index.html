@@ -17,10 +17,10 @@
     <!-- SEO - Basic Meta Tags -->
     <title>pdongsoo의 바이브 코딩 자료실</title>
     <meta name="description" content="pdongsoo의 바이브 코딩 자료실입니다. 오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
-    <meta name="keywords" content="pdongsoo, 바이브 코딩, 코딩 자료실, 개발, 프로젝트, 오늘의 크로스워드, 십자말풀이, 클라이밍, 암장 검색기, 암장 위치 기반 인스타그램, 미니게임, 로또 번호 추천, 인스타그램, 페이스북, 블로그">
+    <meta name="keywords" content="pdongsoo, 바이브 코딩, 코딩 자료실, 개발, 프로젝트, 오늘의 크로스워드, 십자말풀이, 클라이밍, 암장 검색기, 암장 위치 기반 인스타그램, 미니게임, 로또 번호 추천, 블랙잭, 인스타그램, 페이스북, 블로그">
     <meta name="author" content="pdongsoo">
 
-    <!-- SEO - Open Graph -->
+    <!-- SEO - Open Graph (for social media sharing, e.g., Facebook, KakaoTalk) -->
     <meta property="og:title" content="pdongsoo의 바이브 코딩 자료실">
     <meta property="og:description" content="오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
     <meta property="og:type" content="website">
@@ -52,10 +52,12 @@
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
         .card-border-blue { border-top-color: #3b82f6; }
-        .card-border-green { border-top-color: #22c55e; } /* 클로버용 초록색 */
-        .card-border-brown { border-top-color: #8b4513; } /* 클라이밍용 갈색 */
+        .card-border-green { border-top-color: #22c55e; }
+        .card-border-brown { border-top-color: #8b4513; }
         .card-border-pink { border-top-color: #ec4899; }
         .card-border-purple { border-top-color: #8b5cf6; }
+        .card-border-amber { border-top-color: #f59e0b; }
+        .card-border-indigo { border-top-color: #6366f1; } /* 블랙잭 카드용 색상 */
 
         .gradient-text {
             background: linear-gradient(to right, #3b82f6, #14b8a6);
@@ -72,6 +74,7 @@
             <span class="gradient-text">pdongsoo의<br class="md:hidden"> 바이브 코딩 자료실</span>
         </h1>
 
+        <!-- 부제 추가 -->
         <p class="text-center text-base md:text-lg text-gray-500 mt-4 tracking-wide">
             무용과 유용 사이 <span class="mx-2 text-gray-300">•</span> 필요와 재미 사이
         </p>
@@ -92,24 +95,24 @@
                     </a>
                 </article>
 
-                <!-- 랜덤 로또 번호 추천기 (색상 수정: 초록색) -->
+                <!-- 랜덤 로또 번호 추천기 -->
                 <article>
-                    <a href="https://hobbyco.github.io/lotto/index.html" 
-                       class="link-card card-border-green block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                    <a href="https://hobbyco.github.io/pds_root/lotto/index.html" 
+                       class="link-card card-border-amber block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
-                            <i data-lucide="clover" class="w-12 h-12 text-green-600"></i>
+                            <i data-lucide="clover" class="w-12 h-12 text-amber-500"></i>
                         </div>
                         <h2 class="text-2xl font-bold text-gray-800">랜덤 로또 번호 추천기</h2>
                         <p class="text-gray-500 mt-2">행운의 로또 번호 추천!!</p>
                     </a>
                 </article>
                 
-                <!-- 클라이밍 암장 검색기 링크 카드 (색상 수정: 갈색) -->
+                <!-- 클라이밍 암장 검색기 링크 카드 -->
                 <article>
                     <a href="https://hobbyco.github.io/climbing/index.html" 
                        class="link-card card-border-brown block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
-                            <i data-lucide="mountain" class="w-12 h-12 text-[#8b4513]"></i>
+                            <i data-lucide="mountain" class="w-12 h-12 text-green-500"></i>
                         </div>
                         <h2 class="text-2xl font-bold text-gray-800">클라이밍 암장 검색기</h2>
                         <p class="text-gray-500 mt-2"> 원정러를 위한 클라이밍 암장 검색기 </p>
@@ -124,6 +127,18 @@
                         </div>
                         <h2 class="text-2xl font-bold text-gray-800">암장 위치 기반 Instagram</h2>
                         <p class="text-gray-500 mt-2">장소별 인스타그램 링크 모음</p>
+                    </a>
+                </article>
+
+                <!-- 블랙잭 연습기 (신규 추가) -->
+                <article>
+                    <a href="https://hobbyco.github.io/pds_root/mini_games/blackjack/index.html" 
+                       class="link-card card-border-indigo block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                        <div class="flex justify-center mb-4">
+                            <i data-lucide="club" class="w-12 h-12 text-indigo-500"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800">블랙잭 연습기</h2>
+                        <p class="text-gray-500 mt-2">블랙잭 정복을 위해 혼자 연습해보기</p>
                     </a>
                 </article>
 
@@ -168,6 +183,5 @@
         }
     </script>
 </body>
-<!-- Last updated: 2026-02-13 11:30 KST . 깃허브 직접 수정 -->
+<!-- Last updated: 2026-02-14 21:39 KST -->
 </html>
-
