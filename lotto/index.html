@@ -26,12 +26,12 @@
 
     <style>
         :root {
-            --primary-color: #4f46e5;
-            --primary-dark: #312e81;
+            --primary-color: #3b82f6; 
+            --primary-dark: #1d4ed8;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --text-main: #1a1a1a; /* 표 가이드: #1a1a1a */
+            --text-muted: #6b7280; /* gray-500 계열 */
             --accent-yellow: #fefce8;
             --accent-blue: #eff6ff;
             --accent-indigo: #eef2ff;
@@ -56,39 +56,72 @@
             background: var(--card-bg);
             width: 100%;
             max-width: 500px;
-            padding: 2.5rem 2rem;
-            border-radius: 28px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 4rem 2rem;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
             position: relative;
             margin-bottom: 40px;
             margin-top: 20px;
         }
 
+        /* 표 가이드라인 정밀 반영 헤더 */
         header {
             text-align: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 4rem;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .header-img {
-            width: 130px;
-            height: auto;
-            margin-bottom: 12px;
-            display: block;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        /* 가이드: text-lg(18px), font-bold(700), 대문자, 자간 넓게 */
+        .lotto-badge {
+            color: var(--primary-color);
+            font-size: 1.125rem; /* 18px */
+            font-weight: 700;
+            letter-spacing: 0.35em; 
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
         }
 
-        /* 제목 가독성 강화 업데이트 */
+        /* 가이드: text-5xl(3rem/48px), font-black(900), 검정(#1a1a1a) */
         h1 {
-            font-size: 2.5rem; /* 크기 확대 */
+            font-size: 3rem; 
             line-height: 1.1;
-            margin: 0;
-            color: var(--primary-dark);
-            font-weight: 900; /* 최대 두께 */
-            letter-spacing: -0.04em; /* 자간 축소로 응집력 강화 */
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 0 0 1.5rem 0;
+            color: var(--text-main);
+            font-weight: 900; 
+            letter-spacing: -0.05em; 
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        /* 마침표 포인트: 이미지 원형 유지 */
+        h1 .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            margin-left: 6px;
+            transform: translateY(-4px);
+        }
+
+        /* 가이드: 1rem(16px), font-medium(500), 회색(gray-500) */
+        .header-subtitle {
+            font-size: 1rem; 
+            color: #6b7280; 
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            line-height: 1.6;
+        }
+
+        /* 모바일 가이드: text-4xl(2.25rem/36px) */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.25rem; }
+            h1 .dot { width: 10px; height: 10px; }
+            .lotto-badge { font-size: 1rem; }
         }
 
         .section-label {
@@ -116,26 +149,26 @@
         .chip {
             padding: 12px;
             border-radius: 16px;
-            background: #f8fafc;
-            color: var(--text-muted);
+            background: #f1f5f9;
+            color: #475569;
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             text-align: center;
             border: 2px solid transparent;
         }
 
         .chip:hover {
-            background: #f1f5f9;
+            background: #e2e8f0;
         }
 
         .chip.active {
-            background-color: var(--accent-indigo);
+            background-color: var(--accent-blue);
             border-color: var(--primary-color);
-            color: var(--primary-color);
+            color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
 
         .btn-toggle-fixed {
@@ -144,7 +177,7 @@
             background-color: white;
             border: 2px dashed #cbd5e1;
             border-radius: 16px;
-            color: var(--text-muted);
+            color: #64748b;
             font-weight: 700;
             display: flex;
             flex-direction: column;
@@ -157,7 +190,7 @@
             border-style: solid;
             border-color: var(--primary-color);
             color: var(--primary-color);
-            background-color: var(--accent-indigo);
+            background-color: var(--accent-blue);
         }
 
         .btn-toggle-fixed .sub-text {
@@ -174,23 +207,24 @@
             border-radius: 18px;
             font-size: 1.15rem;
             font-weight: 800;
-            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
             transition: all 0.2s;
             margin-top: 10px;
         }
 
         .btn-extract:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
+            background-color: var(--primary-dark);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
         }
 
         #fixedSelector {
             display: none;
-            background: var(--accent-indigo);
+            background: var(--accent-blue);
             padding: 1.5rem;
             border-radius: 24px;
             margin-bottom: 15px;
-            border: 1px solid rgba(79, 70, 229, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.1);
         }
 
         .fixed-grid {
@@ -222,7 +256,7 @@
             color: white;
             border-color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
         }
 
         .btn-reset {
@@ -257,7 +291,7 @@
         .game-header {
             font-size: 0.75rem;
             font-weight: 800;
-            color: var(--text-muted);
+            color: #64748b;
             display: flex;
             justify-content: space-between;
         }
@@ -283,7 +317,7 @@
         }
 
         .ball.is-fixed {
-            box-shadow: 0 0 12px rgba(79, 70, 229, 0.4), inset -2px -2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4), inset -2px -2px 4px rgba(0,0,0,0.2);
             transform: scale(1.1);
             z-index: 1;
         }
@@ -353,7 +387,6 @@
             color: var(--primary-color);
         }
 
-        /* 정보 박스 스타일 */
         .info-box {
             margin-top: 12px;
             padding: 12px;
@@ -377,8 +410,12 @@
 
 <div class="app-container">
     <header>
-        <img src="lotto_img.svg" alt="로또 이미지" class="header-img" onerror="this.style.display='none'">
-        <h1>중복 없는 <br> 로또 번호<br>랜덤 추천기</h1>
+        <div class="lotto-badge">LOTTO 6/45</div>
+        <h1>오늘의 행운 번호<span class="dot"></span></h1>
+        <p class="header-subtitle">
+            중복 없이 깔끔하게 추출하는<br>
+            로또 번호 무료 랜덤 추천기
+        </p>
     </header>
 
     <div class="controls">
@@ -422,7 +459,6 @@
             <span>최소 1개 당첨 확률</span>
             <span class="prob-value" id="winAtLeastOnce">-</span>
         </div>
-        <!-- 복구된 제외/중복 번호 영역 -->
         <div id="coverageInfo"></div>
     </div>
 </div>
@@ -432,7 +468,6 @@
 <script>
     let currentSelectedCount = 5;
 
-    // 공통 푸터 삽입
     fetch('../footer.html')
         .then(response => response.ok ? response.text() : '')
         .then(data => {
@@ -447,7 +482,6 @@
         lucide.createIcons();
     }
 
-    // 고정수 그리드 생성
     const grid = document.getElementById('checkboxGrid');
     for (let i = 1; i <= 45; i++) {
         const item = document.createElement('div');
@@ -485,7 +519,6 @@
         const checked = document.querySelectorAll('#checkboxGrid input:checked');
         if (checked.length > 5) {
             checkbox.checked = false;
-            alert('고정수는 최대 5개까지만 선택 가능합니다.');
         }
     }
 
@@ -538,14 +571,12 @@
         const statsDisplay = document.getElementById('statsDisplay');
         statsDisplay.style.display = 'block';
 
-        // 확률 계산
         const p1 = (count / 8145060 * 100).toFixed(6);
         document.getElementById('prob1st').innerText = `약 ${p1}%`;
         const p_single = 1 / 44.8;
         const p_at_least_one = (1 - Math.pow(1 - p_single, count)) * 100;
         document.getElementById('winAtLeastOnce').innerText = `약 ${p_at_least_one.toFixed(2)}%`;
 
-        // 제외/중복 번호 분석 로직 복구
         const flatResults = games.flat();
         const uniqueInResults = new Set(flatResults);
         const coverageArea = document.getElementById('coverageInfo');
@@ -590,6 +621,6 @@
     }
 </script>
 
-<!-- 버전: v1.3.2 | 최종 수정 시간: 2026-02-14 10:05 KST -->
+<!-- 버전: v1.5.1 | 최종 수정 시간: 2026-02-14 11:03 KST -->
 </body>
 </html>
