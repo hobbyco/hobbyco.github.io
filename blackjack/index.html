@@ -16,7 +16,7 @@
     <!-- SEO Meta Tags -->
     <title>블랙잭 마스터 전략 프로 - AI 기반 블랙잭 시뮬레이터</title>
     <meta name="description" content="AI가 추천하는 실시간 블랙잭 전략으로 승률을 높이세요. 카지노 확률 계산기 및 블랙잭 기본 전략을 학습할 수 있는 최고의 시뮬레이터입니다.">
-    <meta name="keywords" content="블랙잭, 블랙잭 전략, 카지노 게임, 블랙잭 연습, 싱글 플레이, 블랙잭 싱글,  확률 계산기, 블랙잭 AI, 기본 전략표, Blackjack Strategy, Casino Simulator">
+    <meta name="keywords" content="블랙잭, 블랙잭 전략, 카지노 게임, 확률 계산기, 블랙잭 AI, 기본 전략표, Blackjack Strategy, Casino Simulator">
     <meta name="author" content="Blackjack Master Pro">
     <link rel="canonical" href="https://your-domain.com/">
 
@@ -48,7 +48,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
 
         :root {
-            --casino-green: #064e3b; /* 짙은 카지노 펠트 색상 */
+            --casino-green: #064e3b;
             --felt-light: #065f46;
             --gold: #fbbf24;
             --gold-dark: #d97706;
@@ -56,6 +56,8 @@
             --card-white: #ffffff;
             --text-light: #f8fafc;
             --border-gold: rgba(251, 191, 36, 0.3);
+            --footer-bg: #ffffff;
+            --footer-text: #334155;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -70,7 +72,15 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 20px 10px;
+        }
+
+        .main-content {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 10px;
         }
 
         .app-container {
@@ -264,62 +274,69 @@
         /* Footer Container */
         #footer-container {
             width: 100%;
-            margin-top: 40px;
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
         }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="lang-toggle">
-        <select id="lang-select">
-            <option value="ko">KO</option>
-            <option value="en">EN</option>
-        </select>
-    </div>
-
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="stat-label" id="lbl-balance">CAPITAL</div>
-            <div class="stat-value">$<span id="balance">1000</span></div>
+<div class="main-content">
+    <div class="app-container">
+        <div class="lang-toggle">
+            <select id="lang-select">
+                <option value="ko">KO</option>
+                <option value="en">EN</option>
+            </select>
         </div>
-        <div class="stat-card">
-            <div class="stat-label" id="lbl-bet">STAKE</div>
-            <div class="stat-value">$<span id="bet">50</span></div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label" id="lbl-balance">CAPITAL</div>
+                <div class="stat-value">$<span id="balance">1000</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label" id="lbl-bet">STAKE</div>
+                <div class="stat-value">$<span id="bet">50</span></div>
+            </div>
         </div>
-    </div>
 
-    <div id="dealer-area" class="game-section">
-        <div class="section-header">
-            <span id="lbl-dealer" style="font-weight: 800; letter-spacing: 1px;">DEALER</span>
-            <span id="dealer-score" class="badge">?</span>
+        <div id="dealer-area" class="game-section">
+            <div class="section-header">
+                <span id="lbl-dealer" style="font-weight: 800; letter-spacing: 1px;">DEALER</span>
+                <span id="dealer-score" class="badge">?</span>
+            </div>
+            <div id="dealer-cards" class="card-container"></div>
         </div>
-        <div id="dealer-cards" class="card-container"></div>
-    </div>
 
-    <div id="player-area"></div>
+        <div id="player-area"></div>
 
-    <div id="result-overlay"></div>
+        <div id="result-overlay"></div>
 
-    <div class="action-bar">
-        <button id="hit-btn" class="btn-hit">HIT</button>
-        <button id="stay-btn" class="btn-stay">STAY</button>
-        <button id="double-btn">DOUBLE</button>
-        <button id="split-btn">SPLIT</button>
-        <button id="deal-btn" class="btn-main">NEW GAME</button>
-    </div>
-
-    <div class="ai-assistant">
-        <div class="ai-header">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
-            <span id="lbl-ai">AI STRATEGY PRO</span>
+        <div class="action-bar">
+            <button id="hit-btn" class="btn-hit">HIT</button>
+            <button id="stay-btn" class="btn-stay">STAY</button>
+            <button id="double-btn">DOUBLE</button>
+            <button id="split-btn">SPLIT</button>
+            <button id="deal-btn" class="btn-main">NEW GAME</button>
         </div>
-        <div id="ai-content" class="ai-feedback">
-            최적의 확률을 계산하여 승리를 돕습니다.
+
+        <div class="ai-assistant">
+            <div class="ai-header">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
+                <span id="lbl-ai">AI STRATEGY PRO</span>
+            </div>
+            <div id="ai-content" class="ai-feedback">
+                최적의 확률을 계산하여 승리를 돕습니다.
+            </div>
         </div>
     </div>
 </div>
 
+<!-- 상위 폴더의 footer.html이 로드될 영역 -->
 <div id="footer-container"></div>
 
 <script>
@@ -464,12 +481,8 @@
             ${desc} <span class="ai-reason">${t.reasons[opt.res]}</span>
         `;
 
-        // GA Event Tracking (Optional: Send user actions to GA)
         if (typeof gtag === 'function') {
-            gtag('event', 'game_action', {
-                'action_type': userAct,
-                'is_optimal': isOpt
-            });
+            gtag('event', 'game_action', { 'action_type': userAct, 'is_optimal': isOpt });
         }
     };
 
@@ -526,18 +539,20 @@
         updateUI();
         if (getScore(state.playerHands[0].cards) === 21) nextHand();
     };
-    document.getElementById('hit-btn').onclick = () => { hit(); };
-    function hit() {
+    
+    document.getElementById('hit-btn').onclick = () => {
         giveFeedback('HIT');
         const h = state.playerHands[state.currentHandIdx];
         h.cards.push(state.deck.pop());
         if (getScore(h.cards) >= 21) nextHand();
         updateUI();
-    }
+    };
+
     document.getElementById('stay-btn').onclick = () => {
         giveFeedback('STAY');
         nextHand();
     };
+
     document.getElementById('double-btn').onclick = () => {
         giveFeedback('DOUBLE');
         const h = state.playerHands[state.currentHandIdx];
@@ -546,6 +561,7 @@
         h.cards.push(state.deck.pop());
         nextHand();
     };
+
     document.getElementById('split-btn').onclick = () => {
         giveFeedback('SPLIT');
         const h = state.playerHands[state.currentHandIdx];
@@ -555,27 +571,31 @@
         state.playerHands.splice(state.currentHandIdx + 1, 0, newHand);
         updateUI();
     };
+
     document.getElementById('lang-select').onchange = (e) => {
         state.lang = e.target.value;
         updateUI();
     };
 
     window.onload = function() {
+        // 상위 폴더의 footer.html 로드 로직 최적화
         fetch('../footer.html')
             .then(response => {
                 if (!response.ok) throw new Error('Footer not found');
                 return response.text();
             })
             .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
+                const container = document.getElementById('footer-container');
+                container.innerHTML = data;
+                // 배경색 및 글자색 강제 적용 (흰색 바탕 요구사항 유지)
+                container.style.backgroundColor = "#ffffff";
+                container.style.color = "#334155";
             })
             .catch(err => {
-                console.warn('Footer Load Failed');
+                console.warn('Footer fetch failed:', err);
             });
         updateUI();
     };
 </script>
 </body>
-  
-<!-- Last updated: 2026-02-14 21:37 KST . 깃허브 직접 수정 -->
 </html>
