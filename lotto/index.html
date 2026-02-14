@@ -19,12 +19,15 @@
       gtag('config', 'G-KFCTS5DZ6V');
     </script>
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons Library -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         :root {
             --primary-color: #4f46e5;
+            --primary-dark: #312e81;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #1e293b;
@@ -33,9 +36,6 @@
             --accent-blue: #eff6ff;
             --accent-indigo: #eef2ff;
             --success-color: #10b981;
-            --nav-bg: #f0fdf4;
-            --nav-border: #bbf7d0;
-            --nav-text: #15803d;
             --orange-color: #f97316;
             --orange-hover: #ea580c;
         }
@@ -56,144 +56,164 @@
             background: var(--card-bg);
             width: 100%;
             max-width: 500px;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem 2rem;
+            border-radius: 28px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             position: relative;
             margin-bottom: 40px;
-        }
-
-        .nav-home-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 6px 14px;
-            background-color: var(--nav-bg);
-            border: 1px solid var(--nav-border);
-            border-radius: 10px;
-            text-decoration: none;
-            color: var(--nav-text);
-            margin-bottom: 20px;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            align-self: flex-start;
-        }
-
-        .nav-home-btn:hover {
-            background-color: #dcfce7;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transform: translateY(-1px);
-        }
-
-        .nav-text {
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: 700;
-            line-height: 1.3;
+            margin-top: 20px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .header-img {
-            width: 100px;
+            width: 130px;
             height: auto;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             display: block;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
+        /* 제목 가독성 강화 업데이트 */
         h1 {
-            font-size: 1.8rem;
-            line-height: 1.3;
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
+            font-size: 2.5rem; /* 크기 확대 */
+            line-height: 1.1;
+            margin: 0;
+            color: var(--primary-dark);
+            font-weight: 900; /* 최대 두께 */
+            letter-spacing: -0.04em; /* 자간 축소로 응집력 강화 */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section-label {
+            font-size: 0.95rem;
             font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            display: block;
+            text-align: left;
         }
 
         .controls {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 20px;
             margin-bottom: 2rem;
         }
 
-        .input-group {
-            display: flex;
+        .game-chip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 10px;
         }
 
-        select {
-            flex: 1;
+        .chip {
             padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            border-radius: 16px;
+            background: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 700;
             font-size: 1rem;
-            outline: none;
-        }
-
-        button {
-            padding: 12px;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
-            border: none;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            border: 2px solid transparent;
         }
 
-        .btn-primary {
-            flex: 2;
+        .chip:hover {
+            background: #f1f5f9;
+        }
+
+        .chip.active {
+            background-color: var(--accent-indigo);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+        }
+
+        .btn-toggle-fixed {
+            width: 100%;
+            padding: 14px;
+            background-color: white;
+            border: 2px dashed #cbd5e1;
+            border-radius: 16px;
+            color: var(--text-muted);
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            transition: all 0.2s;
+        }
+
+        .btn-toggle-fixed.active {
+            border-style: solid;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background-color: var(--accent-indigo);
+        }
+
+        .btn-toggle-fixed .sub-text {
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .btn-extract {
+            width: 100%;
+            padding: 18px;
             background-color: var(--primary-color);
             color: white;
+            border-radius: 18px;
+            font-size: 1.15rem;
+            font-weight: 800;
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+            transition: all 0.2s;
+            margin-top: 10px;
         }
 
-        .btn-outline {
-            background-color: white;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+        .btn-extract:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.45);
         }
 
         #fixedSelector {
             display: none;
             background: var(--accent-indigo);
-            padding: 15px;
-            border-radius: 15px;
+            padding: 1.5rem;
+            border-radius: 24px;
             margin-bottom: 15px;
+            border: 1px solid rgba(79, 70, 229, 0.1);
         }
 
         .fixed-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
-        .fixed-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .fixed-item input {
-            display: none;
-        }
+        .fixed-item input { display: none; }
 
         .fixed-label {
-            width: 34px;
-            height: 34px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 0.85rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
-            user-select: none;
             transition: all 0.2s;
         }
 
@@ -202,44 +222,40 @@
             color: white;
             border-color: var(--primary-color);
             transform: translateY(-2px);
-            box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+            box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
         }
 
         .btn-reset {
             grid-column: 6 / span 2;
-            height: 34px;
-            padding: 0 8px;
-            font-size: 0.75rem;
+            height: 36px;
             background-color: var(--orange-color);
             color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-        }
-
-        .btn-reset:hover {
-            background-color: var(--orange-hover);
+            font-weight: 800;
+            font-size: 0.8rem;
         }
 
         .result-section {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .game-card {
-            padding: 12px 15px;
-            border-radius: 15px;
-            background: #f1f5f9;
+            padding: 16px 20px;
+            border-radius: 20px;
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 12px;
         }
 
         .game-header {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 800;
             color: var(--text-muted);
             display: flex;
@@ -248,40 +264,39 @@
 
         .ball-container {
             display: flex;
-            gap: 5px;
+            gap: 8px;
             justify-content: space-between;
         }
 
         .ball {
             position: relative;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: 700;
-            font-size: 0.85rem;
+            font-weight: 800;
+            font-size: 1rem;
             color: white;
-            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.15);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset -2px -2px 4px rgba(0,0,0,0.15), 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .ball.is-fixed {
-            box-shadow: 0 0 12px rgba(79, 70, 229, 0.5), inset -2px -2px 4px rgba(0,0,0,0.2);
-            transform: scale(1.05);
+            box-shadow: 0 0 12px rgba(79, 70, 229, 0.4), inset -2px -2px 4px rgba(0,0,0,0.2);
+            transform: scale(1.1);
             z-index: 1;
         }
 
         .ball.is-fixed::after {
             content: '🔒';
             position: absolute;
-            top: -4px;
-            right: -4px;
-            font-size: 10px;
+            top: -5px;
+            right: -5px;
+            font-size: 11px;
             background: white;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -301,7 +316,7 @@
             text-align: center;
             font-weight: 800;
             color: var(--success-color);
-            font-size: 1.1rem;
+            font-size: 1.25rem;
             opacity: 0;
             transform: translateY(10px);
             transition: all 0.5s ease;
@@ -320,8 +335,8 @@
 
         .stats-container {
             margin-top: 1.5rem;
-            padding: 15px;
-            border-radius: 15px;
+            padding: 1.5rem;
+            border-radius: 24px;
             background: #f8fafc;
             border: 1px solid #e2e8f0;
         }
@@ -329,48 +344,29 @@
         .prob-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.85rem;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
         }
 
         .prob-value {
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary-color);
         }
 
-        .strategy-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .strategy-stable { background: #dcfce7; color: #166534; }
-        .strategy-highrisk { background: #fee2e2; color: #991b1b; }
-
+        /* 정보 박스 스타일 */
         .info-box {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 0.8rem;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            line-height: 1.5;
         }
 
-        .info-excluded { background: var(--accent-yellow); color: #854d0e; }
-        .info-duplicate { background: var(--accent-blue); color: #1e40af; }
+        .info-excluded { background: var(--accent-yellow); color: #854d0e; border: 1px solid #fde68a; }
+        .info-duplicate { background: var(--accent-blue); color: #1e40af; border: 1px solid #bfdbfe; }
 
-        .empty-state { text-align: center; padding: 2rem 0; color: #94a3b8; }
+        .empty-state { text-align: center; padding: 4rem 0; color: #94a3b8; font-weight: 600; }
         
-        .tooltip {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            line-height: 1.4;
-            margin-top: 10px;
-            border-top: 1px solid #eee;
-            padding-top: 10px;
-        }
-
         #footer-placeholder {
             width: 100%;
             max-width: 500px;
@@ -380,97 +376,84 @@
 <body>
 
 <div class="app-container">
-    <!-- 좌측 상단 바로가기 버튼 -->
-    <a href="https://hobbyco.github.io/index.html" class="nav-home-btn">
-        <div class="nav-text">
-            pdongsoo의 <br> 바이브 코딩
-        </div>
-    </a>
-
     <header>
         <img src="lotto_img.svg" alt="로또 이미지" class="header-img" onerror="this.style.display='none'">
-        <h1>로또 번호<br>랜덤 추천기</h1>
+        <h1>중복 없는 <br> 로또 번호<br>랜덤 추천기</h1>
     </header>
 
     <div class="controls">
-        <div class="input-group">
-            <select id="gameCount">
-                <option value="3">3게임</option>
-                <option value="5" selected>5게임</option>
-                <option value="7">7게임</option>
-                <option value="8">8게임</option>
-                <option value="10">10게임</option>
-            </select>
-            <button class="btn-outline" onclick="toggleFixedSelector()">고정 숫자 선택</button>
-        </div>
+        <section>
+            <span class="section-label">몇 게임을 생성할까요?</span>
+            <div class="game-chip-grid">
+                <button class="chip" onclick="setGameCount(1, this)">1게임</button>
+                <button class="chip" onclick="setGameCount(3, this)">3게임</button>
+                <button class="chip active" onclick="setGameCount(5, this)">5게임</button>
+                <button class="chip" onclick="setGameCount(7, this)">7게임</button>
+                <button class="chip" onclick="setGameCount(8, this)">8게임</button>
+                <button class="chip" onclick="setGameCount(10, this)">10게임</button>
+            </div>
+        </section>
         
+        <button id="toggleFixedBtn" class="btn-toggle-fixed" onclick="toggleFixedSelector()">
+            <span>반자동 고정 숫자 선택</span>
+            <span class="sub-text">(수동 번호 지정. 최대 5개)</span>
+        </button>
+
         <div id="fixedSelector">
-            <div style="font-size: 0.85rem; font-weight: 700; color: var(--primary-color);">고정할 숫자를 선택하세요 (최대 5개)</div>
+            <div style="font-size: 0.95rem; font-weight: 800; color: var(--primary-color);">고정할 숫자를 선택하세요 (최대 5개)</div>
             <div class="fixed-grid" id="checkboxGrid"></div>
         </div>
 
-        <button class="btn-primary" onclick="runLottoGenerator()">번호 추출하기</button>
+        <button class="btn-extract" onclick="runLottoGenerator()">행운의 번호 추출하기</button>
     </div>
 
     <div id="resultDisplay">
-        <div class="empty-state">버튼을 눌러 번호를 생성하세요.</div>
+        <div class="empty-state">위 버튼을 눌러 행운의 번호를 만나보세요!</div>
     </div>
 
     <div id="cheerMessage" class="cheer-message">당첨을 기원합니다! 🍀</div>
 
     <div id="statsDisplay" style="display: none;" class="stats-container">
-        <div id="strategyBadge"></div>
         <div class="prob-row">
-            <span>1등 당첨 확률 (6개 일치)</span>
+            <span>1등 당첨 확률</span>
             <span class="prob-value" id="prob1st">-</span>
         </div>
         <div class="prob-row">
-            <span>총 당첨 기댓값 (평균)</span>
-            <span class="prob-value" id="expectedValue">-</span>
-        </div>
-        <div class="prob-row">
-            <span>최소 1개라도 당첨될 확률</span>
+            <span>최소 1개 당첨 확률</span>
             <span class="prob-value" id="winAtLeastOnce">-</span>
         </div>
+        <!-- 복구된 제외/중복 번호 영역 -->
         <div id="coverageInfo"></div>
-        <div class="tooltip" id="logicExplain">
-            ※ 고정된 번호는 <b>글로우 효과</b>와 <b>🔒 자물쇠</b> 표시가 붙습니다.
-        </div>
     </div>
 </div>
 
-<!-- 푸터가 삽입될 위치 -->
 <div id="footer-placeholder"></div>
 
 <script>
-    // 공통 푸터 삽입 (상위 폴더의 footer.html 참조)
+    let currentSelectedCount = 5;
+
+    // 공통 푸터 삽입
     fetch('../footer.html')
-        .then(response => {
-            if (!response.ok) throw new Error('네트워크 응답 에러');
-            return response.text();
-        })
+        .then(response => response.ok ? response.text() : '')
         .then(data => {
             const placeholder = document.getElementById('footer-placeholder');
             if (placeholder) {
                 placeholder.innerHTML = data;
                 if (typeof lucide !== 'undefined') lucide.createIcons();
             }
-        })
-        .catch(error => console.error('푸터 로드 실패:', error));
+        });
 
-    // 페이지의 나머지 Lucide 아이콘 렌더링
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
 
+    // 고정수 그리드 생성
     const grid = document.getElementById('checkboxGrid');
     for (let i = 1; i <= 45; i++) {
         const item = document.createElement('div');
         item.className = 'fixed-item';
-        item.innerHTML = `
-            <input type="checkbox" id="fix-${i}" value="${i}" onchange="validateFixed(this)">
-            <label for="fix-${i}" class="fixed-label">${i}</label>
-        `;
+        item.innerHTML = `<input type="checkbox" id="fix-${i}" value="${i}" onchange="validateFixed(this)">
+                          <label for="fix-${i}" class="fixed-label">${i}</label>`;
         grid.appendChild(item);
     }
     
@@ -480,14 +463,22 @@
     resetBtn.onclick = resetFixedNumbers;
     grid.appendChild(resetBtn);
 
+    function setGameCount(count, element) {
+        currentSelectedCount = count;
+        document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+        element.classList.add('active');
+    }
+
     function toggleFixedSelector() {
         const selector = document.getElementById('fixedSelector');
-        selector.style.display = selector.style.display === 'block' ? 'none' : 'block';
+        const btn = document.getElementById('toggleFixedBtn');
+        const isVisible = selector.style.display === 'block';
+        selector.style.display = isVisible ? 'none' : 'block';
+        btn.classList.toggle('active', !isVisible);
     }
 
     function resetFixedNumbers() {
-        const checkboxes = document.querySelectorAll('#checkboxGrid input:checked');
-        checkboxes.forEach(cb => cb.checked = false);
+        document.querySelectorAll('#checkboxGrid input:checked').forEach(cb => cb.checked = false);
     }
 
     function validateFixed(checkbox) {
@@ -515,12 +506,11 @@
     }
 
     function runLottoGenerator() {
-        const count = parseInt(document.getElementById('gameCount').value);
+        const count = currentSelectedCount;
         const fixedNums = Array.from(document.querySelectorAll('#checkboxGrid input:checked')).map(cb => parseInt(cb.value));
         const neededPerGame = 6 - fixedNums.length;
         
         let basePool = Array.from({length: 45}, (_, i) => i + 1).filter(n => !fixedNums.includes(n));
-        
         let games = [];
         let drawingPool = [];
 
@@ -530,101 +520,41 @@
                 shuffleArray(newSet);
                 drawingPool = [...drawingPool, ...newSet];
             }
-            
             let randomPart = drawingPool.splice(0, neededPerGame);
             let fullGame = [...fixedNums, ...randomPart].sort((a, b) => a - b);
             games.push(fullGame);
         }
 
-        games.sort((a, b) => a[0] - b[0]);
+        renderResults(games, fixedNums);
+        calculateStats(count, games, fixedNums);
+        document.getElementById('cheerMessage').classList.add('show');
 
-        renderResults(games, basePool, fixedNums);
-        calculateAdvancedProbabilities(count, fixedNums.length);
-        
-        const cheerMsg = document.getElementById('cheerMessage');
-        cheerMsg.classList.add('show');
-
-        // GA 이벤트 전송 (추출 시점)
         if(typeof gtag === 'function') {
-            gtag('event', 'generate_lotto', {
-                'game_count': count,
-                'fixed_count': fixedNums.length
-            });
+            gtag('event', 'generate_lotto', { 'game_count': count, 'fixed_count': fixedNums.length });
         }
     }
 
-    function calculateAdvancedProbabilities(count, fixedLen) {
-        document.getElementById('statsDisplay').style.display = 'block';
-        
+    function calculateStats(count, games, fixedNums) {
+        const statsDisplay = document.getElementById('statsDisplay');
+        statsDisplay.style.display = 'block';
+
+        // 확률 계산
         const p1 = (count / 8145060 * 100).toFixed(6);
-        document.getElementById('prob1st').innerText = `약 ${p1}% (1/${Math.round(8145060/count).toLocaleString()})`;
-
-        const expectedCount = (count / 44.8).toFixed(2);
-        document.getElementById('expectedValue').innerText = `${expectedCount}회 (5등 기준)`;
-
+        document.getElementById('prob1st').innerText = `약 ${p1}%`;
         const p_single = 1 / 44.8;
-        let p_at_least_one;
+        const p_at_least_one = (1 - Math.pow(1 - p_single, count)) * 100;
+        document.getElementById('winAtLeastOnce').innerText = `약 ${p_at_least_one.toFixed(2)}%`;
 
-        if (fixedLen === 0) {
-            p_at_least_one = 1 - Math.pow(1 - p_single, count);
-        } else {
-            const correlation = fixedLen / 6; 
-            const independentPart = 1 - Math.pow(1 - p_single, count);
-            p_at_least_one = (independentPart * (1 - correlation)) + (p_single * correlation);
-        }
-
-        document.getElementById('winAtLeastOnce').innerText = `약 ${(p_at_least_one * 100).toFixed(2)}%`;
-
-        const badge = document.getElementById('strategyBadge');
-        if (fixedLen === 0) {
-            badge.className = 'strategy-badge strategy-stable';
-            badge.innerText = '🛡️ 분산 투자 (안정형)';
-        } else if (fixedLen >= 3) {
-            badge.className = 'strategy-badge strategy-highrisk';
-            badge.innerText = '🔥 고정수 전략 (수익 몰빵형)';
-        } else {
-            badge.className = 'strategy-badge';
-            badge.style.background = '#e2e8f0';
-            badge.innerText = '⚖️ 혼합 전략';
-        }
-    }
-
-    function renderResults(games, basePool, fixedNums) {
-        const display = document.getElementById('resultDisplay');
-        display.innerHTML = '';
-
-        const section = document.createElement('div');
-        section.className = 'result-section';
-
+        // 제외/중복 번호 분석 로직 복구
         const flatResults = games.flat();
         const uniqueInResults = new Set(flatResults);
-        const fixedSet = new Set(fixedNums); 
-        
-        games.forEach((game, idx) => {
-            const card = document.createElement('div');
-            card.className = 'game-card';
-            card.innerHTML = `
-                <div class="game-header">
-                    <span>GAME ${idx + 1}</span>
-                    <span></span>
-                </div>
-                <div class="ball-container">
-                    ${game.map(num => {
-                        const isFixed = fixedSet.has(num);
-                        return `<span class="ball ${getBallClass(num)} ${isFixed ? 'is-fixed' : ''}">${num}</span>`;
-                    }).join('')}
-                </div>
-            `;
-            section.appendChild(card);
-        });
-        display.appendChild(section);
-
         const coverageArea = document.getElementById('coverageInfo');
+
         if (games.length <= 7) {
             const excluded = Array.from({length: 45}, (_, i) => i + 1).filter(n => !uniqueInResults.has(n));
             coverageArea.innerHTML = `
                 <div class="info-box info-excluded">
-                    <strong>제외된 숫자 (${excluded.length}개):</strong><br>${excluded.join(', ') || '없음'}
+                    <strong>포함되지 않은 숫자 (${excluded.length}개):</strong><br>${excluded.join(', ') || '없음'}
                 </div>
             `;
         } else {
@@ -633,13 +563,33 @@
             const duplicates = Object.keys(counts).filter(k => counts[k] > 1).map(Number).sort((a,b)=>a-b);
             coverageArea.innerHTML = `
                 <div class="info-box info-duplicate">
-                    <strong>중복 활용 숫자 (고정수 제외):</strong><br>${duplicates.join(', ') || '없음'}
+                    <strong>2회 이상 중복 번호 (고정수 제외):</strong><br>${duplicates.join(', ') || '없음'}
                 </div>
             `;
         }
     }
+
+    function renderResults(games, fixedNums) {
+        const display = document.getElementById('resultDisplay');
+        display.innerHTML = '';
+        const section = document.createElement('div');
+        section.className = 'result-section';
+        const fixedSet = new Set(fixedNums); 
+        
+        games.forEach((game, idx) => {
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <div class="game-header"><span>GAME ${idx + 1}</span></div>
+                <div class="ball-container">
+                    ${game.map(num => `<span class="ball ${getBallClass(num)} ${fixedSet.has(num) ? 'is-fixed' : ''}">${num}</span>`).join('')}
+                </div>`;
+            section.appendChild(card);
+        });
+        display.appendChild(section);
+    }
 </script>
 
-<!-- 버전: v1.1.6 | 최종 수정 시간: 2026-02-13 20:23 KST -->
+<!-- 버전: v1.3.2 | 최종 수정 시간: 2026-02-14 10:05 KST -->
 </body>
 </html>
