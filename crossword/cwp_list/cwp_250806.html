@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>세계지리 퍼즐 (8)</title>
+    <meta name="description" content="2025.08.06에 생성된 '세계지리' 주제의 8 크로스워드 퍼즐입니다. 주요 단어: 소코비아, 소말리아, 아산, 토고, 산티아고, 아르헨티나, 르완다, 나가사키, 팔라우, 다카, 카불, 키이우. 가로세로 낱말 퀴즈를 즐겨보세요!">
+    <meta name="keywords" content="크로스워드, 오늘의 퍼즐, 가로세로 낱말 퀴즈, 십자말풀이, 낱말퀴즈, 두뇌게임, 세계지리, 8, 소코비아, 소말리아, 아산, 토고, 산티아고, 아르헨티나, 르완다, 나가사키, 팔라우, 다카, 카불, 키이우">
+    <meta property="og:title" content="세계지리 퍼즐 (8)">
+    <meta property="og:description" content="2025.08.06에 생성된 '세계지리' 주제의 8 크로스워드 퍼즐입니다. 주요 단어: 소코비아, 소말리아, 아산, 토고, 산티아고, 아르헨티나, 르완다, 나가사키, 팔라우, 다카, 카불, 키이우. 가로세로 낱말 퀴즈를 즐겨보세요!">
+    <meta property="og:type" content="website">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f0f2f5; padding: 10px; box-sizing: border-box; }
+        .puzzle-info { text-align: center; margin-bottom: 20px; font-size: 16px; color: #555; }
+        .puzzle-info span { margin: 0 10px; }
+        .main-container { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; justify-content: center; width: 100%; }
+        #grid-container, #answer-grid-container { display: grid; grid-template-columns: repeat(7, 45px); grid-template-rows: repeat(7, 45px); border: 2px solid #333; flex-shrink: 0; width: 315px; height: 315px; box-sizing: content-box;}
+        .cell, .answer-cell { width: 45px; height: 45px; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
+        .cell.black, .answer-cell.black { background-color: #2c2c2c; }
+        .cell.white, .answer-cell.white { background-color: #fff; }
+        .cell .number, .answer-cell .number { position: absolute; top: 1px; left: 2px; font-size: 10px; font-weight: bold; color: #005a9c; }
+        .cell input { width: 100%; height: 100%; border: none; text-align: center; font-size: 22px; padding: 0; box-sizing: border-box; text-transform: uppercase; }
+        .cell input.correct { background-color: #d4edda; }
+        .cell input.incorrect { background-color: #f8d7da; }
+        .answer-cell { display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; }
+        .answer-cell.correct-char { color: #155724; }
+        .answer-cell.incorrect-char { color: #721c24; }
+        #clues-container { width: 450px; }
+        .clue-group h3 { margin-top: 0; }
+        .clue-item { display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 12px; font-size: 14px; }
+        .clue-input-wrapper { display: flex; align-items: center; gap: 5px; margin-top: 4px; }
+        .clue-answer-input { padding: 4px; border: 1px solid #ccc; border-radius: 3px; width: 100px; }
+        .button-wrapper { text-align: center; margin-top: 20px; }
+        .action-buttons { margin-bottom: 15px; }
+        #submit-button, #reset-incorrect-button, #show-answer-button { margin: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; color: white; border: none; border-radius: 5px; }
+        #submit-button { background-color: #007bff; }
+        #reset-incorrect-button { background-color: #6c757d; }
+        #show-answer-button { background-color: #28a745; }
+        .button-descriptions { text-align: left; max-width: 450px; margin: 0 auto 15px auto; padding: 10px; background-color: #e9ecef; border-radius: 5px; font-size: 12px; color: #495057; }
+        .button-descriptions p { margin: 5px 0; }
+        .more-puzzles-button { display: inline-block; background-color: #17a2b8; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px; margin-bottom: 15px; }
+        #result-message { font-size: 18px; font-weight: bold; min-height: 27px; text-align: center; }
+        .feedback-link { font-size: 14px; }
+        .feedback-link a { color: #555; text-decoration: underline; }
+
+        @media (max-width: 850px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            #clues-container {
+                width: 100%;
+                max-width: 450px;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="puzzle-content"></div>
+    <script id="puzzle-data" type="application/json">
+        {"gridState":[[1,1,1,1,0,0,1],[1,0,0,1,1,1,1],[1,0,0,0,0,0,0],[1,1,1,1,1,0,0],[0,1,0,0,1,0,1],[0,1,1,0,1,0,1],[0,0,1,0,1,1,1]],"words":[{"id":1,"direction":"가로","row":0,"col":0,"length":4,"hint":"마블 유니버스에 등장하는 가상의 동유럽 국가. 완다가 이곳 출신","answer":"소코비아"},{"id":1,"direction":"세로","row":0,"col":0,"length":4,"hint":"해적하면 떠오르는 나라. 수도는 모가디슈.","answer":"소말리아"},{"id":2,"direction":"세로","row":0,"col":3,"length":2,"hint":"충청남도에 위치한 온천으로 유명한 도시. 나 ㅇㅇ 백호여~","answer":"아산"},{"id":3,"direction":"세로","row":0,"col":6,"length":2,"hint":"서아프리카의 소국이나, 2006년 월드컵 같은 조에 편성되며 알려진 나라. 대표 선수는 아데바요르.","answer":"토고"},{"id":4,"direction":"가로","row":1,"col":3,"length":4,"hint":"칠레의 수도 이름이지만, 스페인 등지의 성지순례길 이름으로 더 유명.","answer":"산티아고"},{"id":5,"direction":"가로","row":3,"col":0,"length":5,"hint":"탱고와 축구의 나라이자, 남미에서 브라질에 이어 두번째로 큰 나라(면적)","answer":"아르헨티나"},{"id":6,"direction":"세로","row":3,"col":1,"length":3,"hint":"아프리카의 내륙국으로 1994년 집단 학살 및 장기간 내전으로 잘 알려짐. '호텔 ㅇㅇㅇ'는 이 당시 실화를 영화화.","answer":"르완다"},{"id":7,"direction":"세로","row":3,"col":4,"length":4,"hint":"2차 세계대전 당시 히로시마와 더불어 원자폭탄이 투하된 일본의 도시. 해물 육수 기반의 짬뽕으로도 유명.","answer":"나가사키"},{"id":8,"direction":"세로","row":4,"col":6,"length":3,"hint":"우리나라에서 가장 거리가 가까운 오세아니아의 섬나라(도시국가). 스쿠버다이버 명소.","answer":"팔라우"},{"id":9,"direction":"가로","row":5,"col":1,"length":2,"hint":"방글라데시의 수도이자 최대 도시","answer":"다카"},{"id":10,"direction":"세로","row":5,"col":2,"length":2,"hint":"아프가니스탄의 수도로 탈레반과 관련된 뉴스에 자주 등장.","answer":"카불"},{"id":11,"direction":"가로","row":6,"col":4,"length":3,"hint":"러시아 발음 '키예프'로 불렸던 우크라이나의 수도","answer":"키이우"}],"solutionGrid":[["소","코","비","아",null,null,"토"],["말",null,null,"산","티","아","고"],["리",null,null,null,null,null,null],["아","르","헨","티","나",null,null],[null,"완",null,null,"가",null,"팔"],[null,"다","카",null,"사",null,"라"],[null,null,"불",null,"키","이","우"]],"episode":"8","topic":"세계지리","creationDate":"2025.08.06"}
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const puzzleData = JSON.parse(document.getElementById('puzzle-data').textContent);
+            const { gridState, words: wordData, solutionGrid, episode, topic, creationDate } = puzzleData;
+            
+            const content = `
+                <h1>크로스워드 퍼즐</h1>
+                <div class="puzzle-info">
+                    <span>생성일: ${creationDate}</span>
+                    <span>회차: ${episode}</span>
+                    <span>주제: ${topic}</span>
+                </div>
+                <div class="main-container">
+                    <div id="grid-container"></div>
+                    <div id="clues-container"></div>
+                </div>
+                <div class="button-wrapper">
+                    <div class="action-buttons">
+                        <button id="submit-button">정답 체크</button>
+                        <button id="reset-incorrect-button">오답 수정</button>
+                        <button id="show-answer-button">정답 공개</button>
+                    </div>
+                    <div class="button-descriptions">
+                        <p>*. 정답 체크 : 정답이 맞는지 확인합니다 (정답 연두색, 오답 핑크색)</p>
+                        <p>*. 오답 수정 : 오답을 삭제하여, 다시 풀 수 있습니다.</p>
+                        <p>*. 정답 공개 : 아래에 정답으로 채워진 정답을 공개합니다.</p>
+                    </div>
+                    <a href="../index.html" class="more-puzzles-button">더 많은 문제 풀러 가기</a>
+                    <div class="feedback-link">
+                        <a href="https://naver.me/5TQM65TX" target="_blank">네이버폼으로 피드백 보내기 (뉴스레터 구독신청)</a>
+                    </div>
+                    <div class="feedback-link" style="margin-top: 8px;">
+                        <a href="https://hobbyco.github.io/pds_root/" target="_blank"> pdongsoo의 바이브 코딩 자료실 </a>
+                    </div>
+					<div class="feedback-link" style="margin-top: 8px;">
+                        <a href="https://hobbyco.github.io/pds_root/donate.html" target="_blank">개발자 후원하기 </a>
+                    </div>
+					         
+					
+                </div>
+                <p id="result-message"></p>
+                <div id="answer-container" style="display:none; margin-top: 30px;">
+                    <h2>정답</h2>
+                    <div id="answer-grid-container"></div>
+                </div>
+            `;
+            document.getElementById('puzzle-content').innerHTML = content;
+
+            const gridContainer = document.getElementById('grid-container');
+            const cluesContainer = document.getElementById('clues-container');
+            const submitButton = document.getElementById('submit-button');
+            const resetButton = document.getElementById('reset-incorrect-button');
+            const showAnswerButton = document.getElementById('show-answer-button');
+            const resultMessage = document.getElementById('result-message');
+            const answerContainer = document.getElementById('answer-container');
+            const answerGridContainer = document.getElementById('answer-grid-container');
+
+            // 그리드 렌더링
+            for (let r = 0; r < 7; r++) {
+                for (let c = 0; c < 7; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell ' + (gridState[r][c] === 1 ? 'white' : 'black');
+                    if (gridState[r][c] === 1) {
+                        const input = document.createElement('input');
+                        input.setAttribute('maxlength', 1);
+                        input.dataset.row = r;
+                        input.dataset.col = c;
+                        cell.appendChild(input);
+                    }
+                    gridContainer.appendChild(cell);
+                }
+            }
+
+            // 힌트 및 번호 렌더링
+            const acrossWords = wordData.filter(w => w.direction === '가로').sort((a,b)=>a.id - b.id);
+            const downWords = wordData.filter(w => w.direction === '세로').sort((a,b)=>a.id - b.id);
+            
+            let cluesHTML = '';
+            if (acrossWords.length > 0) {
+                cluesHTML += '<div class="clue-group"><h3>가로 낱말</h3>';
+                acrossWords.forEach(w => { 
+                    cluesHTML += '<div class="clue-item">' +
+                                    '<span>' + w.id + '. ' + w.hint + '</span>' +
+                                    '<div class="clue-input-wrapper">' +
+                                        '<input type="text" class="clue-answer-input" placeholder="정답 입력" maxlength="' + w.length + '" data-id="' + w.id + '" data-direction="가로">' +
+                                        '<span>(' + w.length + '글자)</span>' +
+                                    '</div>' +
+                                 '</div>';
+                });
+                cluesHTML += '</div>';
+            }
+            if (downWords.length > 0) {
+                cluesHTML += '<div class="clue-group"><h3>세로 낱말</h3>';
+                downWords.forEach(w => { 
+                    cluesHTML += '<div class="clue-item">' +
+                                    '<span>' + w.id + '. ' + w.hint + '</span>' +
+                                    '<div class="clue-input-wrapper">' +
+                                        '<input type="text" class="clue-answer-input" placeholder="정답 입력" maxlength="' + w.length + '" data-id="' + w.id + '" data-direction="세로">' +
+                                        '<span>(' + w.length + '글자)</span>' +
+                                    '</div>' +
+                                 '</div>';
+                });
+                cluesHTML += '</div>';
+            }
+            cluesContainer.innerHTML = cluesHTML;
+
+            wordData.forEach(word => {
+                const cell = gridContainer.children[word.row * 7 + word.col];
+                const numberDiv = document.createElement('div');
+                numberDiv.className = 'number';
+                numberDiv.textContent = word.id;
+                cell.prepend(numberDiv);
+            });
+            
+            function submitClueAnswerToGrid(inputField) {
+                const id = parseInt(inputField.dataset.id);
+                const direction = inputField.dataset.direction;
+                const word = wordData.find(w => w.id === id && w.direction === direction);
+                const userAnswer = inputField.value;
+
+                if (userAnswer.length > 0 && userAnswer.length !== word.length) {
+                    alert('글자 수가 맞지 않습니다.');
+                    return false;
+                }
+
+                for (let i = 0; i < userAnswer.length; i++) {
+                    const char = userAnswer[i];
+                    const r = word.row + (direction === '세로' ? i : 0);
+                    const c = word.col + (direction === '가로' ? i : 0);
+                    const gridInput = gridContainer.querySelector('input[data-row="' + r + '"][data-col="' + c + '"]');
+                    if (gridInput) gridInput.value = char.toUpperCase();
+                }
+                return true;
+            }
+            
+            cluesContainer.addEventListener('keydown', e => {
+                if (!e.target.classList.contains('clue-answer-input')) return;
+                
+                const inputField = e.target;
+                
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const success = submitClueAnswerToGrid(inputField);
+                    if (success) {
+                        const allClueInputs = Array.from(cluesContainer.querySelectorAll('.clue-answer-input'));
+                        const currentIndex = allClueInputs.indexOf(inputField);
+                        const nextInput = allClueInputs[currentIndex + 1];
+                        if (nextInput) {
+                            nextInput.focus();
+                        } else {
+                            allClueInputs[0]?.focus();
+                        }
+                    }
+                }
+            });
+            
+            cluesContainer.addEventListener('blur', e => {
+                if (!e.target.classList.contains('clue-answer-input')) return;
+                submitClueAnswerToGrid(e.target);
+            }, true);
+
+
+            // '제출' 버튼 로직 (글자 단위)
+            submitButton.addEventListener('click', () => {
+                let allCellsAreCorrect = true;
+                const allInputs = gridContainer.querySelectorAll('input');
+                allInputs.forEach(input => input.classList.remove('correct', 'incorrect'));
+
+                for(let r = 0; r < 7; r++) {
+                    for(let c = 0; c < 7; c++) {
+                        const correctChar = solutionGrid[r][c];
+                        if (correctChar) { // 퍼즐 칸인 경우
+                            const input = gridContainer.querySelector('input[data-row="' + r + '"][data-col="' + c + '"]');
+                            const userChar = input.value;
+                            if (userChar.toLowerCase() === correctChar.toLowerCase()) {
+                                input.classList.add('correct');
+                            } else {
+                                input.classList.add('incorrect');
+                                allCellsAreCorrect = false;
+                            }
+                        }
+                    }
+                }
+
+                if (allCellsAreCorrect) {
+                    resultMessage.textContent = '축하합니다! 모든 정답을 맞혔습니다! 🎉';
+                    resultMessage.style.color = 'green';
+                } else {
+                    resultMessage.textContent = '아쉽네요. 틀린 글자가 있습니다. 다시 확인해보세요.';
+                    resultMessage.style.color = 'red';
+                }
+            });
+
+            // '오답 수정' 버튼 로직 (글자 단위)
+            resetButton.addEventListener('click', () => {
+                const incorrectInputs = document.querySelectorAll('input.incorrect');
+                if (incorrectInputs.length > 0) {
+                    incorrectInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('incorrect');
+                    });
+                    resultMessage.textContent = '틀린 답을 모두 지웠습니다.';
+                } else {
+                    resultMessage.textContent = '틀린 답이 없습니다!';
+                }
+                resultMessage.style.color = 'black';
+            });
+
+            // '정답 확인' 버튼 로직
+            showAnswerButton.addEventListener('click', () => {
+                if (answerGridContainer.hasChildNodes()) {
+                    answerContainer.style.display = answerContainer.style.display === 'none' ? 'block' : 'none';
+                    return;
+                }
+                
+                answerContainer.style.display = 'block';
+                resultMessage.textContent = '정답을 표시합니다.';
+                resultMessage.style.color = 'black';
+
+                for (let r = 0; r < 7; r++) {
+                    for (let c = 0; c < 7; c++) {
+                        const isWhiteCell = gridState[r][c] === 1;
+                        const answerCell = document.createElement('div');
+                        answerCell.className = 'answer-cell ' + (isWhiteCell ? 'white' : 'black');
+
+                        if (isWhiteCell) {
+                            const correctChar = solutionGrid[r][c];
+                            const userInput = gridContainer.querySelector('input[data-row="' + r + '"][data-col="' + c + '"]').value;
+
+                            answerCell.textContent = correctChar ? correctChar.toUpperCase() : '';
+
+                            if (correctChar) {
+                                if (userInput.toLowerCase() === correctChar.toLowerCase()) {
+                                    answerCell.classList.add('correct-char');
+                                } else {
+                                    answerCell.classList.add('incorrect-char');
+                                }
+                            }
+                        }
+                        answerGridContainer.appendChild(answerCell);
+                    }
+                }
+                
+                wordData.forEach(word => {
+                    const cell = answerGridContainer.children[word.row * 7 + word.col];
+                    const numberDiv = document.createElement('div');
+                    numberDiv.className = 'number';
+                    numberDiv.textContent = word.id;
+                    cell.prepend(numberDiv);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

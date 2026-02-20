@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>크로스워드 퍼즐</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; display: flex; flex-direction: column; align-items: center; background-color: #f0f2f5; }
+        .puzzle-info { text-align: center; margin-bottom: 20px; font-size: 16px; color: #555; }
+        .puzzle-info span { margin: 0 10px; }
+        .main-container { display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; justify-content: center; }
+        #grid-container, #answer-grid-container { display: grid; grid-template-columns: repeat(7, 45px); border: 2px solid #333; }
+        .cell, .answer-cell { width: 45px; height: 45px; border: 1px solid #ccc; box-sizing: border-box; position: relative; }
+        .cell.black, .answer-cell.black { background-color: #2c2c2c; }
+        .cell.white, .answer-cell.white { background-color: #fff; }
+        .cell .number, .answer-cell .number { position: absolute; top: 1px; left: 2px; font-size: 10px; font-weight: bold; color: #005a9c; }
+        .cell input { width: 100%; height: 100%; border: none; text-align: center; font-size: 22px; padding: 0; box-sizing: border-box; text-transform: uppercase; }
+        .cell input.correct { background-color: #d4edda; }
+        .cell input.incorrect { background-color: #f8d7da; }
+        .answer-cell { display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: bold; }
+        .answer-cell.correct-char { color: #155724; }
+        .answer-cell.incorrect-char { color: #721c24; }
+        #clues-container { width: 400px; }
+        .clue-group h3 { margin-top: 0; }
+        .clue-item { margin-bottom: 5px; font-size: 14px; }
+        .button-wrapper { text-align: center; margin-top: 20px; }
+        .action-buttons { margin-bottom: 15px; }
+        #submit-button, #reset-incorrect-button, #show-answer-button { margin: 5px; padding: 10px 20px; font-size: 16px; cursor: pointer; color: white; border: none; border-radius: 5px; }
+        #submit-button { background-color: #007bff; }
+        #reset-incorrect-button { background-color: #6c757d; }
+        #show-answer-button { background-color: #28a745; }
+        .more-puzzles-button { display: inline-block; background-color: #17a2b8; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-size: 16px; margin-bottom: 15px; }
+        #result-message { font-size: 18px; font-weight: bold; min-height: 27px; text-align: center; }
+        .feedback-link { font-size: 14px; }
+        .feedback-link a { color: #555; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>크로스워드 퍼즐</h1>
+    <div class="puzzle-info">
+        <span>생성일: 2025.07.12</span>
+        <span>회차: 2</span>
+        <span>주제: 한국영화</span>
+    </div>
+    <div class="main-container">
+        <div id="grid-container"></div>
+        <div id="clues-container"></div>
+    </div>
+    <div class="button-wrapper">
+        <div class="action-buttons">
+            <button id="submit-button">제출</button>
+            <button id="reset-incorrect-button">오답 수정</button>
+            <button id="show-answer-button">정답 확인</button>
+        </div>
+        <a href="./index.html" class="more-puzzles-button">더 많은 문제 풀러 가기</a>
+        <div class="feedback-link">
+            <a href="https://naver.me/5TQM65TX" target="_blank">네이버폼으로 피드백 보내기 (뉴스레터 구독신청)</a>
+        </div>
+    </div>
+    <p id="result-message"></p>
+    <div id="answer-container" style="display:none; margin-top: 30px;">
+        <h2>정답</h2>
+        <div id="answer-grid-container"></div>
+    </div>
+
+    <script>
+        const gridState = [[0,0,1,0,0,1,1],[1,1,1,1,1,0,1],[1,0,1,0,0,0,0],[1,0,1,1,1,1,0],[1,0,0,0,1,0,0],[0,0,1,0,1,0,0],[0,1,1,1,0,0,0]];
+        const wordData = [{"id":1,"direction":"세로","row":0,"col":2,"length":4,"hint":" 징한 놈의 이 세상! 광대로 다시 만나 제대로 한 번 맞춰보자!","answer":"왕의남자"},{"id":2,"direction":"가로","row":0,"col":5,"length":2,"hint":"부산으로 가고 싶었던 도깨비","answer":"공유"},{"id":3,"direction":"세로","row":0,"col":6,"length":2,"hint":"한국 최초의 잠수함 소재 영화","answer":"유령"},{"id":4,"direction":"가로","row":1,"col":0,"length":5,"hint":"밥은 먹고 다니냐?","answer":"살인의추억"},{"id":4,"direction":"세로","row":1,"col":0,"length":4,"hint":"사실 제목 앞에 #이 들어가야 됨","answer":"살아있다"},{"id":5,"direction":"가로","row":3,"col":2,"length":4,"hint":"설경구, 변요한 주연의 흑백영화","answer":"자산어보"},{"id":6,"direction":"세로","row":3,"col":4,"length":3,"hint":"본업(배우)보다 요리로 더 유명한..","answer":"어남선"},{"id":7,"direction":"세로","row":5,"col":2,"length":2,"hint":"영화 부산행 속편","answer":"반도"},{"id":8,"direction":"가로","row":6,"col":1,"length":3,"hint":"멜로 퀸. 칸의 여왕","answer":"전도연"}];
+        const solutionGrid = [[null,null,"왕",null,null,"공","유"],["살","인","의","추","억",null,"령"],["아",null,"남",null,null,null,null],["있",null,"자","산","어","보",null],["다",null,null,null,"남",null,null],[null,null,"반",null,"선",null,null],[null,"전","도","연",null,null,null]]; // 글자 단위 정답
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridContainer = document.getElementById('grid-container');
+            const cluesContainer = document.getElementById('clues-container');
+            const submitButton = document.getElementById('submit-button');
+            const resetButton = document.getElementById('reset-incorrect-button');
+            const showAnswerButton = document.getElementById('show-answer-button');
+            const resultMessage = document.getElementById('result-message');
+            const answerContainer = document.getElementById('answer-container');
+            const answerGridContainer = document.getElementById('answer-grid-container');
+
+            // 그리드 렌더링
+            for (let r = 0; r < 7; r++) {
+                for (let c = 0; c < 7; c++) {
+                    const cell = document.createElement('div');
+                    cell.className = `cell ${gridState[r][c] === 1 ? 'white' : 'black'}`;
+                    if (gridState[r][c] === 1) {
+                        const input = document.createElement('input');
+                        input.setAttribute('maxlength', 1);
+                        input.dataset.row = r;
+                        input.dataset.col = c;
+                        cell.appendChild(input);
+                    }
+                    gridContainer.appendChild(cell);
+                }
+            }
+
+            // 힌트 및 번호 렌더링
+            const acrossWords = wordData.filter(w => w.direction === '가로').sort((a,b)=>a.id - b.id);
+            const downWords = wordData.filter(w => w.direction === '세로').sort((a,b)=>a.id - b.id);
+            
+            let cluesHTML = '';
+            if (acrossWords.length > 0) {
+                cluesHTML += '<div class="clue-group"><h3>가로 낱말</h3>';
+                acrossWords.forEach(w => { cluesHTML += `<div class="clue-item">${w.id}. ${w.hint}</div>`; });
+                cluesHTML += '</div>';
+            }
+            if (downWords.length > 0) {
+                cluesHTML += '<div class="clue-group"><h3>세로 낱말</h3>';
+                downWords.forEach(w => { cluesHTML += `<div class="clue-item">${w.id}. ${w.hint}</div>`; });
+                cluesHTML += '</div>';
+            }
+            cluesContainer.innerHTML = cluesHTML;
+
+            wordData.forEach(word => {
+                const cell = gridContainer.children[word.row * 7 + word.col];
+                const numberDiv = document.createElement('div');
+                numberDiv.className = 'number';
+                numberDiv.textContent = word.id;
+                cell.prepend(numberDiv);
+            });
+
+            // '제출' 버튼 로직 (글자 단위)
+            submitButton.addEventListener('click', () => {
+                let allCellsAreCorrect = true;
+                const allInputs = gridContainer.querySelectorAll('input');
+                allInputs.forEach(input => input.classList.remove('correct', 'incorrect'));
+
+                for(let r = 0; r < 7; r++) {
+                    for(let c = 0; c < 7; c++) {
+                        const correctChar = solutionGrid[r][c];
+                        if (correctChar) { // 퍼즐 칸인 경우
+                            const input = gridContainer.querySelector(`input[data-row="${r}"][data-col="${c}"]`);
+                            const userChar = input.value;
+                            if (userChar.toLowerCase() === correctChar.toLowerCase()) {
+                                input.classList.add('correct');
+                            } else {
+                                input.classList.add('incorrect');
+                                allCellsAreCorrect = false;
+                            }
+                        }
+                    }
+                }
+
+                if (allCellsAreCorrect) {
+                    resultMessage.textContent = '축하합니다! 모든 정답을 맞혔습니다!  ';
+                    resultMessage.style.color = 'green';
+                } else {
+                    resultMessage.textContent = '아쉽네요. 틀린 글자가 있습니다. 다시 확인해보세요.';
+                    resultMessage.style.color = 'red';
+                }
+            });
+
+            // '오답 수정' 버튼 로직 (글자 단위)
+            resetButton.addEventListener('click', () => {
+                const incorrectInputs = document.querySelectorAll('input.incorrect');
+                if (incorrectInputs.length > 0) {
+                    incorrectInputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('incorrect');
+                    });
+                    resultMessage.textContent = '틀린 답을 모두 지웠습니다.';
+                } else {
+                    resultMessage.textContent = '틀린 답이 없습니다!';
+                }
+                resultMessage.style.color = 'black';
+            });
+
+            // '정답 확인' 버튼 로직
+            showAnswerButton.addEventListener('click', () => {
+                if (answerGridContainer.hasChildNodes()) {
+                    answerContainer.style.display = answerContainer.style.display === 'none' ? 'block' : 'none';
+                    return;
+                }
+                
+                answerContainer.style.display = 'block';
+                resultMessage.textContent = '정답을 표시합니다.';
+                resultMessage.style.color = 'black';
+
+                for (let r = 0; r < 7; r++) {
+                    for (let c = 0; c < 7; c++) {
+                        const isWhiteCell = gridState[r][c] === 1;
+                        const answerCell = document.createElement('div');
+                        answerCell.className = `answer-cell ${isWhiteCell ? 'white' : 'black'}`;
+
+                        if (isWhiteCell) {
+                            const correctChar = solutionGrid[r][c];
+                            const userInput = gridContainer.querySelector(`input[data-row="${r}"][data-col="${c}"]`).value;
+
+                            answerCell.textContent = correctChar ? correctChar.toUpperCase() : '';
+
+                            if (correctChar) {
+                                if (userInput.toLowerCase() === correctChar.toLowerCase()) {
+                                    answerCell.classList.add('correct-char');
+                                } else {
+                                    answerCell.classList.add('incorrect-char');
+                                }
+                            }
+                        }
+                        answerGridContainer.appendChild(answerCell);
+                    }
+                }
+                
+                wordData.forEach(word => {
+                    const cell = answerGridContainer.children[word.row * 7 + word.col];
+                    const numberDiv = document.createElement('div');
+                    numberDiv.className = 'number';
+                    numberDiv.textContent = word.id;
+                    cell.prepend(numberDiv);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
