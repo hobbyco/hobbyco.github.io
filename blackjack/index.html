@@ -1,3 +1,4 @@
+<!-- Last Updated: 2026-02-21 07:37:00 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,29 +21,15 @@
     <meta name="author" content="Blackjack Master Pro">
     <link rel="canonical" href="https://your-domain.com/">
 
-    <!-- Open Graph / Facebook / Kakao -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-domain.com/">
     <meta property="og:title" content="블랙잭 마스터 전략 프로 - AI 실시간 피드백">
     <meta property="og:description" content="수학적 기본 전략에 따라 가장 유리한 수를 제안합니다. 지금 바로 블랙잭 실력을 업그레이드하세요.">
     <meta property="og:image" content="https://your-domain.com/og-image.jpg">
 
-    <!-- Structured Data (JSON-LD) for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "블랙잭 마스터 전략 프로",
-      "operatingSystem": "Web",
-      "applicationCategory": "GameApplication",
-      "description": "AI 기반 블랙잭 전략 시뮬레이터 및 확률 학습 도구",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
+    <!-- Lucide Icons Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
@@ -60,17 +47,15 @@
             --footer-text: #334155;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
 
         body {
             font-family: 'Pretendard', sans-serif;
             background: var(--casino-green);
             background: radial-gradient(circle at center, var(--felt-light) 0%, var(--casino-green) 100%);
             color: var(--text-light);
-            margin: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
             min-height: 100vh;
         }
 
@@ -80,6 +65,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 40px 10px;
         }
 
@@ -243,7 +229,29 @@
             border: 1px solid var(--border-gold);
         }
 
-        .ai-header { color: var(--gold); font-weight: 800; display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+        .ai-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 12px;
+        }
+        
+        .ai-title { color: var(--gold); font-weight: 800; display: flex; align-items: center; gap: 8px; }
+
+        .btn-guide {
+            background: var(--gold);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 2px 0 var(--gold-dark);
+        }
+        .btn-guide:hover { transform: translateY(-1px); box-shadow: 0 3px 0 var(--gold-dark); }
+        .btn-guide:active { transform: translateY(1px); box-shadow: none; }
+
         .ai-feedback { font-size: 1rem; line-height: 1.6; }
         .ai-reason { font-size: 0.85rem; color: #94a3b8; margin-top: 10px; display: block; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
 
@@ -271,12 +279,11 @@
             padding: 5px 10px;
         }
 
-        /* Footer Container */
-        #footer-container {
+        /* Footer Container Optimization */
+        #footer-placeholder {
             width: 100%;
             background: var(--footer-bg);
             color: var(--footer-text);
-            padding: 20px;
             text-align: center;
             border-top: 1px solid #e2e8f0;
         }
@@ -326,8 +333,11 @@
 
         <div class="ai-assistant">
             <div class="ai-header">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
-                <span id="lbl-ai">AI STRATEGY PRO</span>
+                <div class="ai-title">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
+                    <span id="lbl-ai">AI STRATEGY PRO</span>
+                </div>
+                <a href="guide.html" class="btn-guide">블랙잭 필승 가이드</a>
             </div>
             <div id="ai-content" class="ai-feedback">
                 최적의 확률을 계산하여 승리를 돕습니다.
@@ -336,8 +346,8 @@
     </div>
 </div>
 
-<!-- 상위 폴더의 footer.html이 로드될 영역 -->
-<div id="footer-container"></div>
+<!-- 로또 추천기 스타일의 푸터 자리 -->
+<div id="footer-placeholder"></div>
 
 <script>
     const i18n = {
@@ -577,19 +587,28 @@
         updateUI();
     };
 
+    // 로또 추천기 스타일의 푸터 로직 반영
     window.onload = function() {
-        // 상위 폴더의 footer.html 로드 로직 최적화
         fetch('../footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Footer not found');
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : '')
             .then(data => {
-                const container = document.getElementById('footer-container');
-                container.innerHTML = data;
-                // 배경색 및 글자색 강제 적용 (흰색 바탕 요구사항 유지)
-                container.style.backgroundColor = "#ffffff";
-                container.style.color = "#334155";
+                const placeholder = document.getElementById('footer-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = data;
+                    // 배경색 및 글자색 강제 적용 (흰색 바탕 요구사항 유지)
+                    placeholder.style.backgroundColor = "#ffffff";
+                    placeholder.style.color = "#334155";
+                    placeholder.style.padding = "20px";
+                    
+                    // 아이콘 가시성 보장 및 lucide 적용
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                    
+                    const icons = placeholder.querySelectorAll('svg');
+                    icons.forEach(icon => {
+                        icon.style.display = 'inline-block';
+                        if (!icon.getAttribute('fill')) icon.style.fill = 'currentColor';
+                    });
+                }
             })
             .catch(err => {
                 console.warn('Footer fetch failed:', err);
@@ -597,5 +616,6 @@
         updateUI();
     };
 </script>
+<!-- Last Updated: 2026-02-21 07:37:00 -->
 </body>
 </html>
