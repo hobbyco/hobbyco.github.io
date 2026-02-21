@@ -1,0 +1,333 @@
+<!-- Last Updated: 2026-02-21 17:35:00 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- SEO Meta Tags -->
+    <title>Blackjack Winning Guide - Master Hit/Stay Strategy</title>
+    <meta name="description" content="Master Blackjack with strategies based on mathematical probability. Learn when to hit, stay, double down, or split with our visual guide based on dealer upcards.">
+    <meta name="keywords" content="Blackjack Strategy, Blackjack Rules, How to win at Blackjack, Casino Strategy, Probability, Hit or Stay, Double Down, Split, Basic Strategy">
+    <meta name="author" content="Blackjack Master Pro">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Blackjack Strategy Guide: The Art of Hit and Stay">
+    <meta property="og:description" content="Don't rely on luck. Use mathematical probability. Discover the winning formula to beat the dealer.">
+    <meta property="og:url" content="https://your-domain.com/guide_en.html">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Blackjack Strategy Guide: Hit vs Stay Explained",
+      "description": "A comprehensive guide on optimal blackjack actions and game rules based on statistical probability.",
+      "author": {
+        "@type": "Person",
+        "name": "Blackjack Master Pro"
+      }
+    }
+    </script>
+
+    <!-- Lucide Icons Library -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800&display=swap');
+
+        :root {
+            --casino-green: #064e3b;
+            --felt-light: #065f46;
+            --gold: #fbbf24;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --accent-hit: #10b981;
+            --accent-stay: #ef4444;
+            --bg-card: #f8fafc;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #f1f5f9;
+            color: var(--text-dark);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-wrapper { 
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--casino-green) 0%, var(--felt-light) 100%);
+            color: var(--text-light);
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 12px; color: var(--gold); letter-spacing: -1px; }
+        .hero p { font-size: 1.15rem; max-width: 650px; margin: 0 auto; color: #ffffff; font-weight: 500; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+
+        /* Content Container */
+        .container {
+            max-width: 900px;
+            margin: -40px auto 0;
+            background: white;
+            border-radius: 32px 32px 0 0;
+            padding: 45px 45px 30px;
+            box-shadow: 0 -10px 25px -12px rgba(0, 0, 0, 0.05);
+            flex: 1;
+        }
+
+        @media (max-width: 640px) {
+            .container { margin: -25px 0 0; padding: 25px 20px 30px; border-radius: 20px 20px 0 0; width: 100%; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p { font-size: 1rem; }
+        }
+
+        h2 { font-size: 1.8rem; margin: 45px 0 20px; border-left: 6px solid var(--casino-green); padding-left: 18px; color: var(--casino-green); letter-spacing: -0.5px; }
+        h2:first-of-type { margin-top: 0; }
+        h3 { font-size: 1.3rem; margin: 30px 0 15px; color: var(--text-dark); border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; }
+        p { margin-bottom: 20px; color: #475569; }
+        
+        /* Information Grid for Strategy */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .strategy-grid { grid-template-columns: 1fr; }
+        }
+
+        .strategy-card {
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid #e2e8f0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-hit { border-top: 5px solid var(--accent-hit); background: #f0fdf4; }
+        .card-stay { border-top: 5px solid var(--accent-stay); background: #fef2f2; }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .action-badge {
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            color: white;
+        }
+
+        .badge-hit { background: var(--accent-hit); }
+        .badge-stay { background: var(--accent-stay); }
+
+        .strategy-card ul { list-style: none; }
+        .strategy-card li { 
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .strategy-card li::before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .card-hit li::before { color: var(--accent-hit); }
+        .card-stay li::before { color: var(--accent-stay); }
+
+        .key-num { font-weight: 800; color: var(--text-dark); background: rgba(0,0,0,0.05); padding: 1px 4px; border-radius: 4px; }
+
+        /* Tables */
+        .value-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        .value-table th, .value-table td { border: 1px solid #e2e8f0; padding: 14px; text-align: center; }
+        .value-table th { background: #f8fafc; font-weight: 700; color: #64748b; }
+
+        /* Footer Container */
+        #footer-placeholder {
+            width: 100%;
+            background: #ffffff;
+            color: #334155;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: var(--casino-green);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            margin-top: 10px;
+            transition: all 0.2s;
+            box-shadow: 0 10px 20px rgba(6, 78, 59, 0.2);
+        }
+        .btn-link:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(6, 78, 59, 0.3); }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <section class="hero">
+        <h1>🃏 Blackjack Winning Guide</h1>
+        <p>Master the game from basic rules to advanced tactics based on mathematical probability.</p>
+    </section>
+
+    <article class="container">
+        <h2>1. Blackjack Basics</h2>
+        <p>The goal of Blackjack is to beat the dealer's hand without exceeding 21. More importantly, winning often depends on calculating the <b>Dealer's probability of 'Busting' (exceeding 21)</b>.</p>
+
+        <h3>Card Values</h3>
+        <table class="value-table">
+            <thead>
+                <tr>
+                    <th>Card Type</th>
+                    <th>Point Calculation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Number Cards (2~10)</td>
+                    <td>Face value</td>
+                </tr>
+                <tr>
+                    <td>Face Cards (J, Q, K)</td>
+                    <td>Always <span class="key-num">10 points</span></td>
+                </tr>
+                <tr>
+                    <td>Ace (Ace)</td>
+                    <td><span class="key-num">1 point</span> or <span class="key-num">11 points</span> (player's choice)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>2. Action Guide: Hit vs Stay</h2>
+        <p>The most critical decision point. Compare your hand with the dealer's upcard to make the optimal move.</p>
+
+        <div class="strategy-grid">
+            <!-- Hit Section -->
+            <div class="strategy-card card-hit">
+                <div class="card-header">
+                    <span class="action-badge badge-hit">HIT</span>
+                    <strong class="text-lg">When to Hit?</strong>
+                </div>
+                <ul>
+                    <li><span class="key-num">Total of 11 or less</span>: There is zero risk of busting (exceeding 21). Hit without hesitation.</li>
+                    <li><span class="key-num">12~16 vs Strong Dealer</span>: If the dealer's upcard is <span class="key-num">7, 8, 9, 10, A</span>, you must risk hitting to improve your score.</li>
+                    <li><span class="key-num">Soft Hands (with Ace)</span>: Hands from A-2 to A-6 are "free" opportunities to improve without fear of busting.</li>
+                </ul>
+            </div>
+
+            <!-- Stay Section -->
+            <div class="strategy-card card-stay">
+                <div class="card-header">
+                    <span class="action-badge badge-stay">STAY</span>
+                    <strong class="text-lg">When to Stay?</strong>
+                </div>
+                <ul>
+                    <li><span class="key-num">Hard Total of 17+</span>: Bust probability is extremely high. Stop and wait for the dealer's outcome.</li>
+                    <li><span class="key-num">Weak Dealer (2~6)</span>: If the dealer upcard is 2 to 6, stay even with a lower score (<span class="key-num">13+</span>). There is a ~40% chance the dealer will bust.</li>
+                    <li><span class="key-num">Hard 12 vs Dealer 4, 5, 6</span>: This is the most likely range for a dealer bust. Staying is the mathematically correct move.</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>3. Maximizing Profits</h2>
+        <p>Methods to increase your stake or diversify risk when the odds are in your favor.</p>
+        
+        <div class="strategy-grid">
+            <div class="strategy-card" style="background: #fffbeb; border-color: #fef3c7;">
+                <h3 style="margin-top:0; border:none; padding:0;">Split</h3>
+                <ul style="margin-top:10px;">
+                    <li><span class="key-num">A-A</span> / <span class="key-num">8-8</span>: <b>Always Split.</b> Turn your worst hand into two potential winners.</li>
+                    <li><span class="key-num">10-10</span>: Never Split. You already have a powerful 20; don't break it.</li>
+                </ul>
+            </div>
+            <div class="strategy-card" style="background: #f0f9ff; border-color: #e0f2fe;">
+                <h3 style="margin-top:0; border:none; padding:0;">Double Down</h3>
+                <ul style="margin-top:10px;">
+                    <li><span class="key-num">Total of 11</span>: Highest probability of reaching 21 with the next card. Double your bet.</li>
+                    <li><span class="key-num">Total of 10</span>: If the dealer shows 9 or less, aggressive doubling is favorable.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="btn-link">Practice Now</a>
+        </div>
+    </article>
+</div>
+
+<div id="footer-placeholder"></div>
+
+<script>
+    // Footer injection logic
+    window.onload = function() {
+        fetch('../footer.html')
+            .then(response => response.ok ? response.text() : '')
+            .then(data => {
+                const placeholder = document.getElementById('footer-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = data;
+                    
+                    // Style and spacing optimization
+                    placeholder.style.backgroundColor = "#ffffff";
+                    placeholder.style.color = "#334155";
+                    placeholder.style.padding = "20px 20px 30px";
+                    
+                    // Apply Lucide icons
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                    
+                    // Ensure icon visibility
+                    const icons = placeholder.querySelectorAll('svg');
+                    icons.forEach(icon => {
+                        icon.style.display = 'inline-block';
+                        if (!icon.getAttribute('fill')) icon.style.fill = 'currentColor';
+                    });
+                }
+            })
+            .catch(err => console.warn('Footer fetch failed:', err));
+    };
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+</script>
+
+<!-- Last Updated: 2026-02-21 17:35:00 -->
+</body>
+</html>
