@@ -1,4 +1,4 @@
-<!-- Last Updated: 2026-02-21 07:37:00 -->
+<!-- Last Updated: 2026-02-21 17:40:00 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -314,7 +314,7 @@
         <div id="dealer-area" class="game-section">
             <div class="section-header">
                 <span id="lbl-dealer" style="font-weight: 800; letter-spacing: 1px;">DEALER</span>
-                <span id="dealer-score" class="badge">?</span>
+                <span id="dealer-score" class="badge">카드 합계 : </span>
             </div>
             <div id="dealer-cards" class="card-container"></div>
         </div>
@@ -337,7 +337,7 @@
                     <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"></path></svg>
                     <span id="lbl-ai">AI STRATEGY PRO</span>
                 </div>
-                <a href="guide.html" class="btn-guide">블랙잭 필승 가이드</a>
+                <a href="guide_kor.html" id="guide-link-btn" class="btn-guide">블랙잭 필승 가이드</a>
             </div>
             <div id="ai-content" class="ai-feedback">
                 최적의 확률을 계산하여 승리를 돕습니다.
@@ -359,6 +359,9 @@
             perfectDesc: "가장 높은 기대값을 가진 <b>{opt}</b>를 선택하셨습니다.",
             errorDesc: "수학적으로는 <b>{opt}</b>를 선택하는 것이 더 유리합니다.",
             win: "WIN", lose: "LOSE", push: "PUSH", bust: "BUST", bj: "BLACKJACK",
+            scoreLabel: "카드 합계 : ",
+            guideBtn: "블랙잭 필승 가이드",
+            guideLink: "guide_kor.html",
             reasons: {
                 splitAA: "에이스 스플릿은 블랙잭에서 가장 유리한 수입니다.",
                 split88: "16점은 가장 위험한 점수입니다. 8-8로 나누어 다시 시작하세요.",
@@ -377,6 +380,9 @@
             perfectDesc: "You chose the move with the highest EV: <b>{opt}</b>.",
             errorDesc: "Mathematically, <b>{opt}</b> is the better move here.",
             win: "WIN", lose: "LOSE", push: "PUSH", bust: "BUST", bj: "BLACKJACK",
+            scoreLabel: "Card Total : ",
+            guideBtn: "Blackjack Strategy Guide",
+            guideLink: "guide_eng.html",
             reasons: {
                 splitAA: "Always split Aces to maximize high-value potential.",
                 split88: "16 is the worst hand. Break it into 8s for a fresh start.",
@@ -444,19 +450,31 @@
         document.getElementById('double-btn').textContent = t.double;
         document.getElementById('split-btn').textContent = t.split;
 
+        // 가이드 버튼 텍스트 및 링크 업데이트
+        const guideLinkBtn = document.getElementById('guide-link-btn');
+        guideLinkBtn.textContent = t.guideBtn;
+        guideLinkBtn.href = t.guideLink;
+
         const showAll = state.phase === 'DEALER' || state.phase === 'END';
         document.getElementById('dealer-cards').innerHTML = state.dealerHand.map((c, i) => `
             <div class="card ${i === 1 && !showAll ? 'hidden' : ''} ${c.s === '♥' || c.s === '♦' ? 'red' : ''}">
                 ${i === 1 && !showAll ? '' : `<span>${c.r}</span><small>${c.s}</small>`}
             </div>
         `).join('');
-        document.getElementById('dealer-score').textContent = showAll ? getScore(state.dealerHand) : '?';
+        
+        // 딜러 점수 표시 로직
+        const dealerScoreBadge = document.getElementById('dealer-score');
+        if (state.phase === 'IDLE') {
+            dealerScoreBadge.textContent = t.scoreLabel;
+        } else {
+            dealerScoreBadge.textContent = `${t.scoreLabel} ${showAll ? getScore(state.dealerHand) : '?'}`;
+        }
 
         document.getElementById('player-area').innerHTML = state.playerHands.map((h, i) => `
             <div class="game-section ${i === state.currentHandIdx && state.phase === 'PLAYER' ? 'active-turn' : ''}">
                 <div class="section-header">
                     <span>${t.player} ${state.playerHands.length > 1 ? i + 1 : ''}</span>
-                    <span class="badge">${getScore(h.cards)}</span>
+                    <span class="badge">${state.phase === 'IDLE' ? t.scoreLabel : t.scoreLabel + getScore(h.cards)}</span>
                 </div>
                 <div class="card-container">${h.cards.map(c => `
                     <div class="card ${c.s === '♥' || c.s === '♦' ? 'red' : ''}"><span>${c.r}</span><small>${c.s}</small></div>
@@ -616,6 +634,6 @@
         updateUI();
     };
 </script>
-<!-- Last Updated: 2026-02-21 07:37:00 -->
+<!-- Last Updated: 2026-02-21 17:40:00 -->
 </body>
 </html>
