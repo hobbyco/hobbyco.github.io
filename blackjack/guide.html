@@ -1,4 +1,4 @@
-<!-- Last Updated: 2026-02-21 07:44:00 -->
+<!-- Last Updated: 2026-02-21 07:47:00 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -92,13 +92,13 @@
             margin: -40px auto 0; /* 하단 마진 제거하여 푸터와 밀착 */
             background: white;
             border-radius: 32px 32px 0 0; /* 하단 라운드 제거하여 푸터와 연결 */
-            padding: 45px 45px 60px;
+            padding: 45px 45px 30px; /* 하단 패딩을 줄여 빈 공간 최소화 */
             box-shadow: 0 -10px 25px -12px rgba(0, 0, 0, 0.05);
             flex: 1;
         }
 
         @media (max-width: 640px) {
-            .container { margin: -25px 0 0; padding: 25px 20px 40px; border-radius: 20px 20px 0 0; width: 100%; }
+            .container { margin: -25px 0 0; padding: 25px 20px 30px; border-radius: 20px 20px 0 0; width: 100%; }
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
         }
@@ -286,7 +286,7 @@
             </div>
         </div>
 
-        <div style="text-align: center; padding-top: 20px;">
+        <div style="text-align: center; padding-top: 10px;">
             <a href="index.html" class="btn-link">지금 바로 실전 연습하기</a>
         </div>
     </article>
@@ -295,7 +295,7 @@
 <div id="footer-placeholder"></div>
 
 <script>
-    // 공통 푸터 삽입 로직 (로또 추천기 최신 방식 적용)
+    // 공통 푸터 삽입 로직 (가독성 및 간격 최적화)
     window.onload = function() {
         fetch('../footer.html')
             .then(response => response.ok ? response.text() : '')
@@ -304,10 +304,10 @@
                 if (placeholder) {
                     placeholder.innerHTML = data;
                     
-                    // 스타일 최적화 (흰색 배경 유지)
+                    // 푸터 스타일 및 간격 최적화
                     placeholder.style.backgroundColor = "#ffffff";
                     placeholder.style.color = "#334155";
-                    placeholder.style.padding = "30px 20px";
+                    placeholder.style.padding = "20px 20px 30px"; /* 상단 간격 축소 */
                     
                     // Lucide 아이콘 적용
                     if (typeof lucide !== 'undefined') lucide.createIcons();
@@ -328,6 +328,6 @@
     }
 </script>
 
-<!-- Last Updated: 2026-02-21 07:44:00 -->
+<!-- Last Updated: 2026-02-21 07:47:00 -->
 </body>
 </html>
