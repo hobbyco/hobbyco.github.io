@@ -590,7 +590,7 @@
         updateUI();
     };
 
-    window.onload = function() {
+window.onload = function() {
         fetch('../footer.html')
             .then(response => response.ok ? response.text() : '')
             .then(data => {
@@ -598,38 +598,35 @@
                 if (placeholder) {
                     placeholder.innerHTML = data;
                     
+                    // lotto_index와 동일하게 자연스러운 스타일로 수정
                     const style = document.createElement('style');
                     style.innerHTML = `
                         #footer-placeholder {
-                            background-color: #ffffff !important;
-                            color: #334155 !important;
-                            padding: 40px 20px !important;
-                            display: block !important;
-                            text-align: center !important;
-                        }
-                        #footer-placeholder * {
-                            background-color: transparent !important;
-                            color: #334155 !important;
-                        }
-                        #footer-placeholder img, 
-                        #footer-placeholder svg { 
-                            width: 24px !important; 
-                            height: 24px !important; 
-                            display: inline-block !important;
-                            margin: 0 5px !important;
-                            filter: none !important;
-                            opacity: 0.6;
+                            width: 100%;
+                            padding: 40px 20px;
+                            display: block;
+                            text-align: center;
+                            /* 배경색을 흰색으로 강제하지 않고 투명하게 유지 */
+                            color: var(--text-light) !important; 
                         }
                         #footer-placeholder a {
-                            display: inline-flex !important;
+                            display: inline-flex;
                             align-items: center;
                             text-decoration: none;
                             margin: 0 10px;
+                            color: var(--text-light) !important;
+                            opacity: 0.8;
                         }
-                        /* 바로가기 아이콘 등 불필요한 요소 숨김 */
-                        #footer-placeholder a svg[class*="external"],
-                        #footer-placeholder .external-link-icon {
-                            display: none !important;
+                        #footer-placeholder a:hover {
+                            opacity: 1;
+                        }
+                        #footer-placeholder img, 
+                        #footer-placeholder svg { 
+                            width: 20px; 
+                            height: 20px; 
+                            display: inline-block;
+                            margin-right: 5px;
+                            filter: brightness(0) invert(1); /* 어두운 배경을 위해 아이콘을 흰색으로 반전 */
                         }
                     `;
                     document.head.appendChild(style);
@@ -644,7 +641,7 @@
     };
 </script>
 
-<!-- last updated  2026-02-22 18:09 KST -->
+<!-- last updated  2026-02-23 08:34 KST -->
 
 </body>
 </html>
