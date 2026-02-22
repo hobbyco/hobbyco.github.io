@@ -590,7 +590,6 @@
         updateUI();
     };
 
-    // 로또 추천기 스타일의 푸터 로직 반영 및 이미지 크기 수정
     window.onload = function() {
         fetch('../footer.html')
             .then(response => response.ok ? response.text() : '')
@@ -599,32 +598,42 @@
                 if (placeholder) {
                     placeholder.innerHTML = data;
                     
-                    // 스타일 강제 보정: 푸터 내 이미지/SVG 크기 제한
                     const style = document.createElement('style');
                     style.innerHTML = `
+                        #footer-placeholder {
+                            background-color: #ffffff !important;
+                            color: #334155 !important;
+                            padding: 40px 20px !important;
+                            display: block !important;
+                            text-align: center !important;
+                        }
+                        #footer-placeholder * {
+                            background-color: transparent !important;
+                            color: #334155 !important;
+                        }
                         #footer-placeholder img, 
                         #footer-placeholder svg { 
                             width: 24px !important; 
                             height: 24px !important; 
                             display: inline-block !important;
                             margin: 0 5px !important;
-                        }
-                        #footer-placeholder {
-                            background-color: #ffffff !important;
-                            color: #334155 !important;
-                            padding: 30px 20px !important;
-                            display: block !important;
-                            text-align: center !important;
+                            filter: none !important;
+                            opacity: 0.6;
                         }
                         #footer-placeholder a {
                             display: inline-flex !important;
                             align-items: center;
                             text-decoration: none;
+                            margin: 0 10px;
+                        }
+                        /* 바로가기 아이콘 등 불필요한 요소 숨김 */
+                        #footer-placeholder a svg[class*="external"],
+                        #footer-placeholder .external-link-icon {
+                            display: none !important;
                         }
                     `;
                     document.head.appendChild(style);
 
-                    // 아이콘 가시성 보장 및 lucide 적용
                     if (typeof lucide !== 'undefined') lucide.createIcons();
                 }
             })
@@ -634,5 +643,8 @@
         updateUI();
     };
 </script>
+
+<!-- last updated  2026-02-22 18:09 KST -->
+
 </body>
 </html>
