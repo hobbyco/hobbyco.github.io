@@ -1,8 +1,6 @@
-<!-- Last Updated: 2026-02-21 17:40:00 -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,21 +12,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- SEO Meta Tags -->
     <title>블랙잭 마스터 전략 프로 - AI 기반 블랙잭 시뮬레이터</title>
     <meta name="description" content="AI가 추천하는 실시간 블랙잭 전략으로 승률을 높이세요. 카지노 확률 계산기 및 블랙잭 기본 전략을 학습할 수 있는 최고의 시뮬레이터입니다.">
     <meta name="keywords" content="블랙잭, 블랙잭 전략, 카지노 게임, 확률 계산기, 블랙잭 AI, 기본 전략표, Blackjack Strategy, Casino Simulator">
     <meta name="author" content="Blackjack Master Pro">
     <link rel="canonical" href="https://your-domain.com/">
 
-    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://your-domain.com/">
     <meta property="og:title" content="블랙잭 마스터 전략 프로 - AI 실시간 피드백">
     <meta property="og:description" content="수학적 기본 전략에 따라 가장 유리한 수를 제안합니다. 지금 바로 블랙잭 실력을 업그레이드하세요.">
     <meta property="og:image" content="https://your-domain.com/og-image.jpg">
 
-    <!-- Lucide Icons Library -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2233415985336309" crossorigin="anonymous"></script>
+
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -279,13 +276,9 @@
             padding: 5px 10px;
         }
 
-        /* Footer Container Optimization */
+        /* Footer Container */
         #footer-placeholder {
             width: 100%;
-            background: var(--footer-bg);
-            color: var(--footer-text);
-            text-align: center;
-            border-top: 1px solid #e2e8f0;
         }
     </style>
 </head>
@@ -346,7 +339,6 @@
     </div>
 </div>
 
-<!-- 로또 추천기 스타일의 푸터 자리 -->
 <div id="footer-placeholder"></div>
 
 <script>
@@ -450,7 +442,6 @@
         document.getElementById('double-btn').textContent = t.double;
         document.getElementById('split-btn').textContent = t.split;
 
-        // 가이드 버튼 텍스트 및 링크 업데이트
         const guideLinkBtn = document.getElementById('guide-link-btn');
         guideLinkBtn.textContent = t.guideBtn;
         guideLinkBtn.href = t.guideLink;
@@ -462,7 +453,6 @@
             </div>
         `).join('');
         
-        // 딜러 점수 표시 로직
         const dealerScoreBadge = document.getElementById('dealer-score');
         if (state.phase === 'IDLE') {
             dealerScoreBadge.textContent = t.scoreLabel;
@@ -508,10 +498,6 @@
             <span style="color: ${isOpt ? '#10b981' : '#f59e0b'}; font-weight:800; font-size:1.1rem;">${head}</span><br>
             ${desc} <span class="ai-reason">${t.reasons[opt.res]}</span>
         `;
-
-        if (typeof gtag === 'function') {
-            gtag('event', 'game_action', { 'action_type': userAct, 'is_optimal': isOpt });
-        }
     };
 
     const nextHand = () => {
@@ -553,7 +539,6 @@
         updateUI();
     };
 
-    // Actions
     document.getElementById('deal-btn').onclick = () => {
         if (state.balance < state.bet) return;
         state.balance -= state.bet;
@@ -605,7 +590,7 @@
         updateUI();
     };
 
-    // 로또 추천기 스타일의 푸터 로직 반영
+    // 로또 추천기 스타일의 푸터 로직 반영 및 이미지 크기 수정
     window.onload = function() {
         fetch('../footer.html')
             .then(response => response.ok ? response.text() : '')
@@ -613,19 +598,34 @@
                 const placeholder = document.getElementById('footer-placeholder');
                 if (placeholder) {
                     placeholder.innerHTML = data;
-                    // 배경색 및 글자색 강제 적용 (흰색 바탕 요구사항 유지)
-                    placeholder.style.backgroundColor = "#ffffff";
-                    placeholder.style.color = "#334155";
-                    placeholder.style.padding = "20px";
                     
+                    // 스타일 강제 보정: 푸터 내 이미지/SVG 크기 제한
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        #footer-placeholder img, 
+                        #footer-placeholder svg { 
+                            width: 24px !important; 
+                            height: 24px !important; 
+                            display: inline-block !important;
+                            margin: 0 5px !important;
+                        }
+                        #footer-placeholder {
+                            background-color: #ffffff !important;
+                            color: #334155 !important;
+                            padding: 30px 20px !important;
+                            display: block !important;
+                            text-align: center !important;
+                        }
+                        #footer-placeholder a {
+                            display: inline-flex !important;
+                            align-items: center;
+                            text-decoration: none;
+                        }
+                    `;
+                    document.head.appendChild(style);
+
                     // 아이콘 가시성 보장 및 lucide 적용
                     if (typeof lucide !== 'undefined') lucide.createIcons();
-                    
-                    const icons = placeholder.querySelectorAll('svg');
-                    icons.forEach(icon => {
-                        icon.style.display = 'inline-block';
-                        if (!icon.getAttribute('fill')) icon.style.fill = 'currentColor';
-                    });
                 }
             })
             .catch(err => {
@@ -634,6 +634,5 @@
         updateUI();
     };
 </script>
-<!-- Last Updated: 2026-02-21 17:40:00 -->
 </body>
 </html>
