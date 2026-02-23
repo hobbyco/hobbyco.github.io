@@ -177,11 +177,11 @@
         .value-table th { background: #f8fafc; font-weight: 700; color: #64748b; }
 
         /* Footer Container */
+        /* Footer Container (shared footer.html) */
         #footer-placeholder {
             width: 100%;
-            background: #ffffff;
-            color: #334155;
-            border-top: 1px solid #e2e8f0;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .btn-link {
@@ -198,6 +198,13 @@
         }
         .btn-link:hover { transform: translateY(-2px); box-shadow: 0 15px 25px rgba(6, 78, 59, 0.3); }
     </style>
+
+    <!-- Tailwind (for shared footer styles). Preflight disabled to avoid affecting this page's custom CSS. -->
+    <script>
+      tailwind = window.tailwind || {};
+      tailwind.config = { corePlugins: { preflight: false } };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -294,40 +301,26 @@
 
 <div id="footer-placeholder"></div>
 
+
 <script>
-    // Footer injection logic
-    window.onload = function() {
-        fetch('../footer.html')
-            .then(response => response.ok ? response.text() : '')
-            .then(data => {
-                const placeholder = document.getElementById('footer-placeholder');
-                if (placeholder) {
-                    placeholder.innerHTML = data;
-                    
-                    // Style and spacing optimization
-                    placeholder.style.backgroundColor = "#ffffff";
-                    placeholder.style.color = "#334155";
-                    placeholder.style.padding = "20px 20px 30px";
-                    
-                    // Apply Lucide icons
-                    if (typeof lucide !== 'undefined') lucide.createIcons();
-                    
-                    // Ensure icon visibility
-                    const icons = placeholder.querySelectorAll('svg');
-                    icons.forEach(icon => {
-                        icon.style.display = 'inline-block';
-                        if (!icon.getAttribute('fill')) icon.style.fill = 'currentColor';
-                    });
-                }
-            })
-            .catch(err => console.warn('Footer fetch failed:', err));
-    };
+    // Footer injection logic (same as lotto_index)
+    fetch('../footer.html')
+        .then(response => response.ok ? response.text() : '')
+        .then(data => {
+            const placeholder = document.getElementById('footer-placeholder');
+            if (placeholder) {
+                placeholder.innerHTML = data;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+        })
+        .catch(err => console.warn('Footer fetch failed:', err));
 
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
 </script>
 
-<!-- Last Updated: 2026-02-21 17:35:00 -->
+
+<!-- Last Updated: 2026-02-23 17:55:05 -->
 </body>
 </html>
