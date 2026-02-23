@@ -395,74 +395,57 @@
     document.getElementById('split-btn').onclick = () => { giveFeedback('SPLIT'); const h = state.playerHands[state.currentHandIdx]; state.balance -= h.bet; const newHand = { cards: [h.cards.pop(), state.deck.pop()], bet: h.bet }; h.cards.push(state.deck.pop()); state.playerHands.splice(state.currentHandIdx + 1, 0, newHand); updateUI(); };
     document.getElementById('lang-select').onchange = (e) => { state.lang = e.target.value; updateUI(); };
 
-// --- 푸터 관련 스크립트 (lotto_index와 100% 동기화) ---
-    window.onload = function() {
+window.onload = function() {
         fetch('../footer.html')
             .then(response => response.ok ? response.text() : '')
             .then(data => {
                 const placeholder = document.getElementById('footer-placeholder');
                 if (placeholder) {
-                    // 1. 깨진 이미지 태그나 불필요한 언더바(_)를 청소하고 깨끗한 텍스트만 삽입
-                    const cleanData = data.replace(/<img[^>]*>/g, '').replace(/_/g, '');
+                    // 1. 깨진 이미지와 불필요한 언더바(_)를 완전히 제거
+                    let cleanData = data.replace(/<img[^>]*>/g, '').replace(/_/g, '');
                     placeholder.innerHTML = cleanData;
                     
+                    // 2. CSS 주입 (lotto_index와 100% 동일한 폰트색과 간격 적용)
                     const style = document.createElement('style');
                     style.innerHTML = `
                         #footer-placeholder {
                             width: 100%;
-                            max-width: 500px; /* lotto_index와 폭 맞춤 */
-                            margin: 40px auto 0 auto;
-                            background-color: transparent !important; /* 배경은 투명하게 하여 body의 흰색 노출 */
-                            color: #6b7280 !important; /* gray-500 */
+                            max-width: 500px;
+                            margin: 60px auto 20px auto;
                             padding: 20px !important;
                             text-align: center !important;
-                            font-size: 0.9rem;
+                            border-top: 1px solid #e2e8f0;
+                            background-color: transparent !important;
                         }
-
-                        /* 아이콘 행 정렬 */
                         #footer-placeholder .flex { 
-                            display: flex; 
-                            justify-content: center; 
-                            gap: 20px; 
-                            margin-bottom: 15px;
+                            display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; align-items: center;
                         }
-
-                        /* 아이콘 스타일링: lotto_index와 동일한 색상 및 크기 */
                         #footer-placeholder a {
-                            color: #6b7280 !important;
+                            color: #6b7280 !important; /* gray-500 */
                             text-decoration: none !important;
                             display: inline-flex;
                             align-items: center;
-                            transition: color 0.2s;
+                            transition: opacity 0.2s;
                         }
-
-                        #footer-placeholder a:hover { color: #1a1a1a !important; }
-
-                        /* Lucide 아이콘 크기 고정 */
-                        #footer-placeholder svg { 
-                            width: 20px !important; 
-                            height: 20px !important; 
-                        }
-
-                        /* 하단 텍스트 라인 */
-                        #footer-placeholder p, 
-                        #footer-placeholder span {
-                            display: block;
-                            margin: 5px 0;
+                        #footer-placeholder a:hover { opacity: 0.7; }
+                        #footer-placeholder svg { width: 20px; height: 20px; }
+                        /* 저작권 및 하단 텍스트 */
+                        #footer-placeholder p, #footer-placeholder span {
                             color: #94a3b8 !important; /* gray-400 */
-                            font-size: 0.8rem;
+                            font-size: 0.85rem;
+                            margin: 4px 0;
+                            letter-spacing: -0.01em;
                         }
-
-                        /* 이미지 깨짐 원천 차단: footer 내의 모든 <img> 숨김 (Lucide로 대체 권장) */
-                        #footer-placeholder img { display: none !important; }
                     `;
                     document.head.appendChild(style);
 
-                    // 2. 만약 네이버 블로그 아이콘이 깨진다면 Lucide의 다른 아이콘으로 임시 대체하거나 
-                    // 아래와 같이 직접 SVG를 주입하는 것이 가장 확실합니다.
+                    // 3. 네이버 블로그 아이콘을 깨지지 않는 초록색 SVG로 직접 교체
                     const blogLink = placeholder.querySelector('a[href*="blog.naver.com"]');
                     if (blogLink) {
-                        blogLink.innerHTML = `<i data-lucide="message-square"></i>`; // 블로그 대용 아이콘
+                        blogLink.innerHTML = `
+                            <svg viewBox="0 0 24 24" fill="#2db400" xmlns="http://www.w3.org/2000/svg" style="width:22px; height:22px;">
+                                <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z"/>
+                            </svg>`;
                     }
 
                     if (typeof lucide !== 'undefined') lucide.createIcons();
@@ -473,5 +456,5 @@
 </script>
 
 </body>
-<!-- last updated 2026-02-23 08:55:05 -->
+<!-- last updated 2026-02-23 09:16:05 -->
 </html>
