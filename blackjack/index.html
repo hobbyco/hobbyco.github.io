@@ -16,6 +16,7 @@
     <meta name="description" content="AI가 추천하는 실시간 블랙잭 전략으로 승률을 높이세요. 카지노 확률 계산기 및 블랙잭 기본 전략을 학습할 수 있는 최고의 시뮬레이터입니다.">
     <meta name="keywords" content="블랙잭, 블랙잭 전략, 카지노 게임, 확률 계산기, 블랙잭 AI, 기본 전략표, Blackjack Strategy, Casino Simulator">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2233415985336309" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -148,7 +149,7 @@
         #result-overlay { font-size: 2rem; font-weight: 900; text-align: center; color: var(--gold); margin: 20px 0; min-height: 2.4rem; }
         .lang-toggle { position: absolute; top: 25px; right: 25px; }
         select { background: rgba(0,0,0,0.5); color: white; border: 1px solid var(--border-gold); border-radius: 8px; padding: 5px 10px; }
-        #footer-placeholder { width: 100%; max-width: 800px; margin: 0 auto; }
+        #footer-placeholder { width: 100%; max-width: 500px; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -401,60 +402,15 @@ window.onload = function() {
             .then(data => {
                 const placeholder = document.getElementById('footer-placeholder');
                 if (placeholder) {
-                    // 1. 깨진 이미지와 불필요한 언더바(_)를 완전히 제거
-                    let cleanData = data.replace(/<img[^>]*>/g, '').replace(/_/g, '');
-                    placeholder.innerHTML = cleanData;
-                    
-                    // 2. CSS 주입 (lotto_index와 100% 동일한 폰트색과 간격 적용)
-                    const style = document.createElement('style');
-                    style.innerHTML = `
-                        #footer-placeholder {
-                            width: 100%;
-                            max-width: 500px;
-                            margin: 60px auto 20px auto;
-                            padding: 20px !important;
-                            text-align: center !important;
-                            border-top: 1px solid #e2e8f0;
-                            background-color: transparent !important;
-                        }
-                        #footer-placeholder .flex { 
-                            display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; align-items: center;
-                        }
-                        #footer-placeholder a {
-                            color: #6b7280 !important; /* gray-500 */
-                            text-decoration: none !important;
-                            display: inline-flex;
-                            align-items: center;
-                            transition: opacity 0.2s;
-                        }
-                        #footer-placeholder a:hover { opacity: 0.7; }
-                        #footer-placeholder svg { width: 20px; height: 20px; }
-                        /* 저작권 및 하단 텍스트 */
-                        #footer-placeholder p, #footer-placeholder span {
-                            color: #94a3b8 !important; /* gray-400 */
-                            font-size: 0.85rem;
-                            margin: 4px 0;
-                            letter-spacing: -0.01em;
-                        }
-                    `;
-                    document.head.appendChild(style);
-
-                    // 3. 네이버 블로그 아이콘을 깨지지 않는 초록색 SVG로 직접 교체
-                    const blogLink = placeholder.querySelector('a[href*="blog.naver.com"]');
-                    if (blogLink) {
-                        blogLink.innerHTML = `
-                            <svg viewBox="0 0 24 24" fill="#2db400" xmlns="http://www.w3.org/2000/svg" style="width:22px; height:22px;">
-                                <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z"/>
-                            </svg>`;
-                    }
-
+                    placeholder.innerHTML = data;
                     if (typeof lucide !== 'undefined') lucide.createIcons();
                 }
             });
+
         updateUI();
     };
 </script>
 
 </body>
-<!-- last updated 2026-02-23 09:16:05 -->
+<!-- last updated 2026-02-23 17:49:05 footer 수정 (by chatGPT) -->
 </html>
