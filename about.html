@@ -8,6 +8,7 @@
   <meta name="description" content="아이디어를 코드로 실현하고 확률과 데이터를 실험하는 'pdongsoo의 바이브 코딩 자료실' 소개 페이지입니다. 로또 알고리즘, 웹 도구 제작 등 다양한 개발 기록을 공유합니다.">
   <meta name="keywords" content="pdongsoo, 바이브 코딩, 코딩 자료실, 웹 개발자, 확률 실험, 데이터 분석, GitHub Pages, 40대 개발자">
   
+  <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,6 +17,7 @@
     gtag('config', 'G-KFCTS5DZ6V');
   </script>
 
+  <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2233415985336309"
      crossorigin="anonymous"></script>
 
@@ -23,7 +25,7 @@
 
   <style>
     body {
-      background-color: #f9fafb; /* index.html과 유사한 부드러운 배경색 */
+      background-color: #f9fafb;
       font-family: system-ui, -apple-system, sans-serif;
     }
     .content-card {
@@ -31,6 +33,53 @@
       border: 1px solid #e5e7eb;
       border-radius: 12px;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* contact.html 스타일과 통일 */
+    .donate-btn {
+      display: inline-block;
+      margin-bottom: 15px;
+      padding: 12px 20px;
+      background: #ff9900;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+      line-height: 1.3;
+      text-align: center;
+    }
+    .donate-btn span {
+      font-size: 12px;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+    .donate-img {
+      display: block;
+      max-width: 200px;
+      margin: 10px auto 20px auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .home-btn {
+      display: inline-block;
+      padding: 10px 18px;
+      background: #0b57d0;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 14px;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+    .home-btn:hover, .donate-btn:hover {
+      opacity: 0.85;
+    }
+    footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      text-align: left;
     }
   </style>
 </head>
@@ -75,7 +124,7 @@
         </p>
       </section>
 
-      <section>
+      <section class="mb-12">
         <h2 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
           <span class="w-1.5 h-6 bg-blue-500 mr-2 rounded-full"></span>
           운영 방식
@@ -87,12 +136,29 @@
         </p>
       </section>
 
-      <div class="mt-12 text-center">
-        <a href="/" class="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-all shadow-md">
-          ← 자료실 홈으로 이동
-        </a>
-      </div>
+      <footer class="mt-12">
+        <!-- 개발자 후원하기 섹션 -->
+        <div class="mb-4">
+          <a href="https://link.coupang.com/a/dR3F8x" target="_blank" rel="noopener noreferrer" class="donate-btn">
+            개발자 후원하기<br>
+            <span>(쿠팡 파트너스)</span>
+          </a>
+        </div>
+        
+        <!-- 후원 이미지 -->
+        <img src="/img/donate_img.png" alt="개발자 후원 이미지" class="donate-img" onerror="this.style.display='none'">
+
+        <!-- 메인화면 돌아가기 섹션 -->
+        <div class="mt-6">
+          <a href="/" class="home-btn">← 메인화면으로 돌아가기</a>
+        </div>
+
+        <div class="mt-4 text-sm text-gray-500 font-normal">
+          최종 업데이트: 2026.02.24
+        </div>
+      </footer>
     </div>
   </div>
 </body>
+<!-- Last Updated: 2026.02.24 17:39 -->
 </html>
