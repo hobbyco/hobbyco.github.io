@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>암장 영상 바로 가기 - 클라이밍 영상 모음</title>
+    <meta name="description" content="자주 가는 클라이밍 암장의 인스타그램, 유튜브 영상 링크를 한 곳에서 확인하세요. 클라임 어스 미사점, 온플릭 천호점 등 인기 암장 바로가기 제공.">
+    <meta name="keywords" content="클라이밍, 암장, 볼더링, 클라임 어스, 온플릭, 암장 영상, 클라이밍 영상, 실내 암벽, 스포츠 클라이밍">
+    <link rel="canonical" href="https://hobbyco.github.io/pds_root/climb_movie/index.html">
+
+    <!-- Open Graph (소셜 미디어 공유용) -->
+    <meta property="og:title" content="암장 영상 바로 가기">
+    <meta property="og:description" content="즐겨찾는 클라이밍 암장의 최신 영상을 가장 빠르게 확인하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hobbyco.github.io/pds_root/climb_movie/index.html">
+    
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <!-- Tailwind CSS & Font -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="mb-8 text-center bg-gradient-to-br from-white to-gray-100 p-8 rounded-2xl shadow-lg border border-gray-200">
+            <h1 class="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 pb-2"> 위치 태그 기준 Instagram </h1>
+            <p class="mt-4 text-lg text-gray-600"> 각 암장의 최신 영상을 확인하세요!</p>
+        </header>
+
+        <!-- 컨트롤 바: 검색 및 바로가기 버튼 -->
+        <div class="flex justify-between items-center mb-8 gap-4">
+            <!-- 암장 검색 바 -->
+            <div class="relative w-1/2">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </span>
+                <input type="text" id="gym-search" placeholder="암장 이름으로 검색..." class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-purple-500 transition-shadow duration-300">
+            </div>
+            
+            <!-- 암장 검색기 바로가기 버튼 -->
+            <a href="https://hobbyco.github.io/climbing/index.html" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               class="bg-gradient-to-br from-green-400 to-blue-500 text-white font-bold py-2 px-4 rounded-full shadow-lg hover:from-green-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 transition-all duration-300 transform hover:scale-105 flex items-center space-x-2 flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                <span class="text-sm font-semibold">암장 검색기</span>
+            </a>
+        </div>
+
+        <main>
+            <!-- 암장 목록 -->
+            <div id="gym-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 클라임 어스 미사점 -->
+                <div class="gym-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-center">
+                    <a href="https://www.instagram.com/explore/locations/287171631139883/-climbus-misa/recent/?hl=ko" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block w-full text-center bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-75 transition-all duration-300 transform hover:-translate-y-1">
+                        클라임 어스 미사점 영상 바로보기
+                    </a>
+                    <p class="text-xs text-gray-500 mt-4 text-center flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        모바일에서 앱으로 바로 연결됩니다.
+                    </p>
+                </div>
+
+                <!-- 온플릭 천호점 -->
+                <div class="gym-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-center">
+                    <a href="https://www.instagram.com/explore/locations/117295271363511/recent/?hl=ko" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block w-full text-center bg-gradient-to-r from-blue-500 to-teal-500 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-75 transition-all duration-300 transform hover:-translate-y-1">
+                        온플릭 천호점 영상 바로보기
+                    </a>
+                    <p class="text-xs text-gray-500 mt-4 text-center flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        모바일에서 앱으로 바로 연결됩니다.
+                    </p>
+                </div>
+
+                <!-- 더클라임 성수 -->
+                <div class="gym-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-center">
+                    <a href="https://www.instagram.com/explore/locations/577719012088994/-theclimb-seongsu/recent/?hl=ko" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block w-full text-center bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transition-all duration-300 transform hover:-translate-y-1">
+                        더클라임 성수 영상 바로보기
+                    </a>
+                    <p class="text-xs text-gray-500 mt-4 text-center flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        모바일에서 앱으로 바로 연결됩니다.
+                    </p>
+                </div>
+
+                <!-- 더클라임 논현 -->
+                <div class="gym-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-center">
+                    <a href="https://www.instagram.com/explore/locations/180475825141749/-theclimb-nonhyeon/recent/?hl=ko" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block w-full text-center bg-gradient-to-r from-green-400 to-blue-500 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75 transition-all duration-300 transform hover:-translate-y-1">
+                        더클라임 논현 영상 바로보기
+                    </a>
+                    <p class="text-xs text-gray-500 mt-4 text-center flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        모바일에서 앱으로 바로 연결됩니다.
+                    </p>
+                </div>
+
+                <!-- 클라이밍파크 종로 -->
+                <div class="gym-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-center">
+                    <a href="https://www.instagram.com/explore/locations/103539849515895/recent/?hl=ko" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block w-full text-center bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-75 transition-all duration-300 transform hover:-translate-y-1">
+                        클라이밍파크 종로 영상 바로보기
+                    </a>
+                    <p class="text-xs text-gray-500 mt-4 text-center flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        모바일에서 앱으로 바로 연결됩니다.
+                    </p>
+                </div>
+
+                <!-- 락랜드 수유 -->
+                <div class="gym-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col justify-center items-center">
+                    <a href="https://www.instagram.com/explore/locations/312741855245245/recent/?hl=ko" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-block w-full text-center bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition-all duration-300 transform hover:-translate-y-1">
+                        락랜드 수유 영상 바로보기
+                    </a>
+                    <p class="text-xs text-gray-500 mt-4 text-center flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                        </svg>
+                        모바일에서 앱으로 바로 연결됩니다.
+                    </p>
+                </div>
+
+                <!-- 향후 다른 암장을 추가할 수 있는 예시 공간입니다. -->
+                <div class="gym-card flex items-center justify-center text-center p-10 border-2 border-dashed border-gray-300 rounded-xl">
+                    <p class="text-gray-500">다른 암장 추가 예정</p>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Footer loading script
+            fetch('../footer.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('네트워크 응답이 올바르지 않습니다: ' + response.statusText);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    const placeholder = document.getElementById('footer-placeholder');
+                    if (placeholder) {
+                        placeholder.innerHTML = data;
+                        if (typeof lucide !== 'undefined') {
+                            lucide.createIcons();
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('푸터를 불러오는 데 문제가 발생했습니다:', error);
+                    const placeholder = document.getElementById('footer-placeholder');
+                    if (placeholder) {
+                        placeholder.innerHTML = '<p class="text-center text-red-500 py-10">푸터를 불러오지 못했습니다.</p>';
+                    }
+                });
+
+            // Search functionality
+            const searchInput = document.getElementById('gym-search');
+            const gymList = document.getElementById('gym-list');
+            const gymCards = gymList.querySelectorAll('.gym-card');
+
+            searchInput.addEventListener('keyup', function(event) {
+                const searchTerm = event.target.value.toLowerCase().trim();
+
+                gymCards.forEach(card => {
+                    // '다른 암장 추가 예정' 카드는 검색 대상에서 제외
+                    if (card.querySelector('a')) {
+                        const gymName = card.querySelector('a').textContent.toLowerCase();
+                        if (gymName.includes(searchTerm)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+            
+            // Render any other Lucide icons on the page.
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+
+</body>
+</html>
