@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>원정러를 위한 클라이밍 암장 검색기</title>
-    <meta name="description" content="전국 클라이밍 암장 정보를 한눈에! 지역, 가격, 세팅일 등 다양한 조건으로 나에게 맞는 암장을 찾아보세요.">
-    <link rel="canonical" href="https://hobbyco.github.io/pds_root/index-search.html">
+    <title>전국 클라이밍 암장 검색기 | 원정러를 위한 필수 앱 (세팅일, 가격, 보드 정보)</title>
+    <meta name="description" content="전국 클라이밍 암장 정보를 한눈에! 지역, 가격, 세팅일, 보드 종류 등 다양한 조건으로 나에게 맞는 암장을 쉽고 빠르게 찾아보세요.">
+    <meta name="keywords" content="클라이밍, 암장, 클라이밍장, 원정, 암장투어, 실내암벽, 볼더링, 지구력, 문보드, 킬터보드, 스프레이월, 암장찾기, 암장검색">
+    <link rel="canonical" href="https://hobbyco.github.io/pds_root/index.html">
     
+    <meta property="og:title" content="원정러를 위한 클라이밍 암장 검색기">
+    <meta property="og:description" content="전국 클라이밍 암장 정보를 한눈에! 세팅일과 할인 정보까지 스마트하게 검색하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hobbyco.github.io/pds_root/index.html">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,64 +26,107 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; }
         .filter-container { background-color: #f8f9fa; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
-        .card { transition: transform 0.2s; }
+        .card { transition: all 0.2s ease-in-out; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+        select, input { appearance: none; }
+        .notice-box { background-color: #f3f4f6; border-radius: 0.5rem; padding: 1.5rem; margin-top: 3rem; margin-bottom: 2rem; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
 
     <div class="container mx-auto p-4 md:p-8">
         <header class="text-center mb-8 pt-4">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">🧗 원정러를 위한<br class="sm:hidden"> 클라이밍 암장 검색기</h1>
-            <p class="text-base md:text-lg text-gray-600 mt-2">이번 주 원정은 어디로?? 세팅과 할인정보까지!</p>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">🧗 원정러를 위한 클라이밍 암장 검색기</h1>
+            <p class="text-base md:text-lg text-gray-600 mt-2">이번 주 원정은 어디로? 세팅과 할인정보까지!</p>
         </header>
+
+        <div id="filter-section" class="filter-container">
+            </div>
+
+        <div id="resultsCountContainer" class="text-lg text-center mb-6">
+            <p><span class="font-bold text-blue-600" id="resultsCount">0</span>개의 암장을 찾았어요!</p>
+        </div>
+
+        <div id="loading" class="text-center my-10">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600"></div>
+        </div>
 
         <div id="gymList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-        <div id="footerNotice" class="mt-12 p-4 bg-gray-200 rounded-lg text-sm text-gray-600">
-            <p class="font-bold">※ 참고사항</p>
-            <p>암장 사정에 따라 암장 정보가 달라질 수 있으니 방문 전 공식 채널을 확인해 주세요.</p>
+        <div id="footerNotice" class="notice-box text-sm text-gray-600">
+            <p class="font-bold text-base mb-2">※ 참고사항</p>
+            <p>암장 사정에 따라 암장 정보가 달라질 수 있으니, 반드시 방문 전 해당 암장 홈페이지/인스타그램을 참고해 주세요.<br> 
+               월권 보다는 일권 위주의 정보를 담았으며, 할인 정보 역시 개인에 맞춰져 있습니다 (크루 할인 등은 적용하지 않음)<br>
+               특히 아래 내용에 따라, 검색이 잘 안될 수 있는 점 유의해 주십시오.</p>
+            <ul class="list-disc list-inside mt-2 space-y-1">
+                <li>오픈시간이 평일에도 요일마다 다른 암장, 주말과 공휴일 영업 시간이 다른 암장이 있을 수 있습니다.</li>
+                <li>공휴일이 평일일 경우 (세팅 주기가 달라지는 경우가 많음)</li>
+                <li>격주 세팅 등 매주 세팅이 아닌 경우</li>
+                <li>기타 등등</li>
+            </ul>
         </div>
 
-        <div id="footer-placeholder" class="text-center my-8"></div>
+        <div id="footer-container"></div>
     </div>
     
     <script>
-        // 2) 암장 데이터 시트 주소 수정 (CSV 출력용)
-        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR_pL_lw6SF0f_UB90TlPmlBaNgX01_kayBM6uynCrXGS4/pub?gid=0&single=true&output=csv';
-        // ※ 참고: 위 URL은 제공하신 시트 ID(1pL_lw6SF0f_UB90TlPmlBaNgX01_kayBM6uynCrXGS4)를 기반으로 한 웹 게시용 주소 포맷입니다.
+        // 외부 푸터 로드 함수
+        async function loadFooter() {
+            try {
+                const response = await fetch('../footer.html');
+                if (response.ok) {
+                    const data = await response.text();
+                    document.getElementById('footer-container').innerHTML = data;
+                    if(window.lucide) lucide.createIcons();
+                }
+            } catch (e) { console.error('Footer load failed'); }
+        }
 
+        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdN7on7-9sdHseYE5NCqz8hBh9G7qzyhFgvM4tPuzUile-HKjDm1PFLqxJFJiH-SEz5zV4fqGpzXmV/pub?gid=0&single=true&output=csv';
+
+        // 구글 시트 데이터 Fetch 및 파싱 (따옴표 및 공백 처리 강화)
         async function fetchData() {
-            const loading = document.getElementById('loading');
             try {
                 const response = await fetch(GOOGLE_SHEET_URL);
-                const data = await response.text();
-                // CSV 파싱 로직 실행...
-                console.log("데이터 로드 완료");
-                // parseCSV(data); // 기존 파싱 함수 호출
+                const csvText = await response.text();
+                allGyms = parseCSV(csvText);
+                populateFilters();
+                filterGyms(); 
             } catch (error) {
-                console.error("데이터를 불러오는 중 오류 발생:", error);
+                console.error("Data load error:", error);
             } finally {
-                if(loading) loading.style.display = 'none';
+                document.getElementById('loading').style.display = 'none';
             }
         }
 
-        // 페이지 로드 시 데이터 호출
-        window.addEventListener('DOMContentLoaded', () => {
+        function parseCSV(text) {
+            const lines = text.trim().split(/\r?\n/);
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            return lines.slice(1).map(line => {
+                const values = [];
+                let curr = '', inQuotes = false;
+                for (let char of line) {
+                    if (char === '"') inQuotes = !inQuotes;
+                    else if (char === ',' && !inQuotes) { values.push(curr.trim()); curr = ''; }
+                    else curr += char;
+                }
+                values.push(curr.trim());
+                const obj = {};
+                headers.forEach((h, i) => obj[h] = values[i] ? values[i].replace(/"/g, '') : "");
+                return obj;
+            }).filter(g => g.암장명);
+        }
+
+        // 초기 로드 실행
+        window.onload = () => {
             fetchData();
-            
-            // 공통 푸터 삽입
-            fetch('../footer.html')
-                .then(res => res.ok ? res.text() : '')
-                .then(html => {
-                    const p = document.getElementById('footer-placeholder');
-                    if(p) p.innerHTML = html;
-                    if(window.lucide) lucide.createIcons();
-                });
-        });
+            loadFooter();
+        };
     </script>
-</body>
+    </body>
+	<!-- 2026-02-26 14:03:48 -->
 </html>
