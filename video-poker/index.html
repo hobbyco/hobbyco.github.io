@@ -110,11 +110,12 @@
             color: white;
         }
 
-        /* 랭귀지 컨트롤 최적화: 라벨 클릭 시 select가 트리거됨 */
         .lang-control-box {
             display: flex;
             justify-content: flex-end;
+            align-items: center;
             margin-bottom: 20px;
+            gap: 8px;
         }
 
         .lang-label {
@@ -130,6 +131,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             cursor: pointer;
             transition: background 0.2s;
+            text-decoration: none; /* 가이드 버튼용 */
         }
 
         .lang-label:hover { background: #f1f5f9; }
@@ -209,6 +211,11 @@
 
     <div class="app-container">
         <div class="lang-control-box">
+            <a id="guide-btn" href="vp-guide-kr.html" class="lang-label">
+                <i data-lucide="help-circle" style="width:14px; height:14px;"></i>
+                <span id="guide-text">비디오 포커 가이드</span>
+            </a>
+            
             <label for="lang-select" class="lang-label">
                 <span>Language :</span>
                 <select id="lang-select">
@@ -279,7 +286,8 @@
             betBtn: "베팅(최대 : 5)", deal: "딜 (시작)", draw: "드로우 (교체)",
             wait: "베팅을 해주세요", holdDraw: "홀드 선택 후 드로우!",
             ranks: ["로열 플러쉬", "스트레이트 플러쉬", "포 카드", "풀 하우스", "플러쉬", "스트레이트", "트리플", "투 페어", "잭스 오어 베터"],
-            win: "승리!", lose: "다시 도전하세요"
+            win: "승리!", lose: "다시 도전하세요",
+            guideText: "비디오 포커 가이드", guideLink: "vp-guide-kr.html"
         },
         en: {
             title: "Video Poker AI",
@@ -288,7 +296,8 @@
             betBtn: "BET (Max: 5)", deal: "DEAL", draw: "DRAW",
             wait: "PLACE YOUR BET", holdDraw: "HOLD & DRAW!",
             ranks: ["Royal Flush", "Straight Flush", "4 of a Kind", "Full House", "Flush", "Straight", "3 of a Kind", "Two Pair", "Jacks or Better"],
-            win: "WIN!", lose: "TRY AGAIN"
+            win: "WIN!", lose: "TRY AGAIN",
+            guideText: "Video Poker Guide", guideLink: "vp-guide-en.html"
         }
     };
 
@@ -335,11 +344,22 @@
             const dealBtn = document.getElementById('deal-btn');
             dealBtn.textContent = this.state === 'DEALT' ? t.draw : t.deal;
             
+            // 가이드 버튼 텍스트 및 링크 업데이트
+            const guideBtn = document.getElementById('guide-btn');
+            const guideText = document.getElementById('guide-text');
+            if (guideBtn && guideText) {
+                guideBtn.href = t.guideLink;
+                guideText.textContent = t.guideText;
+            }
+
             document.getElementById('bet-btn').disabled = (this.state !== 'IDLE');
             dealBtn.disabled = (this.state === 'BUSY');
 
             if(this.state === 'IDLE') document.getElementById('status-msg').textContent = t.wait;
             if(this.state === 'DEALT') document.getElementById('status-msg').textContent = t.holdDraw;
+
+            // 아이콘 렌더링 확인 (lucide 사용 시)
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         },
 
         cycleBet() {
@@ -474,7 +494,6 @@
 
     window.onload = () => game.init();
 </script>
-
+<!-- 2026-02-26 15:03:49 -->
 </body>
-  <!-- last updated 2/26 08:55 -->
-</html>
+  </html>
