@@ -3,16 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>전국 클라이밍 암장 검색기 | 원정러를 위한 필수 앱 (세팅일, 가격, 보드 정보)</title>
-    <meta name="description" content="전국 클라이밍 암장 정보를 한눈에! 지역, 가격, 세팅일, 보드 종류 등 다양한 조건으로 나에게 맞는 암장을 쉽고 빠르게 찾아보세요.">
-    <meta name="keywords" content="클라이밍, 암장, 클라이밍장, 원정, 암장투어, 실내암벽, 볼더링, 지구력, 문보드, 킬터보드, 스프레이월, 암장찾기, 암장검색">
-    <link rel="canonical" href="https://hobbyco.github.io/pds_root/index.html">
+    <title>전국 클라이밍 암장 검색기 | 원정러 필수 앱</title>
+    <meta name="description" content="전국 클라이밍 암장 정보를 한눈에! 지역, 가격, 세팅일 등 나에게 맞는 암장을 쉽고 빠르게 찾아보세요.">
     
-    <meta property="og:title" content="원정러를 위한 클라이밍 암장 검색기">
-    <meta property="og:description" content="전국 클라이밍 암장 정보를 한눈에! 세팅일과 할인 정보까지 스마트하게 검색하세요.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://hobbyco.github.io/pds_root/index.html">
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -30,10 +23,9 @@
     <style>
         body { font-family: 'Noto Sans KR', sans-serif; }
         .filter-container { background-color: #f8f9fa; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
-        .card { transition: all 0.2s ease-in-out; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
-        select, input { appearance: none; }
-        .notice-box { background-color: #f3f4f6; border-radius: 0.5rem; padding: 1.5rem; margin-top: 3rem; margin-bottom: 2rem; }
+        .card { transition: all 0.2s ease-in-out; background: white; border-radius: 0.5rem; padding: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .notice-box { background-color: #f3f4f6; border-radius: 0.5rem; padding: 1.5rem; margin-top: 3rem; }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -44,8 +36,14 @@
             <p class="text-base md:text-lg text-gray-600 mt-2">이번 주 원정은 어디로? 세팅과 할인정보까지!</p>
         </header>
 
-        <div id="filter-section" class="filter-container">
+        <div class="filter-container">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <input type="text" id="nameFilter" placeholder="암장 이름 검색" class="p-3 border rounded-lg">
+                <select id="sidoFilter" class="p-3 border rounded-lg"><option value="">모든 시/도</option></select>
+                <select id="regionFilter" class="p-3 border rounded-lg"><option value="">모든 권역</option></select>
+                <button id="resetFilters" class="bg-gray-500 text-white font-bold py-3 px-4 rounded-lg">필터 초기화</button>
             </div>
+        </div>
 
         <div id="resultsCountContainer" class="text-lg text-center mb-6">
             <p><span class="font-bold text-blue-600" id="resultsCount">0</span>개의 암장을 찾았어요!</p>
@@ -70,11 +68,11 @@
             </ul>
         </div>
 
-        <div id="footer-container"></div>
+        <div id="footer-container" class="mt-8"></div>
     </div>
     
     <script>
-        // 외부 푸터 로드 함수
+        // 5) 외부 푸터 로드
         async function loadFooter() {
             try {
                 const response = await fetch('../footer.html');
@@ -83,29 +81,43 @@
                     document.getElementById('footer-container').innerHTML = data;
                     if(window.lucide) lucide.createIcons();
                 }
-            } catch (e) { console.error('Footer load failed'); }
+            } catch (e) { console.error('Footer fail'); }
         }
 
         const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdN7on7-9sdHseYE5NCqz8hBh9G7qzyhFgvM4tPuzUile-HKjDm1PFLqxJFJiH-SEz5zV4fqGpzXmV/pub?gid=0&single=true&output=csv';
 
-        // 구글 시트 데이터 Fetch 및 파싱 (따옴표 및 공백 처리 강화)
+        let allGyms = [];
+
         async function fetchData() {
             try {
                 const response = await fetch(GOOGLE_SHEET_URL);
                 const csvText = await response.text();
                 allGyms = parseCSV(csvText);
-                populateFilters();
+                
+                // 필터 옵션 생성 및 초기 렌더링
+                const sidos = [...new Set(allGyms.map(g => g.시도))].filter(Boolean).sort();
+                const sidoSelect = document.getElementById('sidoFilter');
+                sidos.forEach(s => {
+                    const opt = document.createElement('option');
+                    opt.value = opt.textContent = s;
+                    sidoSelect.appendChild(opt);
+                });
+
                 filterGyms(); 
             } catch (error) {
-                console.error("Data load error:", error);
+                console.error("Fetch Error:", error);
+                document.getElementById('gymList').innerHTML = "데이터를 불러오지 못했습니다. 게시 상태를 확인하세요.";
             } finally {
                 document.getElementById('loading').style.display = 'none';
             }
         }
 
+        // 이미지에 명시된 헤더 이름과 정확히 일치하도록 매핑
         function parseCSV(text) {
             const lines = text.trim().split(/\r?\n/);
-            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            if (lines.length < 2) return [];
+            
+            const headers = lines[0].split(',').map(h => h.trim());
             return lines.slice(1).map(line => {
                 const values = [];
                 let curr = '', inQuotes = false;
@@ -115,18 +127,62 @@
                     else curr += char;
                 }
                 values.push(curr.trim());
+                
                 const obj = {};
-                headers.forEach((h, i) => obj[h] = values[i] ? values[i].replace(/"/g, '') : "");
+                headers.forEach((h, i) => {
+                    obj[h] = values[i] ? values[i].replace(/^"|"$/g, '') : "";
+                });
                 return obj;
-            }).filter(g => g.암장명);
+            }).filter(g => g.암장명); // '암장명' 컬럼이 비어있지 않은 것만 사용
         }
 
-        // 초기 로드 실행
+        function filterGyms() {
+            const name = document.getElementById('nameFilter').value.toLowerCase();
+            const sido = document.getElementById('sidoFilter').value;
+            
+            const filtered = allGyms.filter(g => {
+                return (!name || g.암장명.toLowerCase().includes(name)) &&
+                       (!sido || g.시도 === sido);
+            });
+
+            renderGyms(filtered);
+        }
+
+        function renderGyms(gyms) {
+            const list = document.getElementById('gymList');
+            const count = document.getElementById('resultsCount');
+            list.innerHTML = '';
+            count.textContent = gyms.length;
+
+            gyms.forEach(g => {
+                const div = document.createElement('div');
+                div.className = 'card';
+                // 이미지의 컬럼명과 정확히 매칭 (일권가격, 할인가 등)
+                div.innerHTML = `
+                    <h3 class="font-bold text-lg border-b pb-2 mb-2">${g.암장명}</h3>
+                    <p class="text-sm">📍 ${g.시도} ${g.시군구} (${g.권역권})</p>
+                    <p class="text-sm">💰 일권: ${Number(g.일권가격).toLocaleString()}원</p>
+                    ${g.할인가 && g.할인가 !== '-' ? `<p class="text-sm text-blue-600 font-medium">✨ 할인가: ${Number(g.할인가).toLocaleString()}원</p>` : ''}
+                    <p class="text-xs text-gray-500 mt-2">🕒 평일: ${g.평일오픈시간} / 주말: ${g.주말오픈시간}</p>
+                    <p class="text-xs text-gray-500">ℹ️ ${g.할인조건}</p>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        document.getElementById('nameFilter').addEventListener('input', filterGyms);
+        document.getElementById('sidoFilter').addEventListener('change', filterGyms);
+        document.getElementById('resetFilters').addEventListener('click', () => {
+            document.getElementById('nameFilter').value = '';
+            document.getElementById('sidoFilter').selectedIndex = 0;
+            filterGyms();
+        });
+
         window.onload = () => {
             fetchData();
             loadFooter();
         };
     </script>
     </body>
-	<!-- 2026-02-26 14:03:48 -->
+	<!-- 2026-02-26 14:07:11 -->
 </html>
