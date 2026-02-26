@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Google Analytics (GA) Tracking Code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,27 +13,23 @@
       gtag('config', 'G-KFCTS5DZ6V');
     </script>
     
-    <!-- SEO - Basic Meta Tags -->
     <title>pdongsoo의 바이브 코딩 자료실</title>
     <meta name="description" content="pdongsoo의 바이브 코딩 자료실입니다. 오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
-    <meta name="keywords" content="pdongsoo, 바이브 코딩, 코딩 자료실, 개발, 프로젝트, 오늘의 크로스워드, 십자말풀이, 클라이밍, 암장 검색기, 암장 위치 기반 인스타그램, 미니게임, 로또 번호 추천, 블랙잭, 인스타그램, 페이스북, 블로그">
+    <meta name="keywords" content="pdongsoo, 바이브 코딩, 코딩 자료실, 개발, 프로젝트, 오늘의 크로스워드, 십자말풀이, 클라이밍, 암장 검색기, 암장 위치 기반 인스타그램, 미니게임, 로또 번호 추천, 블랙잭, 비디오 포커, 인스타그램, 페이스북, 블로그">
     <meta name="author" content="pdongsoo">
 
-    <!-- SEO - Open Graph (for social media sharing, e.g., Facebook, KakaoTalk) -->
     <meta property="og:title" content="pdongsoo의 바이브 코딩 자료실">
     <meta property="og:description" content="오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://hobbyco.github.io/index.html">
-    <meta property="og:image" content="https://hobbyco.github.io/img/home_img.png">
+    <meta property="og:image" content="./img/home_img.png">
     
-    <!-- SEO - Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="pdongsoo의 바이브 코딩 자료실">
     <meta name="twitter:description" content="오늘의 크로스워드, 클라이밍 암장 검색기, 미니게임 등 다양한 프로젝트를 만나보세요.">
-    <meta name="twitter:image" content="https://hobbyco.github.io/pds_root/img/home_img.png">
+    <meta name="twitter:image" content="./pds_root/img/home_img.png">
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons Library -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
     <style>
@@ -57,7 +52,8 @@
         .card-border-pink { border-top-color: #ec4899; }
         .card-border-purple { border-top-color: #8b5cf6; }
         .card-border-amber { border-top-color: #f59e0b; }
-        .card-border-indigo { border-top-color: #6366f1; } /* 블랙잭 카드용 색상 */
+        .card-border-indigo { border-top-color: #6366f1; }
+        .card-border-red { border-top-color: #ef4444; } /* 비디오 포커용 색상 */
 
         .gradient-text {
             background: linear-gradient(to right, #3b82f6, #14b8a6);
@@ -74,18 +70,15 @@
             <span class="gradient-text">pdongsoo의<br class="md:hidden"> 바이브 코딩 자료실</span>
         </h1>
 
-        <!-- 부제 추가 -->
         <p class="text-center text-base md:text-lg text-gray-500 mt-4 tracking-wide">
             무용과 유용 사이 <span class="mx-2 text-gray-300">•</span> 필요와 재미 사이
         </p>
 
-        <!-- 링크 섹션 -->
         <section class="container mx-auto px-6 mt-16">
             <div class="flex flex-wrap justify-center items-center gap-10">
                 
-                <!-- 오늘의 크로스워드 링크 카드 -->
                 <article>
-                    <a href="https://hobbyco.github.io/crossword/index.html" 
+                    <a href="./crossword/index.html" 
                        class="link-card card-border-blue block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
                             <i data-lucide="puzzle" class="w-12 h-12 text-blue-500"></i>
@@ -95,9 +88,8 @@
                     </a>
                 </article>
 
-                <!-- 랜덤 로또 번호 추천기 -->
                 <article>
-                    <a href="https://hobbyco.github.io/lotto/index.html" 
+                    <a href="./lotto/index.html" 
                        class="link-card card-border-amber block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
                             <i data-lucide="clover" class="w-12 h-12 text-amber-500"></i>
@@ -107,9 +99,8 @@
                     </a>
                 </article>
                 
-                <!-- 클라이밍 암장 검색기 링크 카드 -->
                 <article>
-                    <a href="https://hobbyco.github.io/climbing/index.html" 
+                    <a href="./climbing/index.html" 
                        class="link-card card-border-brown block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
                             <i data-lucide="mountain" class="w-12 h-12 text-green-500"></i>
@@ -119,9 +110,8 @@
                     </a>
                 </article>
 
-                <!-- 암장 위치 기반 Instagram 링크 카드 -->
                 <article>
-                    <a href="https://hobbyco.github.io/pds_root/climb_movie/index.html" class="link-card card-border-pink block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                    <a href="./pds_root/climb_movie/index.html" class="link-card card-border-pink block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
                             <i data-lucide="map-pin" class="w-12 h-12 text-pink-500"></i>
                         </div>
@@ -130,9 +120,8 @@
                     </a>
                 </article>
 
-                <!-- 블랙잭 연습기 (신규 추가) -->
                 <article>
-                    <a href="https://hobbyco.github.io/blackjack/index.html" 
+                    <a href="./blackjack/index.html" 
                        class="link-card card-border-indigo block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
                             <i data-lucide="club" class="w-12 h-12 text-indigo-500"></i>
@@ -142,15 +131,14 @@
                     </a>
                 </article>
 
-                <!-- 미니게임 링크 카드 -->
                 <article>
-                    <a href="https://hobbyco.github.io/pds_root/mini_games/index_mini_games.html" 
-                       class="link-card card-border-purple block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
+                    <a href="./video-poker/index.html" 
+                       class="link-card card-border-red block w-full md:w-96 p-8 bg-white border border-gray-200 rounded-lg text-center shadow-md">
                         <div class="flex justify-center mb-4">
-                            <i data-lucide="gamepad-2" class="w-12 h-12 text-purple-500"></i>
+                            <i data-lucide="spade" class="w-12 h-12 text-red-500"></i>
                         </div>
-                        <h2 class="text-2xl font-bold text-gray-800">미니게임</h2>
-                        <p class="text-gray-500 mt-2">간단하게 즐기는 미니게임 모음.</p>
+                        <h2 class="text-2xl font-bold text-gray-800">비디오 포커</h2>
+                        <p class="text-gray-500 mt-2">포커 핸드 연습과 전략 시뮬레이션</p>
                     </a>
                 </article>
 
@@ -158,11 +146,9 @@
         </section>
     </main>
 
-    <!-- 푸터가 삽입될 위치 -->
     <div id="footer-placeholder"></div>
 
     <script>
-        // 공통 푸터 삽입
         fetch('footer.html')
             .then(response => {
                 if (!response.ok) throw new Error('네트워크 응답 에러');
@@ -177,14 +163,10 @@
             })
             .catch(error => console.error('푸터 로드 실패:', error));
 
-        // 페이지의 나머지 Lucide 아이콘 렌더링
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
     </script>
+    <!-- last updated 2/26 09:30 ds -->
 </body>
-<!-- Last updated: 2026-02-21 6:35 KST -->
 </html>
-
-
-
