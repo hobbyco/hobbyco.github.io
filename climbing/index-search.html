@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>원정러를 위한 클라이밍 암장 검색기</title>
+    <meta name="description" content="전국 클라이밍 암장 정보를 한눈에! 원정러를 위한 필수 앱. 지역, 가격, 세팅일, 보드 종류 등 다양한 조건으로 나에게 맞는 암장을 쉽고 빠르게 찾아보세요.">
+    <meta name="keywords" content="클라이밍, 암장, 클라이밍장, 원정, 암장투어, 실내암벽, 볼더링, 지구력, 문보드, 킬터보드, 스프레이월, 암장찾기, 암장검색">
+    
+    <meta property="og:title" content="원정러를 위한 클라이밍 암장 검색기">
+    <meta property="og:description" content="전국 클라이밍 암장 정보를 한눈에! 지역, 가격, 세팅일 등 다양한 조건으로 나에게 맞는 암장을 찾아보세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://storage.googleapis.com/generativeai-downloads/static-sites/climbing-gym-finder-final/index.html">
+    <meta property="og:image" content="https://storage.googleapis.com/generativeai-downloads/static-sites/climbing-gym-finder-final/og-image.jpg">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; }
+        .filter-container {
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .card { transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        select, input[type="text"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        select {
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8 pt-4">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">🧗 원정러를 위한<br class="sm:hidden"> 클라이밍 암장 검색기</h1>
+            <p class="text-base md:text-lg text-gray-600 mt-2">이번 주 원정은 어디로??<br class="sm:hidden"> 세팅과 할인정보까지!</p>
+        </header>
+
+        <div class="filter-container">
+            <h2 class="text-xl md:text-2xl font-semibold mb-4 text-gray-800">🔍 상세 검색 필터</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <input type="text" id="nameFilter" placeholder="암장 이름으로 검색" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <select id="visitDayFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">방문 예정일</option>
+                    <option value="월요일">월요일</option>
+                    <option value="화요일">화요일</option>
+                    <option value="수요일">수요일</option>
+                    <option value="목요일">목요일</option>
+                    <option value="금요일">금요일</option>
+                    <option value="주말/공휴일">주말/공휴일</option>
+                </select>
+                <div class="flex items-center justify-start">
+                    <input type="checkbox" id="excludeSettingDayFilter" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                    <label for="excludeSettingDayFilter" class="ml-2 text-sm font-medium text-gray-700">세팅일 제외</label>
+                </div>
+                <div class="flex items-center justify-start">
+                    <input type="checkbox" id="before11Filter" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500" disabled>
+                    <label for="before11Filter" class="ml-2 text-sm font-medium text-gray-700">10:59 이전 오픈</label>
+                </div>
+                <select id="sidoFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">모든 시/도</option></select>
+                <select id="regionFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">모든 권역</option></select>
+                <select id="priceFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">모든 가격(일권)</option></select>
+                <div class="flex items-center justify-start">
+                    <input type="checkbox" id="discountGymFilter" class="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500">
+                    <label for="discountGymFilter" class="ml-2 text-sm font-medium text-gray-700"> 주간 및 기타 할인 </label>
+                </div>
+                <select id="boardFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">모든 보드 종류</option>
+                    <option value="문보드">문보드</option>
+                    <option value="킬터보드">킬터보드</option>
+                    <option value="스프레이월">스프레이월</option>
+                </select>
+                <select id="settingDateFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"><option value="">모든 세팅일</option></select>
+                <button id="resetFilters" class="w-full bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 col-span-full md:col-span-2 lg:col-span-4">필터 초기화</button>
+            </div>
+        </div>
+
+        <div id="resultsCountContainer" class="text-lg text-center mb-6">
+            <p><span class="font-bold text-blue-600" id="resultsCount">0</span>개의 암장을 찾았어요!</p>
+        </div>
+
+        <div id="loading" class="text-center my-10">
+            <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-4 border-blue-600"></div>
+        </div>
+
+        <div id="gymList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        
+        <div id="noResults" class="hidden text-center my-10 p-6 bg-white rounded-lg shadow-md">
+            <p class="text-xl font-semibold text-gray-700">😥 검색 결과가 없습니다.</p>
+        </div>
+
+        <div class="text-center my-8 space-y-4">
+            <button id="shareAppBtn" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                암장 검색기 공유하기
+            </button>
+            <a href="https://docs.google.com/spreadsheets/d/1pL_lw6SF0f_UB90TlPmlBaNgX01_kayBM6uynCrXGS4/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg transition duration-300">
+                암장 정보 추가 및 수정 바로가기
+            </a>
+        </div>
+
+        <div id="footer-placeholder" class="text-center my-8"></div>
+
+        <div id="footerNotice" class="mt-12 p-4 bg-gray-200 rounded-lg text-sm text-gray-600">
+            <p class="font-bold">※ 참고사항</p>
+            <p>암장 사정에 따라 암장 정보가 달라질 수 있으니, 반드시 방문전 해당 암장 홈페이지/인스타그램을 참고해 주세요.<br> 월권 보다는 일권 위주의 정보를 담았으며, 할인 정보 역시 개인에 맞춰져 있습니다.</p>
+            <ul class="list-disc list-inside mt-1 space-y-1">
+                <li>오픈시간이 요일마다 다르거나 공휴일 영업 시간이 다를 수 있습니다.</li>
+                <li>격주 세팅 등 특이 케이스는 검색 결과와 다를 수 있습니다.</li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQdN7on7-9sdHseYE5NCqz8hBh9G7qzyhFgvM4tPuzUile-HKjDm1PFLqxJFJiH-SEz5zV4fqGpzXmV/pub?gid=0&single=true&output=csv';
+
+        // ... (필터링 및 데이터 로드 관련 기존 함수들: parseCSV, populateFilters, displayGyms, filterGyms 등 유지) ...
+
+        // 공통 푸터 삽입 (index.html 로직 적용)
+        fetch('../footer.html')
+            .then(response => response.ok ? response.text() : '')
+            .then(data => {
+                const placeholder = document.getElementById('footer-placeholder');
+                if (placeholder) {
+                    placeholder.innerHTML = data;
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }
+            });
+
+        // 초기 데이터 로드 및 아이콘 실행
+        fetchData();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+
+</body>
+<!-- last updated 2/26 13:42 -->
+</html>
