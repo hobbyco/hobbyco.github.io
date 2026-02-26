@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KFCTS5DZ6V');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>가이드 | 비디오 포커 AI 시뮬레이터</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;800;900&display=swap');
+
+        :root {
+            --casino-blue: #0044cc;
+            --casino-blue-dark: #0033aa;
+            --felt-blue: #002288;
+            --gold: #fbbf24;
+            --gold-dark: #d97706;
+            --card-white: #ffffff;
+            --text-main: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        .guide-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero-section {
+            background: radial-gradient(circle at center, #0055ff 0%, #002288 100%);
+            border-radius: 32px;
+            padding: 40px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            border: 2px solid rgba(251, 191, 36, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 34, 136, 0.2);
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--felt-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight { color: var(--gold-dark); font-weight: 700; }
+        
+        .prob-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .prob-table th, .prob-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .prob-table th { background: #f8fafc; color: #64748b; font-weight: 600; }
+
+        .strategy-tip {
+            background: #fffbeb;
+            border-left: 4px solid var(--gold);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        /* 버튼 크기 및 가독성 최적화 수정 */
+        .cta-section {
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, var(--casino-blue) 0%, #0055ff 100%);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 18px;
+            text-decoration: none;
+            box-shadow: 0 8px 16px rgba(0, 68, 204, 0.2), 0 4px 0 var(--casino-blue-dark);
+            transition: all 0.2s ease;
+            
+            /* 핵심 수정: 버튼의 최대 너비를 제한하여 모바일에서 너무 길어지지 않게 함 */
+            width: 90%; 
+            max-width: 300px; 
+            margin: 0 auto;
+        }
+
+        .cta-button .main-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            line-height: 1.2;
+            display: block;
+        }
+
+        .cta-button .sub-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.8;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .cta-button .arrow-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 10px 20px rgba(0, 68, 204, 0.3), 0 4px 0 var(--casino-blue-dark);
+        }
+
+        .cta-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 4px 10px rgba(0, 68, 204, 0.2), 0 0 0 var(--casino-blue-dark);
+        }
+        
+        @media (max-width: 480px) {
+            .cta-button {
+                max-width: 280px; /* 모바일 전용 너비 제한 */
+                padding: 12px 20px;
+            }
+            .cta-button .main-text {
+                font-size: 1.05rem;
+            }
+        }
+
+        #footer-placeholder { width: 100%; max-width: 800px; margin: 2rem auto; }
+    </style>
+</head>
+<body>
+
+<div class="guide-container">
+    <div class="hero-section">
+        <div class="inline-block bg-white/10 px-4 py-1 rounded-full text-sm font-bold tracking-widest mb-4">USER GUIDE</div>
+        <h1 class="text-4xl font-black mb-2">비디오 포커 공략 가이드</h1>
+        <p class="text-blue-100 opacity-90 font-medium">잭스 오어 베터(Jacks or Better) 최적 전략과 확률 정보</p>
+    </div>
+
+    <div class="section-card">
+        <h2><i data-lucide="play-circle"></i> 게임 방법</h2>
+        <ul class="space-y-4">
+            <li class="flex gap-3">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">1</span>
+                <p><strong>베팅 및 딜:</strong> 하단의 BET 버튼으로 금액을 설정(1~5)하고 DEAL 버튼을 눌러 5장의 카드를 받습니다.</p>
+            </li>
+            <li class="flex gap-3">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">2</span>
+                <p><strong>홀드(Hold) 선택:</strong> 남기고 싶은 카드를 클릭하여 <span class="highlight">HELD</span> 상태로 만듭니다. 나머지 카드는 교체됩니다.</p>
+            </li>
+            <li class="flex gap-3">
+                <span class="bg-blue-600 text-white w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold">3</span>
+                <p><strong>드로우(Draw):</strong> DRAW 버튼을 누르면 홀드하지 않은 카드가 새로운 카드로 교체되며 최종 족보가 결정됩니다.</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="section-card">
+        <h2><i data-lucide="bar-chart-3"></i> 족보별 확률 및 배당</h2>
+        <p class="text-sm text-gray-500 mb-4">* 9/6 Jacks or Better 기준 통계치입니다.</p>
+        <div class="overflow-x-auto">
+            <table class="prob-table">
+                <thead>
+                    <tr>
+                        <th>족보 (Hand)</th>
+                        <th>배당 (1코인당)</th>
+                        <th>출현 확률</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>로열 플러쉬</td><td>250 (5베팅시 4000)</td><td>0.002%</td></tr>
+                    <tr><td>스트레이트 플러쉬</td><td>50</td><td>0.011%</td></tr>
+                    <tr><td>포 카드</td><td>25</td><td>0.236%</td></tr>
+                    <tr><td>풀 하우스</td><td>9</td><td>1.151%</td></tr>
+                    <tr><td>플러쉬</td><td>6</td><td>1.101%</td></tr>
+                    <tr><td>스트레이트</td><td>4</td><td>1.123%</td></tr>
+                    <tr><td>트리플</td><td>3</td><td>7.445%</td></tr>
+                    <tr><td>투 페어</td><td>2</td><td>12.928%</td></tr>
+                    <tr><td>잭스 오어 베터 (J이상 원페어)</td><td>1</td><td>21.459%</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2><i data-lucide="lightbulb"></i> 핵심 승리 전략</h2>
+        <div class="space-y-4">
+            <div class="strategy-tip">
+                <p class="font-bold text-amber-900">1. '잭스 오어 베터'를 기억하세요</p>
+                <p class="text-sm text-amber-800">이 게임은 J, Q, K, A 카드의 원페어부터 당첨금을 줍니다. 낮은 숫자의 원페어는 당첨금이 없으므로, 더 높은 족보를 노리기 위해 교체하는 것이 유리할 수 있습니다.</p>
+            </div>
+            <div class="strategy-tip">
+                <p class="font-bold text-amber-900">2. 로열 플러쉬의 기회</p>
+                <p class="text-sm text-amber-800">로열 플러쉬를 완성할 가능성이 있는 카드 4장이 있다면, 다른 메이드된 족보(예: 플러쉬나 스트레이트)를 깨고서라도 도전하는 것이 수학적으로 기대값이 높습니다.</p>
+            </div>
+            <div class="strategy-tip">
+                <p class="font-bold text-amber-900">3. 아무것도 없을 때</p>
+                <p class="text-sm text-amber-800">아무 족보도 보이지 않는다면 J 이상의 하이카드(High Card)만 홀드하고 나머지는 모두 교체하세요.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section text-center">
+        <a href="vp_index.html" class="cta-button">
+            <div class="text-left">
+                <span class="main-text">실전 연습하러 가기</span>
+                <span class="sub-text">AI 최적 전략 시뮬레이터</span>
+            </div>
+            <i data-lucide="arrow-right" class="arrow-icon"></i>
+        </a>
+        <p class="text-gray-400 text-xs mt-3">로그인 없이 바로 시작할 수 있습니다.</p>
+    </div>
+
+    <div id="footer-placeholder"></div>
+</div>
+
+<script>
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    fetch('../footer.html')
+        .then(r => r.ok ? r.text() : '')
+        .then(data => {
+            const p = document.getElementById('footer-placeholder');
+            if (p) {
+                p.innerHTML = data;
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+        });
+</script>
+
+</body>
+<!-- last updated 2026-02-26 15:04:19 -->
+</html>
