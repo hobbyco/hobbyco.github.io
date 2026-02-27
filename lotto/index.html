@@ -10,6 +10,9 @@
     <meta property="og:title" content="로또 번호 랜덤 추천기">
     <meta property="og:description" content="전략적인 번호 배분과 리얼 셔플로 당첨 확률의 효율을 높이세요.">
     
+    <!-- og:image 추가 -->
+    <meta property="og:image" content="https://hobbyco.github.io/img/og-lotto.png">
+    
     <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KFCTS5DZ6V"></script>
     <script>
@@ -613,7 +616,7 @@
             card.innerHTML = `
                 <div class="game-header"><span>GAME ${idx + 1}</span></div>
                 <div class="ball-container">
-                    ${game.map(num => `<span class="ball ${getBallClass(num)} ${fixedSet.has(num) ? 'is-fixed' : ''}">${num}</span>`).join('')}
+                    ${game.map(num => `<span class="ball ${getBallClass(num)} ${fixedSet.has(num) ? 'is-fixed' : ''}\">${num}</span>`).join('')}
                 </div>`;
             section.appendChild(card);
         });
@@ -621,6 +624,6 @@
     }
 </script>
 
-<!-- 버전: v1.5.1 | 최종 수정 시간: 2026-02-14 11:03 KST -->
+<!-- 최종 업데이트: 2026-02-27 09:40:00 -->
 </body>
 </html>
