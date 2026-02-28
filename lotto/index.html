@@ -33,14 +33,12 @@
             --primary-dark: #1d4ed8;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #1a1a1a; /* 표 가이드: #1a1a1a */
-            --text-muted: #6b7280; /* gray-500 계열 */
+            --text-main: #1a1a1a; 
+            --text-muted: #64748b; 
             --accent-yellow: #fefce8;
             --accent-blue: #eff6ff;
-            --accent-indigo: #eef2ff;
             --success-color: #10b981;
             --orange-color: #f97316;
-            --orange-hover: #ea580c;
         }
 
         body {
@@ -59,7 +57,7 @@
             background: var(--card-bg);
             width: 100%;
             max-width: 500px;
-            padding: 4rem 2rem;
+            padding: 4.5rem 2rem;
             border-radius: 32px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
             position: relative;
@@ -67,7 +65,6 @@
             margin-top: 20px;
         }
 
-        /* 표 가이드라인 정밀 반영 헤더 */
         header {
             text-align: center;
             margin-bottom: 4rem;
@@ -76,55 +73,56 @@
             align-items: center;
         }
 
-        /* 가이드: text-lg(18px), font-bold(700), 대문자, 자간 넓게 */
         .lotto-badge {
             color: var(--primary-color);
-            font-size: 1.125rem; /* 18px */
-            font-weight: 700;
-            letter-spacing: 0.35em; 
+            font-size: 0.85rem; 
+            font-weight: 800;
+            letter-spacing: 0.4em; 
             text-transform: uppercase;
             margin-bottom: 1.5rem;
+            background: var(--accent-blue);
+            padding: 6px 16px;
+            border-radius: 99px;
         }
 
-        /* 가이드: text-5xl(3rem/48px), font-black(900), 검정(#1a1a1a) */
+        /* 메인 제목 크기 대폭 확대 */
         h1 {
-            font-size: 3rem; 
-            line-height: 1.1;
+            font-size: 4rem; 
+            line-height: 1;
             margin: 0 0 1.5rem 0;
             color: var(--text-main);
             font-weight: 900; 
-            letter-spacing: -0.05em; 
+            letter-spacing: -0.06em; 
             display: flex;
             align-items: baseline;
             justify-content: center;
-            white-space: nowrap;
+            word-break: keep-all;
         }
 
-        /* 마침표 포인트: 이미지 원형 유지 */
         h1 .dot {
             display: inline-block;
-            width: 12px;
-            height: 12px;
+            width: 16px;
+            height: 16px;
             background-color: var(--primary-color);
             border-radius: 50%;
-            margin-left: 6px;
+            margin-left: 4px;
             transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         }
 
-        /* 가이드: 1rem(16px), font-medium(500), 회색(gray-500) */
+        /* 설명 문구 크기 축소 및 스타일 조정 */
         .header-subtitle {
-            font-size: 1rem; 
-            color: #6b7280; 
+            font-size: 0.95rem; 
+            color: var(--text-muted); 
             font-weight: 500;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
             line-height: 1.6;
         }
 
-        /* 모바일 가이드: text-4xl(2.25rem/36px) */
         @media (max-width: 480px) {
-            h1 { font-size: 2.25rem; }
-            h1 .dot { width: 10px; height: 10px; }
-            .lotto-badge { font-size: 1rem; }
+            h1 { font-size: 3rem; }
+            h1 .dot { width: 12px; height: 12px; }
+            .header-subtitle { font-size: 0.875rem; }
         }
 
         .section-label {
@@ -194,12 +192,6 @@
             border-color: var(--primary-color);
             color: var(--primary-color);
             background-color: var(--accent-blue);
-        }
-
-        .btn-toggle-fixed .sub-text {
-            font-size: 0.75rem;
-            font-weight: 600;
-            opacity: 0.9;
         }
 
         .btn-extract {
@@ -359,16 +351,9 @@
             transition: all 0.5s ease;
         }
 
-        .cheer-message.show {
-            opacity: 1;
-            transform: translateY(0);
-            animation: bounce 2s infinite;
-        }
+        .cheer-message.show { opacity: 1; transform: translateY(0); animation: bounce 2s infinite; }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
         .stats-container {
             margin-top: 1.5rem;
@@ -385,10 +370,7 @@
             font-size: 0.95rem;
         }
 
-        .prob-value {
-            font-weight: 800;
-            color: var(--primary-color);
-        }
+        .prob-value { font-weight: 800; color: var(--primary-color); }
 
         .info-box {
             margin-top: 12px;
@@ -403,10 +385,7 @@
 
         .empty-state { text-align: center; padding: 4rem 0; color: #94a3b8; font-weight: 600; }
         
-        #footer-placeholder {
-            width: 100%;
-            max-width: 500px;
-        }
+        #footer-placeholder { width: 100%; max-width: 500px; }
     </style>
 </head>
 <body>
@@ -546,18 +525,30 @@
         const fixedNums = Array.from(document.querySelectorAll('#checkboxGrid input:checked')).map(cb => parseInt(cb.value));
         const neededPerGame = 6 - fixedNums.length;
         
-        let basePool = Array.from({length: 45}, (_, i) => i + 1).filter(n => !fixedNums.includes(n));
+        const basePool = Array.from({length: 45}, (_, i) => i + 1).filter(n => !fixedNums.includes(n));
+        
+        let masterRandomPool = [];
+        const totalNeededRandom = count * neededPerGame;
+        
+        while (masterRandomPool.length < totalNeededRandom) {
+            masterRandomPool = [...masterRandomPool, ...shuffleArray([...basePool])];
+        }
+
         let games = [];
-        let drawingPool = [];
+        let poolIdx = 0;
 
         for (let i = 0; i < count; i++) {
-            if (drawingPool.length < neededPerGame) {
-                let newSet = [...basePool];
-                shuffleArray(newSet);
-                drawingPool = [...drawingPool, ...newSet];
+            let currentGameRandomPart = [];
+            while (currentGameRandomPart.length < neededPerGame) {
+                let candidate = masterRandomPool[poolIdx++];
+                if (currentGameRandomPart.includes(candidate)) {
+                    masterRandomPool.push(candidate);
+                    continue;
+                }
+                currentGameRandomPart.push(candidate);
             }
-            let randomPart = drawingPool.splice(0, neededPerGame);
-            let fullGame = [...fixedNums, ...randomPart].sort((a, b) => a - b);
+
+            let fullGame = [...fixedNums, ...currentGameRandomPart].sort((a, b) => a - b);
             games.push(fullGame);
         }
 
@@ -584,7 +575,14 @@
         const uniqueInResults = new Set(flatResults);
         const coverageArea = document.getElementById('coverageInfo');
 
-        if (games.length <= 7) {
+        const counts = {};
+        flatResults.forEach(n => { 
+            if(!fixedNums.includes(n)) counts[n] = (counts[n] || 0) + 1; 
+        });
+        const duplicates = Object.keys(counts).filter(k => counts[k] > 1).map(Number).sort((a,b)=>a-b);
+
+        // 중복 번호가 없는 경우 "포함되지 않은 숫자" 표시
+        if (duplicates.length === 0) {
             const excluded = Array.from({length: 45}, (_, i) => i + 1).filter(n => !uniqueInResults.has(n));
             coverageArea.innerHTML = `
                 <div class="info-box info-excluded">
@@ -592,12 +590,10 @@
                 </div>
             `;
         } else {
-            const counts = {};
-            flatResults.forEach(n => { if(!fixedNums.includes(n)) counts[n] = (counts[n] || 0) + 1; });
-            const duplicates = Object.keys(counts).filter(k => counts[k] > 1).map(Number).sort((a,b)=>a-b);
+            const duplicateCountText = ` (${duplicates.length}개)`;
             coverageArea.innerHTML = `
                 <div class="info-box info-duplicate">
-                    <strong>2회 이상 중복 번호 (고정수 제외):</strong><br>${duplicates.join(', ') || '없음'}
+                    <strong>중복 번호 (고정수 제외):</strong><br>${duplicates.join(', ') || '없음'}${duplicateCountText}
                 </div>
             `;
         }
@@ -616,7 +612,7 @@
             card.innerHTML = `
                 <div class="game-header"><span>GAME ${idx + 1}</span></div>
                 <div class="ball-container">
-                    ${game.map(num => `<span class="ball ${getBallClass(num)} ${fixedSet.has(num) ? 'is-fixed' : ''}\">${num}</span>`).join('')}
+                    ${game.map(num => `<span class="ball ${getBallClass(num)} ${fixedSet.has(num) ? 'is-fixed' : ''}">${num}</span>`).join('')}
                 </div>`;
             section.appendChild(card);
         });
@@ -624,6 +620,6 @@
     }
 </script>
 
-<!-- 최종 업데이트: 2026-02-27 09:40:00 -->
 </body>
+<!-- 2026-02-28 13:23:10 -->
 </html>
