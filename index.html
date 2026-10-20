@@ -125,27 +125,19 @@
         </section>
     </main>
 
+    <!-- 공통 푸터가 렌더링될 자리 -->
     <div id="footer-placeholder"></div>
 
+    <!-- Lucide 본문 아이콘 렌더링 -->
     <script>
-        fetch('footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('네트워크 응답 에러');
-                return response.text();
-            })
-            .then(data => {
-                const placeholder = document.getElementById('footer-placeholder');
-                if (placeholder) {
-                    placeholder.innerHTML = data;
-                    if (typeof lucide !== 'undefined') lucide.createIcons();
-                }
-            })
-            .catch(error => console.error('푸터 로드 실패:', error));
-
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
     </script>
-    </body>
-	<!-- 2026-02-27 09:10:43 -->
+
+    <!-- 공통 푸터 스크립트 연결 -->
+    <script src="./footer.js"></script>
+	
+	<!-- 2026-10-20 15:41:17  -->
+</body>
 </html>
